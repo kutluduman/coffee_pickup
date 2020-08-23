@@ -1,0 +1,6 @@
+-- menu_items table seeds here
+INSERT INTO menu_items (name, price, picture_url, prep_time, description, in_stock, category) VALUES ('Americano', 176, 'https://www.littlecoffeeplace.com/wp-content/uploads/2017/11/What-is-an-americano1.jpg', 3, 'Wonderfull rich coffe taste.', TRUE, 'Coffee');
+INSERT INTO menu_items (name, price, picture_url, prep_time, description, in_stock, category) VALUES ('Cappuccino', 355, 'https://s23991.pcdn.co/wp-content/uploads/fly-images/233843/cappuccino-fp-400x400-c.jpg', 6, 'Enjoy the righ mix of coffe and milk.', TRUE, 'Coffee');
+INSERT INTO menu_items (name, price, picture_url, prep_time, description, in_stock, category) VALUES ('Espresso', 288, 'https://upload.wikimedia.org/wikipedia/commons/a/a5/Tazzina_di_caff%C3%A8_a_Ventimiglia.jpg', 3, 'Our signature Espresso.', TRUE, 'Coffee');
+INSERT INTO menu_items (name, price, picture_url, prep_time, description, in_stock, category) VALUES ('Plain donut', 567, 'https://www.dolcipattini.it/upload/FrontEnd/img_42d8d295-82d5-4fd4-b0bc-9116df97cabb.png', 3, 'The perfect classic donut.', TRUE, 'Bakery');
+INSERT INTO menu_items (name, price, picture_url, prep_time, description, in_stock, category) VALUES ('Chocolate muffin', 741, 'https://marshasbakingaddiction.com/wp-content/uploads/2016/01/nutella-stuffed-double-chocolate-muffins-7-735x1103.jpg', 3, 'Amazing muffin.', TRUE, 'Bakery');
