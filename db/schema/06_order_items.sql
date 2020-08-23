@@ -8,5 +8,5 @@ CREATE TABLE order_items (
   menu_item_id INTEGER REFERENCES menu_items(id) ON DELETE CASCADE,
   quantity SMALLINT NOT NULL DEFAULT 0,
   price INTEGER  NOT NULL DEFAULT 0,
-  size_id INTEGER REFERENCES coffe_sizes(id) ON DELETE CASCADE,
+  size_id INTEGER REFERENCES coffe_sizes(id) ON DELETE CASCADE
 );
