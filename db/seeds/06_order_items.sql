@@ -18,3 +18,7 @@ INSERT INTO order_items (order_id, menu_item_id, quantity, price, size_id) VALUE
 INSERT INTO order_items (order_id, menu_item_id, quantity, price, size_id) VALUES (4, 5, 1, 741, 1);
 -- Qty 2 Plain donut
 INSERT INTO order_items (order_id, menu_item_id, quantity, price, size_id) VALUES (4, 4, 2, 1152, 1);
+-- Qty 1 Espresso large
+INSERT INTO order_items (order_id, menu_item_id, quantity, price, size_id) VALUES (6, 3, 1, 460, 3);
+-- Qty 1 Espresso large
+INSERT INTO order_items (order_id, menu_item_id, quantity, price, size_id) VALUES (7, 3, 1, 460, 3);
