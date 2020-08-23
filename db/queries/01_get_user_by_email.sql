@@ -1,0 +1,1 @@
+-- Get a single user from the database given their email.
