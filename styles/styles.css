@@ -1,0 +1,11 @@
+/* Imports tailwind css core components https://tailwindcss.com/docs/installation */
+/* To build the CSS RUN:
+
+npx tailwindcss build ./styles/styles.css -o ./public/styles/output.css
+
+*/
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
