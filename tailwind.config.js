@@ -3,8 +3,15 @@
 module.exports = {
   purge: [],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "regal-blue": "#243c5a",
+        "coffee-brown": "#D59D66",
+        "ash": "#2B2F33",
+        "light-grey": "#A8A8A8",
+      },
+    },
   },
   variants: {},
   plugins: [],
-}
+};
