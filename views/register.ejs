@@ -9,76 +9,82 @@
     <title>Register</title>
   </head>
   <body class="bg-ash">
-    <main class="h-screen flex">
-      <section
-        class="w-full grid grid-cols-4 gap-x-4 grid-rows-none mx-4 self-center md:grid-cols-8"
+    <section
+      class="grid grid-cols-4 gap-x-4 grid-rows-none mx-4 md:grid-cols-8 lg:grid-cols-12 xl:max-w-screen-xl xl:mx-auto h-screen"
+    >
+      <div class="col-span-6 self-center hidden lg:block ">
+        <img src="/images/sign-up-img.png" />
+      </div>
+      <form
+        class="col-span-4 grid grid-cols-4 gap-x-4 md:col-start-2 md:col-span-6 md:p-10 lg:col-start-7 lg:col-span-6 self-center xl:col-start-8 xl:col-span-5"
       >
-        <form
-          class="col-span-4 grid grid-cols-4 gap-x-4 md:col-start-2 md:col-span-6 md:p-10"
+        <h1
+          class="text-white text-6xl font-display font-bold h-auto block col-span-4"
         >
-          <h1 class="text-white text-6xl font-display font-bold h-auto block col-span-4">
-            Sign Up
-          </h1>
-          <p
-            class="text-white col-span-4 mb-6 block font-body font-light col-span-4"
-          >
-            Create an account to order for pickup.
-          </p>
-          <div class="mb-4 col-start-1 col-span-2">
-            <label class="block text-white text-sm mb-2" for="username">
-              Name
-            </label>
-            <input
-              class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
-              id="name"
-              type="text"
-            />
-          </div>
-          <div class="mb-4 col-start-3 col-span-2">
-            <label class="block text-white text-sm mb-2" for="phone">
-              Phone Number
-            </label>
-            <input
-              class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
-              id="phone"
-              type="tel"
-            />
-          </div>
-          <div class="mb-4 col-span-4">
-            <label class="block text-white text-sm mb-2" for="phone">
-              Email Address
-            </label>
-            <input
-              class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
-              id="email"
-              type="email"
-            />
-          </div>
-          <div class="col-span-4">
-            <label class="block text-white text-sm mb-2" for="phone">
-              Password
-            </label>
-            <input
-              class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
-              id="password"
-              type="password"
-            />
-          </div>
-          <button
-            type="submit"
-            class="bg-coffee-brown col-span-4 py-3 rounded text-white mt-10"
-          >
-            Sign Up
-          </button>
-          <p class="text-white col-span-4 text-center font-light mt-6 md:mt-10 md:col-start-2 md:col-span-2">
-            Don't have an account?
-          </p>
-          <p class="text-coffee-brown col-span-4 text-center mt-1 md:col-start-2 md:col-span-2">
-            Register Here
-          </p>
-        </form>
-      
-      </section>
-    </main>
+          Sign Up
+        </h1>
+        <p
+          class="text-white col-span-4 mb-6 block font-body font-light col-span-4"
+        >
+          Create an account to order for pickup.
+        </p>
+        <div class="mb-4 col-start-1 col-span-2">
+          <label class="block text-white text-sm mb-2" for="username">
+            Name
+          </label>
+          <input
+            class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
+            id="name"
+            type="text"
+          />
+        </div>
+        <div class="mb-4 col-start-3 col-span-2">
+          <label class="block text-white text-sm mb-2" for="phone">
+            Phone Number
+          </label>
+          <input
+            class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
+            id="phone"
+            type="tel"
+          />
+        </div>
+        <div class="mb-4 col-span-4">
+          <label class="block text-white text-sm mb-2" for="phone">
+            Email Address
+          </label>
+          <input
+            class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
+            id="email"
+            type="email"
+          />
+        </div>
+        <div class="col-span-4">
+          <label class="block text-white text-sm mb-2" for="phone">
+            Password
+          </label>
+          <input
+            class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
+            id="password"
+            type="password"
+          />
+        </div>
+        <button
+          type="submit"
+          class="bg-coffee-brown col-span-4 py-3 rounded text-white mt-10"
+        >
+          Sign Up
+        </button>
+        <p
+          class="text-white col-span-4 text-center font-light mt-6 md:mt-10 md:col-start-2 md:col-span-2"
+        >
+          Don't have an account?
+        </p>
+        <p
+          class="text-coffee-brown col-span-4 text-center mt-1 md:col-start-2 md:col-span-2"
+        >
+          Register Here
+        </p>
+      </form>
+    </section>
   </body>
 </html>
