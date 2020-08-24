@@ -9,13 +9,28 @@
     <title>Register</title>
   </head>
   <body class="bg-ash">
+
+    <nav class=" p-6  w-full flex items-center justify-between">
+      <img src="/images/lhc-logo.svg" />
+      <div class="flex">
+        <p class="mx-3 text-white">Menu</p>
+        <p class="mx-3 text-white">Contact Us</p>
+        <div class="h-full block w-2 bg-red-400"></div>
+        <p class="mx-3 text-white">Login</p>
+        <p class="mx-3 text-white">Register</p>
+
+      </div>
+    </nav>
+
     <section
       class="grid grid-cols-4 gap-x-4 grid-rows-none mx-4 md:grid-cols-8 lg:grid-cols-12 xl:max-w-screen-xl xl:mx-auto h-screen"
     >
-      <div class="col-span-6 self-center hidden lg:block ">
+      <div class="col-span-6 self-center hidden lg:block">
         <img src="/images/sign-up-img.png" />
       </div>
       <form
+        method="POST"
+        action="/register"
         class="col-span-4 grid grid-cols-4 gap-x-4 md:col-start-2 md:col-span-6 md:p-10 lg:col-start-7 lg:col-span-6 self-center xl:col-start-8 xl:col-span-5"
       >
         <h1
@@ -35,6 +50,7 @@
           <input
             class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
             id="name"
+            name="name"
             type="text"
           />
         </div>
@@ -45,6 +61,7 @@
           <input
             class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
             id="phone"
+            name="phone"
             type="tel"
           />
         </div>
@@ -55,6 +72,7 @@
           <input
             class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
             id="email"
+            name="email"
             type="email"
           />
         </div>
@@ -65,6 +83,7 @@
           <input
             class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
             id="password"
+            name="password"
             type="password"
           />
         </div>
@@ -77,13 +96,13 @@
         <p
           class="text-white col-span-4 text-center font-light mt-6 md:mt-10 md:col-start-2 md:col-span-2"
         >
-          Don't have an account?
+          Already have an account?
         </p>
-        <p
+        <a
+          href="/api/users/login"
           class="text-coffee-brown col-span-4 text-center mt-1 md:col-start-2 md:col-span-2"
-        >
-          Register Here
-        </p>
+          >Login Here
+        </a>
       </form>
     </section>
   </body>
