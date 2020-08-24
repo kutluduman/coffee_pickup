@@ -14,10 +14,14 @@ router.use(function (req, res, next) {
   next();
 });
 
+
+
+
 module.exports = (db) => {
   router.get("/", (req, res) => {
     res.render("register");
   });
+
 
   router.post("/", (req, res) => {
     const text =
@@ -26,6 +30,29 @@ module.exports = (db) => {
     db.query(text, values)
       .then((res) => {
         console.log(res.rows[0]);
+        console.log("Email",res.rows[0].email);
+        const text1 =
+        `SELECT id, name, email, password, phone, is_admin
+        FROM users
+        WHERE phone = $1 AND email = $2;`;
+        const values1 = [res.rows[0].phone, res.rows[0].email];
+        db.query(text1, values1)
+          .then((result) => {
+            console.log("Result from query find user by email", ressult.rows[0]);
+        //  const user = findUserByEmail(email);
+
+        // if (!user) {
+        //   const userId = addNewUser(name, email, password);
+        //   // setCookie with the user id
+        //   req.session['user_id'] = userId;
+
+        //   // redirect to /quotes
+        //   res.redirect('/quotes');
+        // } else {
+        //   res.status(403).send('Sorry, the user is already registered');
+        // }
+      })
+
         res.redirect('/menu');
 
         // { name: 'brianc', email: 'brian.m.carlson@gmail.com' }
