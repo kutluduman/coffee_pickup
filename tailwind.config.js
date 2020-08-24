@@ -3,6 +3,10 @@
 module.exports = {
   purge: [],
   theme: {
+    fontFamily: {
+      'display': ['Playfair\\ Display'],
+      'body': ['Nunito']
+    },
     extend: {
       colors: {
         "regal-blue": "#243c5a",
