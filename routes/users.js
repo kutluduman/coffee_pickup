@@ -8,6 +8,11 @@
 const express = require('express');
 const router  = express.Router();
 
+// a middleware function with no mount path. This code is executed for every request to the router
+router.use(function (req, res, next) {
+  console.log('Time:', Date.now())
+  next()
+})
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -22,5 +27,14 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+  router.get("/login",(req,res) => {
+    res.render("login");
+  })
+
+  router.get("/register", (req,res) => {
+    res.render("register");
+  })
+
   return router;
 };
