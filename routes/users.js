@@ -63,10 +63,12 @@ module.exports = (db) => {
     res.render("login");
   })
 
+
   // This route gets and renders the login page
-  router.get("/register", (req,res) => {
-    res.render("register");
-  })
+  // router.get("/register", (req,res) => {
+  //   res.render("register");
+  // })
+
 
 
   router.get("/menu", (req,res) => {
