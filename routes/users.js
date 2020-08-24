@@ -28,6 +28,7 @@ module.exports = (db) => {
       });
   });
 
+
   // This route gets and renders the login page
   router.get("/login",(req,res) => {
     res.render("login");
@@ -38,6 +39,7 @@ module.exports = (db) => {
   // router.get("/register", (req,res) => {
   //   res.render("register");
   // })
+
 
 
   router.get("/menu", (req,res) => {

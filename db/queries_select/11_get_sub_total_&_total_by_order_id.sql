@@ -17,6 +17,19 @@ JOIN orders ON (orders.id = order_items.order_id)
 WHERE orders.id = 3
 GROUP BY options.id, options.menu_item_id, options.price, options.name, options_items.id, options_items.order_item_id, order_items.id, orders.id;
 
+-- union the two table above by UNION https://www.postgresqltutorial.com/postgresql-grouping-sets/ not DONE YET
+SELECT order_items.id as order_items_id, order_items.order_id, order_items.quantity, menu_items.name, menu_items.price, coffe_sizes.size, TRUNC(menu_items.price * order_items.quantity * coffe_sizes.price_modifier) as sub_item_price
+FROM orders
+JOIN users ON (orders.user_id = users.id)
+JOIN order_items ON (order_items.order_id = orders.id)
+JOIN coffe_sizes ON (coffe_sizes.id = order_items.size_id)
+JOIN menu_items ON (menu_items.id = order_items.menu_item_id)
+WHERE orders.id = 3
+GROUP BY order_items.id, orders.id, order_items.quantity, menu_items.name, menu_items.price, coffe_sizes.size, coffe_sizes.price_modifier, order_items.order_id
+
+
+
+
 
 -- Be low Commands used for test purpose only
 -- Qty 1 Espresso large

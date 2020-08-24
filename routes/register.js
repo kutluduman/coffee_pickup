@@ -14,25 +14,61 @@ router.use(function (req, res, next) {
   next();
 });
 
+
+
+
 module.exports = (db) => {
   router.get("/", (req, res) => {
     res.render("register");
   });
 
-  router.post("/", (req, res) => {
-    const text =
-      "INSERT INTO users (name, email, password, phone, is_admin) VALUES($1, $2, $3, $4, $5) RETURNING *";
-    const values = [req.body.name, req.body.email, req.body.password, req.body.phone, false];
-    db.query(text, values)
-      .then((res) => {
-        console.log(res.rows[0]);
-        res.redirect('/menu');
+  //TO DO:
+    // Make function userExists(arg1, arg2)
+    // runs a query checking for those values if they exist in users table
+    const userExists =(email, phone) =>{
+      const text =
+        `SELECT id, name, email, password, phone, is_admin
+        FROM users
+        WHERE email = $1 AND phone = $2;`;
+      const values = [email, phone];
+      return db.query(text, values)
+        .then((result) => {
+          if (result.rows[0] !== undefined) {
+            //console.log("Result from query find user by email", result.rows[0]);
+            if ((result.rows[0].email === email) & (result.rows[0].phone === phone)) {
+              return result.rows[0];
+            }
+          } else {
+            return false;
+          }
+        })
+    }
 
-        // { name: 'brianc', email: 'brian.m.carlson@gmail.com' }
-      })
-      .catch((e) => console.error(e.stack));
-
-  });
+  router.post('/', (req, res)=>{
+    userExists(req.body.email, req.body.phone).then((user) => {
+      if (user) {
+        //User already present
+        res.status(403).send('Sorry, the user is already registered! Use different email or phone');
+      } else {
+        const text = "INSERT INTO users (name, email, password, phone, is_admin) VALUES($1, $2, $3, $4, $5) RETURNING *";
+        const values = [req.body.name, req.body.email, req.body.password, req.body.phone, false];
+        db.query(text, values)
+        .then(dbRes => {
+          if (dbRes.rows[0].id !== undefined) {
+            //console.log("Return object from insert query", dbRes.rows[0].id);
+            //set cookie
+            req.session.name = dbRes.rows[0].id;
+            res.redirect('/menu')
+          } else {
+            res.status(500).send('Sorry, registration failed! Try it again.');
+          }
+        })
+        .catch(err => {
+          console.log('Something Broke !', err);
+        })
+      }
+    })
+  })
 
   return router;
 };
