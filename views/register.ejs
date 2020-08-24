@@ -10,16 +10,20 @@
   </head>
   <body class="bg-ash">
     <main class="h-screen flex">
-      <section class="grid grid-cols-4 gap-x-4 grid-rows-none mx-4 self-center">
-        <h1
-          class="text-white text-6xl font-display font-bold col-span-4 h-auto block"
+      <section
+        class="w-full grid grid-cols-4 gap-x-4 grid-rows-none mx-4 self-center md:grid-cols-8"
+      >
+        <form
+          class="col-span-4 grid grid-cols-4 gap-x-4 md:col-start-2 md:col-span-6 md:p-10"
         >
-          Sign Up
-        </h1>
-        <p class="text-white col-span-4 block font-body font-light">
-          Create an account to order for pickup.
-        </p>
-        <form class="col-span-4 grid grid-cols-4 gap-x-4 mt-6">
+          <h1 class="text-white text-6xl font-display font-bold h-auto block col-span-4">
+            Sign Up
+          </h1>
+          <p
+            class="text-white col-span-4 mb-6 block font-body font-light col-span-4"
+          >
+            Create an account to order for pickup.
+          </p>
           <div class="mb-4 col-start-1 col-span-2">
             <label class="block text-white text-sm mb-2" for="username">
               Name
@@ -66,13 +70,14 @@
           >
             Sign Up
           </button>
+          <p class="text-white col-span-4 text-center font-light mt-6 md:mt-10 md:col-start-2 md:col-span-2">
+            Don't have an account?
+          </p>
+          <p class="text-coffee-brown col-span-4 text-center mt-1 md:col-start-2 md:col-span-2">
+            Register Here
+          </p>
         </form>
-        <p class="text-white col-span-4 text-center font-light mt-3">
-          Don't have an account?
-        </p>
-        <p class="text-coffee-brown col-span-4 text-center mt-1">
-          Register Here
-        </p>
+      
       </section>
     </main>
   </body>
