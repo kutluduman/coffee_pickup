@@ -38,5 +38,13 @@ module.exports = (db) => {
     res.render("register");
   })
 
+  router.get("/menu", (req,res) => {
+    res.render("menu");
+  })
+
+  router.get("/contact", (req,res) => {
+    res.render("contact");
+  })
+
   return router;
 };
