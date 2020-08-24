@@ -1,20 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home Page</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-
-    <!-- TailwindCSS Stylesheet -->
+    <link rel="stylesheet" href="/styles/normalize.css" type="text/css" />
     <link rel="stylesheet" href="/styles/output.css" type="text/css" />
-
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
+    <title>Register</title>
   </head>
+  <body class="bg-ash">
+    <nav
+      class="px-4 py-2 md:px-6 md:py-4 w-full flex items-center justify-between fixed"
+    >
+      <img src="/images/lhc-logo.svg" />
+      <div class="flex">
+        <a class="mx-3 lg:hidden"
+          ><img src="/images/icons/shopping-cart.svg"
+        /></a>
+        <div onclick="triggerMenu()" class="mx-3 lg:hidden">
+          <img src="/images/icons/menu.svg" />
+        </div>
 
-  <body>
-    <h1 class="text-lg text-blue-500">Hello World!</h1>
+        <a href="/menu" class="text-white mx-3 hidden lg:block">Menu</a>
+        <a class="text-white mx-3 hidden lg:block">Contact Us</a>
+        <div class="h-px-6 w-px bg-coffee-brown mx-3 hidden lg:block"></div>
+        <a href="/login" class="text-white mx-3 hidden lg:block">Login</a>
+        <a href="/register" class="text-white mx-3 hidden lg:block">Sign Up</a>
+      </div>
+    </nav>
+
+    <div
+      class="fixed h-screen bg-ash right-0 flex flex-col items-end justify-center z-10 transition-all w-0 duration-300 ease-in-out"
+      id="mobile-menu"
+    >
+      <img
+        onclick="triggerMenu()"
+        class="absolute top-0 left-0 p-6 transition-all duration-300"
+        src="/images/icons/back-arrow.svg"
+      />
+      <a
+        class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300"
+        >Menu</a
+      >
+      <a
+        class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300"
+        >Contact Us</a
+      >
+      <a
+        class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300"
+        >Login</a
+      >
+      <a
+        class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300"
+        >Register</a
+      >
+    </div>
+
+    <section
+      class="grid grid-cols-4 gap-x-4 grid-rows-none mx-4 md:grid-cols-8 md:col-start-2 md:col-span-6 lg:grid-cols-12 xl:max-w-screen-xl xl:mx-auto h-screen pt-10"
+    >
+      <div class="col-span-6 self-center hidden lg:block">
+        <img src="/images/sign-up-img.png" />
+      </div>
+      <div
+        class="col-span-4 grid grid-cols-4 gap-x-4 md:col-start-2 md:col-span-6 lg:col-start-7 lg:col-span-6 self-center xl:col-start-8 xl:col-span-5"
+      >
+        <div class="flex col-span-4 mb-6">
+          <img class="h-full w-24 md:w-full" src="/images/lhc-logo.svg" />
+          <h1
+            class="ml-4 text-white text-4xl font-display font-bold h-auto block col-span-4 self-end md:text-6xl"
+          >
+            The Lighthouse
+          </h1>
+        </div>
+
+        <p
+          class="text-white col-span-4 mb-6 block font-body font-light col-span-4"
+        >
+          I thought this salad was exceptionally delicious and healthy. I
+          recommend pressing the entire tofu block for at least 20 minutes
+          before to remove excess ...
+        </p>
+
+        <button
+          
+          class="bg-coffee-brown col-span-4 py-3 rounded text-white mt-2"
+        >
+          Order Pickup
+        </button>
+      </div>
+    </section>
+    <script src="/scripts/nav.js"></script>
   </body>
 </html>
