@@ -35,7 +35,7 @@ module.exports = (db) => {
         .then((result) => {
           if (result.rows[0] !== undefined) {
             //console.log("Result from query find user by email", result.rows[0]);
-            if ((result.rows[0].email === email) & (result.rows[0].phone === phone)) {
+            if ((result.rows[0].email === email) || (result.rows[0].phone === phone)) {
               return result.rows[0];
             }
           } else {
