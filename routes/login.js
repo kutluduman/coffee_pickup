@@ -20,6 +20,7 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
+    res.json(req.body);
     // const text =
     //   "INSERT INTO users (name, email, password, phone, is_admin) VALUES($1, $2, $3, $4, $5) RETURNING *";
     // const values = [req.body.name, req.body.email, req.body.password, req.body.phone, false];
