@@ -3,39 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.7.3/tailwind.min.css" rel="stylesheet">
-</head>
-<body>
+  <link rel="stylesheet" href="/styles/normalize.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/output.css" type="text/css" />
+    <title>Login</title>
+  </head>
+  <body class="bg-ash">
+    <main class="h-screen flex">
+      <section
+        class="w-full grid grid-cols-4 gap-x-4 grid-rows-none mx-4 self-center md:grid-cols-8"
+      >
+        <form
+          class="col-span-4 grid grid-cols-4 gap-x-4 md:col-start-2 md:col-span-6 md:p-10"
+        >
+          <h1 class="text-white text-6xl font-display font-bold h-auto block col-span-4">
+            Login
+          </h1>
+          <p
+            class="text-white col-span-4 mb-6 block font-body font-light col-span-4"
+          >
+          Login to order items for pickup.
+          </p>
 
-<div class = "container mx-auto p-2">
-  <div class = "max-w-sm mx-auto bg-white px-5 py-10 rounded shadow-x1">
-    <div class = "text-center mb-8">
-        <h1 class = "font-bold text-5xl">LOGIN</h1>
-    </div>
+          <div class="mb-4 col-span-4">
+            <label class="block text-white text-sm mb-2" for="email">
+              Email Address
+            </label>
+            <input
+              class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
+              id="email"
+              type="email"
+            />
+          </div>
+          <div class="col-span-4">
+            <label class="block text-white text-sm mb-2" for="password">
+              Password
+            </label>
+            <input
+              class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
+              id="password"
+              type="password"
+            />
+          </div>
+          <button
+            type="submit"
+            class="bg-coffee-brown col-span-4 py-3 rounded text-white mt-10"
+          >
+            Login
+          </button>
+          <p class="text-white col-span-4 text-center font-light mt-6 md:mt-10 md:col-start-2 md:col-span-2">
+            Don't have an account?
+          </p>
+          <a class="text-coffee-brown col-span-4 text-center mt-1 md:col-start-2 md:col-span-2" href="http://localhost:8080/api/users/register" target="_blank">
+            Register Here
+          </a>
+        </form>
 
-    <form action = "#">
-      <div class = "mt-5">
-          <label>Email address</label>
-          <input type = "text" class= "block w-full p-2 border rounded border-gray-500">
-    </div>
-    <div class = "mt-5">
-        <label>Password</label>
-        <input type="password" class = "block w-full p-2 border rounded border-gray-500">
-    </div>
-    <div class ="mt-10">
-          <input type="submit" value="Login" class="py-3 bg-yellow-700 text-white w-full hover:bg-yellow-800">
-    </div>
-    <div class = "font-sans text-lg text-gray-700 text-center">
-      <br>
-      <h3 class = "font-bold text-2x1">Don't have an account?</h3>
-  </div>
-
-    </form>
-  </div>
-</div>
-
-
-
-</body>
+      </section>
+    </main>
+  </body>
 </html>
