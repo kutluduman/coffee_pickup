@@ -9,21 +9,41 @@
     <title>Register</title>
   </head>
   <body class="bg-ash">
-
-    <nav class=" p-6  w-full flex items-center justify-between">
+    <nav class=" px-4 py-2 md:px-6 md:py-4 w-full flex items-center justify-between fixed">
       <img src="/images/lhc-logo.svg" />
       <div class="flex">
-        <p class="mx-3 text-white">Menu</p>
-        <p class="mx-3 text-white">Contact Us</p>
-        <div class="h-full block w-2 bg-red-400"></div>
-        <p class="mx-3 text-white">Login</p>
-        <p class="mx-3 text-white">Register</p>
+        <a class="mx-3 lg:hidden"
+          ><img src="/images/icons/shopping-cart.svg"
+        /></a>
+        <div onclick="triggerMenu()" class="mx-3 lg:hidden"><img src="/images/icons/menu.svg" /></div>
 
+        <a href="/menu" class="text-white mx-3 hidden lg:block">Menu</a>
+        <a class="text-white mx-3 hidden lg:block">Contact Us</a>
+        <div class="h-px-6 w-px bg-coffee-brown mx-3 hidden lg:block"></div>
+        <a href="/login" class="text-white mx-3 hidden lg:block">Login</a>
+        <a href="/register" class="text-white mx-3 hidden lg:block">Sign Up</a>
       </div>
     </nav>
 
+    <div
+      class="fixed h-screen bg-ash right-0 flex flex-col items-end justify-center z-10 transition-all w-0 duration-300 ease-in-out"
+      id="mobile-menu"
+    >
+      <img onclick="triggerMenu()"
+        class="absolute top-0 left-0 p-6 transition-all duration-300"
+        src="/images/icons/back-arrow.svg"
+      />
+      <a
+        class=" text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300"
+        >Menu</a
+      >
+      <a class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300">Contact Us</a>
+      <a class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300">Login</a>
+      <a class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300">Register</a>
+    </div>
+
     <section
-      class="grid grid-cols-4 gap-x-4 grid-rows-none mx-4 md:grid-cols-8 lg:grid-cols-12 xl:max-w-screen-xl xl:mx-auto h-screen"
+      class="grid grid-cols-4 gap-x-4 grid-rows-none mx-4 md:grid-cols-8 lg:grid-cols-12 xl:max-w-screen-xl xl:mx-auto h-screen  pt-10"
     >
       <div class="col-span-6 self-center hidden lg:block">
         <img src="/images/sign-up-img.png" />
@@ -34,7 +54,7 @@
         class="col-span-4 grid grid-cols-4 gap-x-4 md:col-start-2 md:col-span-6 md:p-10 lg:col-start-7 lg:col-span-6 self-center xl:col-start-8 xl:col-span-5"
       >
         <h1
-          class="text-white text-6xl font-display font-bold h-auto block col-span-4"
+          class="text-white text-5xl font-display font-bold h-auto block col-span-4"
         >
           Sign Up
         </h1>
@@ -99,17 +119,12 @@
           Already have an account?
         </p>
         <a
-<<<<<<< HEAD
-          href="/api/users/login"
+          href="/login"
           class="text-coffee-brown col-span-4 text-center mt-1 md:col-start-2 md:col-span-2"
           >Login Here
-=======
-          class="text-coffee-brown col-span-4 text-center mt-1 md:col-start-2 md:col-span-2"
-          href="http://localhost:8080/api/users/login">
-          Login Here
->>>>>>> e1b21ce7c81003baedc19e3de2e1c4ccd80edb82
         </a>
       </form>
     </section>
+    <script src="/scripts/nav.js"></script>
   </body>
 </html>

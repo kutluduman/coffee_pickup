@@ -15,5 +15,9 @@ npx tailwindcss build ./styles/styles.css -o ./public/styles/output.css
   @apply border-b text-coffee-brown bg-transparent py-1 px-1 text-white leading-tight w-full;
 }
 
+.mobile-menu-item{
+  @apply my-4 text-white mr-10 font-semibold;
+}
+
 
 @tailwind utilities;
