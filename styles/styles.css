@@ -4,8 +4,16 @@
 npx tailwindcss build ./styles/styles.css -o ./public/styles/output.css
 
 */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&family=Playfair+Display:wght@400;600;700&display=swap');
+
 @tailwind base;
 
 @tailwind components;
+
+
+.form-input{
+  @apply border-b text-coffee-brown bg-transparent py-1 px-1 text-white leading-tight w-full;
+}
+
 
 @tailwind utilities;

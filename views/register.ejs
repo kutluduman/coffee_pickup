@@ -1,13 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <div><h1>HELLO REGISTER</h1></div>
-
-</body>
+    <link rel="stylesheet" href="/styles/normalize.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/output.css" type="text/css" />
+    <title>Register</title>
+  </head>
+  <body class="bg-ash">
+    <main class="h-screen flex">
+      <section class="grid grid-cols-4 gap-x-4 grid-rows-none mx-4 self-center">
+        <h1
+          class="text-white text-6xl font-display font-bold col-span-4 h-auto block"
+        >
+          Sign Up
+        </h1>
+        <p class="text-white col-span-4 block font-body font-light">
+          Create an account to order for pickup.
+        </p>
+        <form class="col-span-4 grid grid-cols-4 gap-x-4 mt-6">
+          <div class="mb-4 col-start-1 col-span-2">
+            <label class="block text-white text-sm mb-2" for="username">
+              Name
+            </label>
+            <input
+              class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
+              id="name"
+              type="text"
+            />
+          </div>
+          <div class="mb-4 col-start-3 col-span-2">
+            <label class="block text-white text-sm mb-2" for="phone">
+              Phone Number
+            </label>
+            <input
+              class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
+              id="phone"
+              type="tel"
+            />
+          </div>
+          <div class="mb-4 col-span-4">
+            <label class="block text-white text-sm mb-2" for="phone">
+              Email Address
+            </label>
+            <input
+              class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
+              id="email"
+              type="email"
+            />
+          </div>
+          <div class="col-span-4">
+            <label class="block text-white text-sm mb-2" for="phone">
+              Password
+            </label>
+            <input
+              class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
+              id="password"
+              type="password"
+            />
+          </div>
+          <button
+            type="submit"
+            class="bg-coffee-brown col-span-4 py-3 rounded text-white mt-10"
+          >
+            Sign Up
+          </button>
+        </form>
+        <p class="text-white col-span-4 text-center font-light mt-3">
+          Don't have an account?
+        </p>
+        <p class="text-coffee-brown col-span-4 text-center mt-1">
+          Register Here
+        </p>
+      </section>
+    </main>
+  </body>
 </html>
