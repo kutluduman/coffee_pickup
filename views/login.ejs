@@ -8,12 +8,29 @@
     <title>Login</title>
   </head>
   <body class="bg-ash">
-    <main class="h-screen flex">
+
+    <nav class=" p-6  w-full flex items-center justify-between">
+      <img src="/images/lhc-logo.svg" />
+      <div class="flex">
+        <p class="mx-3 text-white">Menu</p>
+        <p class="mx-3 text-white">Contact Us</p>
+        <div class="h-full block w-2 bg-red-400"></div>
+        <p class="mx-3 text-white">Login</p>
+        <p class="mx-3 text-white">Register</p>
+
+      </div>
+    </nav>
+
+
       <section
-        class="w-full grid grid-cols-4 gap-x-4 grid-rows-none mx-4 self-center md:grid-cols-8"
-      >
+        class="grid grid-cols-4 gap-x-4 grid-rows-none mx-4 md:grid-cols-8 lg:grid-cols-12 xl:max-w-screen-xl xl:mx-auto h-screen">
+
+        <div class="col-span-6 self-center hidden lg:block">
+          <img src="/images/coffee_cafe.jpeg" />
+        </div>
+
         <form
-          class="col-span-4 grid grid-cols-4 gap-x-4 md:col-start-2 md:col-span-6 md:p-10"
+          class="col-span-4 grid grid-cols-4 gap-x-4 md:col-start-2 md:col-span-6 md:p-10 lg:col-start-7 lg:col-span-6 self-center xl:col-start-8 xl:col-span-5"
         >
           <h1 class="text-white text-6xl font-display font-bold h-auto block col-span-4">
             Login
@@ -53,12 +70,12 @@
           <p class="text-white col-span-4 text-center font-light mt-6 md:mt-10 md:col-start-2 md:col-span-2">
             Don't have an account?
           </p>
-          <a class="text-coffee-brown col-span-4 text-center mt-1 md:col-start-2 md:col-span-2" href="http://localhost:8080/api/users/register" target="_blank">
+          <a class="text-coffee-brown col-span-4 text-center mt-1 md:col-start-2 md:col-span-2" href="http://localhost:8080/register" target="_blank">
             Register Here
           </a>
         </form>
 
       </section>
-    </main>
+
   </body>
 </html>
