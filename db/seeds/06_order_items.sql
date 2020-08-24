@@ -22,3 +22,10 @@ INSERT INTO order_items (order_id, menu_item_id, quantity, price, size_id) VALUE
 INSERT INTO order_items (order_id, menu_item_id, quantity, price, size_id) VALUES (6, 3, 1, 460, 3);
 -- Qty 1 Espresso large
 INSERT INTO order_items (order_id, menu_item_id, quantity, price, size_id) VALUES (7, 3, 1, 460, 3);
+-- more seeds
+INSERT INTO order_items (order_id, menu_item_id, quantity, price, size_id) VALUES (3, 3, 1, 0, 1);
+INSERT INTO order_items (order_id, menu_item_id, quantity, price, size_id) VALUES (3, 3, 1, 0, 1);
+INSERT INTO order_items (order_id, menu_item_id, quantity, price, size_id) VALUES (3, 3, 2, 0, 2);
+INSERT INTO order_items (order_id, menu_item_id, quantity, price, size_id) VALUES (3, 4, 2, 0, 2);
+INSERT INTO order_items (order_id, menu_item_id, quantity, price, size_id) VALUES (3, 4, 2, 0, 2);
+INSERT INTO order_items (order_id, menu_item_id, quantity, price, size_id) VALUES (3, 5, 2, 0, 1);
