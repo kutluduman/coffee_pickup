@@ -28,6 +28,36 @@ module.exports = (db) => {
       });
   });
 
+  // Get the info from the register form
+  router.post('/register', (req, res) => {
+    // extract the info from the form
+    const name = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
+
+    // check if the user is not already in the database
+
+    const user = findUserByEmail(email);
+
+    // if not in the db, it'ok to add the user to the db
+
+    if (!user) {
+      const userId = addNewUser(name, email, password);
+      // setCookie with the user id
+      req.session['user_id'] = userId;
+
+      // redirect to /quotes
+      res.redirect('/quotes');
+    } else {
+      res.status(403).send('Sorry, the user is already registered');
+    }
+  })
+
+
+
+
+
+
   // This route gets and renders the login page
   router.get("/login",(req,res) => {
     res.render("login");
@@ -37,6 +67,7 @@ module.exports = (db) => {
   router.get("/register", (req,res) => {
     res.render("register");
   })
+
 
   router.get("/menu", (req,res) => {
     res.render("menu");
