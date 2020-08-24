@@ -4,10 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.7.3/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
 
-  <div><h1>HELLO LOGIN</h1></div>
+<div class = "container mx-auto p-2">
+  <div class = "max-w-sm mx-auto bg-white px-5 py-10 rounded shadow-x1">
+    <div class = "text-center mb-8">
+        <h1 class = "font-bold text-5xl">LOGIN</h1>
+    </div>
+
+    <form action = "#">
+      <div class = "mt-5">
+          <label>Email address</label>
+          <input type = "text" class= "block w-full p-2 border rounded border-gray-500">
+    </div>
+    <div class = "mt-5">
+        <label>Password</label>
+        <input type="password" class = "block w-full p-2 border rounded border-gray-500">
+    </div>
+    <div class ="mt-10">
+          <input type="submit" value="Login" class="py-3 bg-yellow-700 text-white w-full hover:bg-yellow-800">
+    </div>
+    <div class = "font-sans text-lg text-gray-700 text-center">
+      <br>
+      <h3 class = "font-bold text-2x1">Don't have an account?</h3>
+  </div>
+
+    </form>
+  </div>
+</div>
+
+
 
 </body>
 </html>
