@@ -47,8 +47,6 @@ const widgetsRoutes = require("./routes/widgets");
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
-//tells Express to use bcrypt
-const bcrypt = require('bcrypt');
 
 
 // Home page
