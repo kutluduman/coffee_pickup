@@ -44,6 +44,7 @@ const widgetsRoutes = require("./routes/widgets");
 const registerRoute = require("./routes/register");
 const loginRoute = require("./routes/login");
 const menuRoute = require("./routes/menu")
+const homeRoute = require("./routes/home");
 
 
 // Mount all resource routes
@@ -53,6 +54,7 @@ app.use("/api/widgets", widgetsRoutes(db));
 app.use("/register", registerRoute(db));
 app.use("/login",loginRoute(db));
 app.use("/menu",menuRoute(db));
+app.use("/home",homeRoute(db));
 
 // Note: mount other resources here, using the same pattern above
 
@@ -60,9 +62,9 @@ app.use("/menu",menuRoute(db));
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
-app.get("/", (req, res) => {
-  res.render("index");
-});
+// app.get("/", (req, res) => {
+//   res.render("index");
+// });
 
 
 app.listen(PORT, () => {

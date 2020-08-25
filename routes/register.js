@@ -8,6 +8,9 @@
 const express = require("express");
 const router = express.Router();
 
+//require twilio credentials
+const client = require('twilio')(`${process.env.TWILIO_ACCOUNT_SID}`, `${process.env.TWILIO_AUTH_TOKEN}`);
+
 // a middleware function with no mount path. This code is executed for every request to the router
 router.use(function (req, res, next) {
   console.log("Time:", Date.now());
@@ -19,7 +22,7 @@ module.exports = (db) => {
     res.render("register");
   });
 
-  //TO DO:
+
   // Make function userExists(arg1, arg2)
   // runs a query checking for those values if they exist in users table
   const userExists = (email, phone) => {
@@ -40,6 +43,7 @@ module.exports = (db) => {
     });
   };
 
+
   router.post("/", (req, res) => {
     userExists(req.body.email, req.body.phone).then((user) => {
       if (user) {
@@ -48,6 +52,7 @@ module.exports = (db) => {
           .status(403)
           let templateVars = {errMessage: "Sorry, the user is already registered! Use different email or phone"};
           res.render("errors_msg", templateVars);
+
       } else {
         const text =
           "INSERT INTO users (name, email, password, phone, is_admin) VALUES($1, $2, $3, $4, $5) RETURNING *";
@@ -64,7 +69,7 @@ module.exports = (db) => {
               //console.log("Return object from insert query", dbRes.rows[0].id);
               //set cookie
               req.session.name = dbRes.rows[0].id;
-              res.redirect("/menu");
+              res.redirect("/home");
             } else {
               res.
               status(500)
