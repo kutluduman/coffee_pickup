@@ -7,7 +7,6 @@
 
 const express = require("express");
 const router = express.Router();
-
 //require twilio credentials
 const client = require('twilio')(`${process.env.TWILIO_ACCOUNT_SID}`, `${process.env.TWILIO_AUTH_TOKEN}`);
 
@@ -18,9 +17,6 @@ router.use(function (req, res, next) {
 });
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    res.render("register");
-  });
 
 
   // Make function userExists(arg1, arg2)
@@ -43,7 +39,10 @@ module.exports = (db) => {
     });
   };
 
+
+  //*********************************************/
   //given the user email return the object order
+  //to be use with sms confirmation for th owner
   const orderInProgress = (email) => {
     console.log("email:", email)
     const text = `
@@ -68,20 +67,16 @@ module.exports = (db) => {
     });
   };
 
-
   router.post("/", (req, res) => {
-    userExists(req.body.email, req.body.phone).then((user) => {
-      if (user) {
-        //User already present
-        console.log("user present, calling order in progress")
-        orderInProgress(req.body.email)
+    /////////////////////////////////////////////////
+    //to be copied after checkout  complete sucessfully
+    //to be use with order in progress function
+    orderInProgress(req.body.email)
         .then((order) => {
           if (order) {
             console.log("Orders:", order)
 
             //sms notification to the owner
-            //to be copied after checkout  complete sucessfully
-            // send SMS for test purpose only
             let sms = `New order recived. Order_id: ${order.order_id}, user_id: ${order.user_id} `
             client.messages.create({
               body: sms,
@@ -91,43 +86,46 @@ module.exports = (db) => {
             .then(message => console.log(message.sid));
           }
         })
+    /////////////////////////////////////////////////
+  })
+    return router;
+  }
 
 
-        res
-          .status(403)
-          let templateVars = {errMessage: "Sorry, the user is already registered! Use different email or phone"};
-          res.render("errors_msg", templateVars);
+//working one for send SMS to onwer
+  //  let sms = 'New order recived. User email' + req.body.email
+  //  client.messages.create({
+  //    body: sms,
+  //    from: process.env.TWILIO_PHONE,
+  //    to: process.env.PHONE
+  //  })
+  //  .then(message => console.log(message.sid));
 
-      } else {
-        const text =
-          "INSERT INTO users (name, email, password, phone, is_admin) VALUES($1, $2, $3, $4, $5) RETURNING *";
-        const values = [
-          req.body.name,
-          req.body.email,
-          req.body.password,
-          req.body.phone,
-          false,
-        ];
-        db.query(text, values)
-          .then((dbRes) => {
-            if (dbRes.rows[0].id !== undefined) {
-              //console.log("Return object from insert query", dbRes.rows[0].id);
-              //set cookie
-              req.session.name = dbRes.rows[0].id;
-              res.redirect("/menu");
-            } else {
-              res.
-              status(500)
-              let templateVars = {errMessage: "Sorry, registration failed! Try it again."};
-              res.render("errors_msg", templateVars);
-            }
-          })
-          .catch((err) => {
-            console.log("Something Broke !", err);
-          });
-      }
-    });
-  });
+///////////////////////////////
 
-  return router;
-};
+  //sms notification to the owner
+  // client.messages
+  // .create({
+  //    body: 'New order recived. Order id ....',
+  //    from: process.env.TWILIO_PHONE,
+  //    to: process.env.PHONE
+  //  })
+  // .then(message => console.log(message.sid));
+
+  //  //sms notification to the client for order received
+  //  client.messages
+  //  .create({
+  //    body: 'Your order has been recived. It will be ready in....',
+  //    from: process.env.TWILIO_PHONE,
+  //    to: process.env.PHONE
+  //   })
+  //  .then(message => console.log(message.sid));
+
+  //  //sms notification to the client for order ready for pick up
+  //  client.messages
+  //  .create({
+  //    body: 'Your order has been recived. It will be ready in....',
+  //      from: process.env.TWILIO_PHONE,
+  //      to: process.env.PHONE
+  //   })
+  //  .then(message => console.log(message.sid));
