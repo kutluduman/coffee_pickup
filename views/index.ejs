@@ -201,31 +201,32 @@
         </div>
 
         <div class="col-span-4 pt-4 md:col-span-8" id="menu-items-container">
+          <% for(let item in items) { %>
           <article class="shadow rounded flex md:grid md:grid-cols-8 lg:mr-6">
             <img
               class="object-cover h-full w-full col-span-3 rounded-l hidden md:block"
-              src="/images/coffee-img.png"
+              src=<%= items[item].picture_url%>
             />
 
             <div class="p-4 col-span-5">
               <header>
-                <p class="text-xl font-body font-bold">Lighthouse Americano</p>
+
+                <p class="text-xl font-body font-bold"><%=items[item].name%></p>
               </header>
               <p class="text-light-grey pb-4 pt-2">
-                I thought this salad was exceptionally delicious and healthy. I
-                recommend pressing the entire tofu block for at least 20 minutes
-                before to remove excess ...
-              </p>
+                <%= items[item].description%></p>
               <footer class="flex justify-between items-center">
-                <p class="cost text-xl text-ash">$3.25</p>
+                <p class="cost text-xl text-ash">$<%= (items[item].price / 100)%></p>
                 <button onclick="openModal()"
                   class="border-coffee-brown border-2 rounded text-coffee-brown py-1 px-2 font-body font-bold hover:bg-coffee-brown hover:text-white"
                 >
                   <span class="text-xl leading-tight font-thin">+</span> Order
                 </button>
+
               </footer>
             </div>
           </article>
+          <% } %>
         </div>
       </div>
     </section>

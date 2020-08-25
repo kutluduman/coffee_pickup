@@ -39,7 +39,7 @@ module.exports = (db) => {
        //   console.log(req.body.password, user.password)
           if (req.body.password === user.password) {
             req.session.email = user.email;
-            res.redirect('/');
+            res.redirect('/home');
           } else {
             console.log(req.body.password, user.password);
             let templateVars = {errMessage: "Incorrect Password!"};
