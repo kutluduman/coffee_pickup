@@ -214,7 +214,7 @@
 
         <div class="col-span-4 pt-4 md:col-span-8" id="menu-items-container">
           <% for(let item in items) { %>
-          <article class="shadow rounded flex md:grid md:grid-cols-8 lg:mr-6">
+          <article  category ="<%= items[item].category %>" class="menu-item-card shadow rounded flex md:grid md:grid-cols-8 lg:mr-6">
             <img
               class="object-cover h-full w-full col-span-3 rounded-l hidden md:block"
               src=<%= items[item].picture_url%>
@@ -229,7 +229,7 @@
                 <%= items[item].description%></p>
               <footer class="flex justify-between items-center">
                 <p class="cost text-xl text-ash">$<%= (items[item].price / 100)%></p>
-                <button onclick="openModal()"
+                <button  onclick="updateModal()"
                   class="border-coffee-brown border-2 rounded text-coffee-brown py-1 px-2 font-body font-bold hover:bg-coffee-brown hover:text-white"
                 >
                   <span class="text-xl leading-tight font-thin">+</span> Order
@@ -317,6 +317,7 @@
     <script src="/scripts/nav.js"></script>
     <script src="/scripts/cache-cart.js"></script>
     <script src="/scripts/updateCartFrontend.js"></script>
+    <script src="/scripts/updateModal.js"></script>
 
   </body>
 </html>
