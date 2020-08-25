@@ -43,56 +43,11 @@ module.exports = (db) => {
     });
   };
 
-  //given the user email return the object order
-  const orderInProgress = (email) => {
-    console.log("email:", email)
-    const text = `
-      SELECT orders.id as order_id, orders.user_id, orders.time_ordered
-      FROM orders
-      JOIN users ON (orders.user_id = users.id)
-      JOIN order_items ON (order_items.order_id = orders.id)
-      WHERE orders.in_progress = FALSE AND orders.pickup_ready = FALSE AND users.email = $1
-      GROUP BY orders.id;`;
-    const values = [email];
-    return db.query(text, values).then((result) => {
-      if (result.rows[0] !== undefined) {
-        console.log("Result from query find user by email", result.rows[0]);
-        //if (result.rows[0].email === email || result.rows[0].phone === phone) {
-          return result.rows[0];
-       //}
-      } else {
-        console.log("orderInProgress returning false")
-        return false;
-
-      }
-    });
-  };
-
 
   router.post("/", (req, res) => {
     userExists(req.body.email, req.body.phone).then((user) => {
       if (user) {
         //User already present
-        console.log("user present, calling order in progress")
-        orderInProgress(req.body.email)
-        .then((order) => {
-          if (order) {
-            console.log("Orders:", order)
-
-            //sms notification to the owner
-            //to be copied after checkout  complete sucessfully
-            // send SMS for test purpose only
-            let sms = `New order recived. Order_id: ${order.order_id}, user_id: ${order.user_id} `
-            client.messages.create({
-              body: sms,
-              from: process.env.TWILIO_PHONE,
-              to: process.env.PHONE
-            })
-            .then(message => console.log(message.sid));
-          }
-        })
-
-
         res
           .status(403)
           let templateVars = {errMessage: "Sorry, the user is already registered! Use different email or phone"};
