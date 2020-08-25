@@ -20,7 +20,7 @@ module.exports = (db) => {
   // runs a query checking for those values if they exist in users table
   const items = () => {
     const text = `
-      SELECT name, price, picture_url, description
+      SELECT name, price, picture_url, description, category
       FROM menu_items
       `;
     //const values = [email, phone];
