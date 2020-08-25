@@ -113,11 +113,13 @@
           <div class="flex py-3 flex-wrap justify-center items-center">
             <button
               type="button"
+              id="remove-qty"
               class="text-xl py-1 px-4 border border-light-grey rounded-lg text-light-grey text-lg"
             >
               -
             </button>
             <input
+              onkeydown="return false"
               type="number"
               id="item-qty"
               class="w-12 text-center text-3xl bg-transparent text-coffee-brown font-body"
@@ -125,6 +127,7 @@
             />
             <button
               type="button"
+              id="add-qty"
               class="text-xl py-1 px-4 border border-gray-700 rounded-lg text-ash text-lg"
             >
               +
@@ -333,6 +336,7 @@
     <script src="/scripts/cache-cart.js"></script>
     <script src="/scripts/updateCartFrontend.js"></script>
     <script src="/scripts/updateModal.js"></script>
+    <script src="/scripts/customCounter.js"></script>
 
   </body>
 </html>
