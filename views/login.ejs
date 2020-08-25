@@ -3,24 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="stylesheet" href="/styles/normalize.css" type="text/css" />
     <link rel="stylesheet" href="/styles/output.css" type="text/css" />
     <title>Login</title>
+
   </head>
+
   <body class="bg-ash">
-    <nav class="p-6 w-full flex items-center justify-between">
-      <img src="/images/lhc-logo.svg" />
-      <div class="flex">
-        <p class="mx-3 text-white">Menu</p>
-        <p class="mx-3 text-white">Contact Us</p>
-        <div class="h-full block w-2 bg-red-400"></div>
-        <p class="mx-3 text-white">Login</p>
-        <p class="mx-3 text-white">Register</p>
-      </div>
-    </nav>
+
+    <%- include('partials/nav') %>
 
     <section
-      class="grid grid-cols-4 gap-x-4 grid-rows-none mx-4 md:grid-cols-8 lg:grid-cols-12 xl:max-w-screen-xl xl:mx-auto h-screen"
+      class="grid grid-cols-4 gap-x-4 grid-rows-none mx-4 md:grid-cols-8 lg:grid-cols-12 xl:max-w-screen-xl xl:mx-auto h-screen  pt-10"
     >
       <div class="col-span-6 self-center hidden lg:block">
         <img src="/images/coffee_cafe.jpeg" />
@@ -32,7 +27,7 @@
         class="col-span-4 grid grid-cols-4 gap-x-4 md:col-start-2 md:col-span-6 md:p-10 lg:col-start-7 lg:col-span-6 self-center xl:col-start-8 xl:col-span-5"
       >
         <h1
-          class="text-white text-6xl font-display font-bold h-auto block col-span-4"
+          class="text-white text-5xl font-display font-bold h-auto block col-span-4"
         >
           Login
         </h1>
@@ -76,9 +71,9 @@
           Don't have an account?
         </p>
         <a
-          class="text-coffee-brown col-span-4 text-center mt-1 md:col-start-2 md:col-span-2"
-          href="http://localhost:8080/register"
+          href="/register"
           target="_blank"
+          class="text-coffee-brown col-span-4 text-center mt-1 md:col-start-2 md:col-span-2"
         >
           Register Here
         </a>
