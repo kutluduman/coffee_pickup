@@ -87,26 +87,29 @@
         </header>
 
         <form class="block">
-          <p class="py-4 px-2">Choose Size</p>
-          <label
-            class="flex justify-between items-center bg-white p-3 border border-t"
-          >
-            <div class="bg-white w-full">Small</div>
-            <input type="radio" name="size" value="small" />
-          </label>
-          <label
-            class="flex justify-between items-center bg-white p-3 border border-t"
-          >
-            <div class="bg-white w-full">Medium</div>
-            <input type="radio" name="size" value="small" />
-          </label>
-          <label
-            class="flex justify-between items-center bg-white p-3 border border-t"
-          >
-            <div class="bg-white w-full">Large</div>
-            <input type="radio" name="size" value="small" />
-          </label>
-
+          <div id="options-container">
+            <p class="py-4 px-2">Choose Size</p>
+            <label
+              class="flex justify-between items-center bg-white p-3 border border-t"
+            >
+              <div class="bg-white w-full">Small</div>
+              <input type="radio" name="size" value="small" />
+            </label>
+            <label
+              class="flex justify-between items-center bg-white p-3 border border-t"
+            >
+              <div class="bg-white w-full">Medium</div>
+              <input type="radio" name="size" value="small" />
+            </label>
+            <label
+              class="flex justify-between items-center bg-white p-3 border border-t"
+            >
+              <div class="bg-white w-full">Large</div>
+              <input type="radio" name="size" value="small" />
+            </label>
+  
+          </div>
+          
           <div class="flex py-3 flex-wrap justify-center items-center">
             <button
               type="button"
@@ -229,7 +232,7 @@
                 <%= items[item].description%></p>
               <footer class="flex justify-between items-center">
                 <p class="cost text-xl text-ash">$<%= (items[item].price / 100)%></p>
-                <button  onclick="updateModal()" 
+                <button  onclick="openModal()" 
                   class="border-coffee-brown border-2 rounded text-coffee-brown py-1 px-2 font-body font-bold hover:bg-coffee-brown hover:text-white"
                 >
                   <span class="text-xl leading-tight font-thin">+</span> Order
