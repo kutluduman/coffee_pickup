@@ -73,15 +73,43 @@ module.exports = (db) => {
       });
   });
 
+  let fromcart = [{"item_name":"Lighthouse Americano","qty":2,"price":3,"options":{"size":"medium"}},
+                  {"item_name":"Lighthouse Americano","qty":2,"price":3,"options":{"size":"medium"}},
+                  {"item_name":"Lighthouse Americano","qty":2,"price":3,"options":{"size":"medium"}},
+                  {"item_name":"Lighthouse Americano","qty":2,"price":3,"options":{"size":"medium"}}]
 
   router.post("/", (req, res) => {
+    const text =
+          "INSERT INTO order_items (menu_item_id, quantity, price, size_id) VALUES($1, $2, $3, $4) RETURNING *";
+        const values = [ 1, 2, 3, 2
+          // req.body.name,
+          // req.body.email,
+          // req.body.password,
+          // req.body.phone,
+          // false,
+        ];
+        console.log("Just before query insert")
+        db.query(text, values)
+        .then((dbRes) => {
+          console.log("dbRes", dbRes)
+          res.redirect("/home");
+          if (dbRes !== undefined) {
+            //console.log("Return object from insert query", dbRes.rows[0].id);
+            //set cookie
+            //req.session.name = dbRes.rows[0].id;
+            // console.log()
 
-
+          } else {
+            res.
+            status(500)
+            let templateVars = {errMessage: "Sorry, registration failed! Try it again."};
+            res.render("errors_msg", templateVars);
+          }
+        })
+        .catch((err) => {
+          console.log("Something Broke !", err);
+        });
   })
-
-
-
-
 
 
   return router;
