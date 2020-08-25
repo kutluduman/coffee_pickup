@@ -7,6 +7,8 @@
 
 const express = require("express");
 const router = express.Router();
+//const bcrypt = require('bcrypt');
+
 
 // a middleware function with no mount path. This code is executed for every request to the router
 router.use(function (req, res, next) {
@@ -19,21 +21,50 @@ module.exports = (db) => {
     res.render("login");
   });
 
+
+  const emailExist = function(email) {
+    return db.query(`
+    SELECT *
+    FROM users
+    WHERE email = $1;
+    `, [email])
+    .then(res => res.rows[0])
+  };
+
   router.post("/", (req, res) => {
-    res.json(req.body);
-    // const text =
-    //   "INSERT INTO users (name, email, password, phone, is_admin) VALUES($1, $2, $3, $4, $5) RETURNING *";
-    // const values = [req.body.name, req.body.email, req.body.password, req.body.phone, false];
-    // db.query(text, values)
-    //   .then((res) => {
-    //     console.log(res.rows[0]);
-    //     res.redirect('/menu');
-
-    //     // { name: 'brianc', email: 'brian.m.carlson@gmail.com' }
-    //   })
-    //   .catch((e) => console.error(e.stack));
-
-  });
+    const email = req.body.email;
+    return emailExist(email)
+      .then(user => {
+        if (user) {
+       //   console.log(req.body.password, user.password)
+          if (req.body.password === user.password) {
+            req.session.email = user.email;
+            res.redirect('/');
+          } else {
+            console.log(req.body.password, user.password);
+            let templateVars = {errMessage: "Incorrect Password!"};
+            res.render("errors_msg", templateVars);
+            // res.send({error: "incorrect password"})
+        }
+      } else {
+        let templateVars = {errMessage: "Email does not exist!"};
+            res.render("errors_msg", templateVars);
+      }
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
+  })
 
   return router;
 };
+
+
+// if (!bcrypt.compareSync(req.body.password, user.password)) {
+//   console.log(req.body.password, user.password);
+//   res.send({error: "incorrect password"})
+// } else {
+// req.session.email = user.email;
+// res.redirect('/');
