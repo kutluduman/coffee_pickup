@@ -92,6 +92,57 @@ module.exports = (db) => {
   }
 
 
+    //*********************************************/
+  //return the total eobject order
+  //to be use with sms confirmation for th owner
+  const orderInProgress = (email) => {
+    console.log("email:", email)
+    const text = `
+      SELECT orders.id as order_id, orders.user_id, orders.time_ordered
+      FROM orders
+      JOIN users ON (orders.user_id = users.id)
+      JOIN order_items ON (order_items.order_id = orders.id)
+      WHERE orders.in_progress = FALSE AND orders.pickup_ready = FALSE AND users.email = $1
+      GROUP BY orders.id;`;
+    const values = [email];
+    return db.query(text, values).then((result) => {
+      if (result.rows[0] !== undefined) {
+        console.log("Result from query find user by email", result.rows[0]);
+        //if (result.rows[0].email === email || result.rows[0].phone === phone) {
+          return result.rows[0];
+       //}
+      } else {
+        console.log("orderInProgress returning false")
+        return false;
+
+      }
+    });
+  };
+
+  router.post("/", (req, res) => {
+    /////////////////////////////////////////////////
+    //to be copied after checkout  complete sucessfully
+    //to be use with order in progress function
+    orderInProgress(req.body.email)
+        .then((order) => {
+          if (order) {
+            console.log("Orders:", order)
+
+            //sms notification to the client
+            let sms = `New order recived. Order_id: ${order.order_id}, user_id: ${order.user_id} `
+            client.messages.create({
+              body: sms,
+              from: process.env.TWILIO_PHONE,
+              to: process.env.PHONE
+            })
+            .then(message => console.log(message.sid));
+          }
+        })
+    /////////////////////////////////////////////////
+  })
+    return router;
+  }
+
 //working one for send SMS to onwer
   //  let sms = 'New order recived. User email' + req.body.email
   //  client.messages.create({
