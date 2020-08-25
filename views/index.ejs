@@ -16,7 +16,7 @@
       <img src="/images/lhc-logo.svg" />
       <div class="flex">
         <a
-        onclick="triggerCart()" 
+        onclick="triggerCart()"
         class="mx-3 lg:hidden"
           ><img src="/images/icons/shopping-cart.svg"
         /></a>
@@ -212,12 +212,8 @@
           <h2 class="font-display text-3xl font-bold">Our Menu</h2>
         </div>
 
-<<<<<<< HEAD
-        <div class="col-span-4 md:col-span-8" id="menu-items-container">
-=======
         <div class="col-span-4 pt-4 md:col-span-8" id="menu-items-container">
           <% for(let item in items) { %>
->>>>>>> 74d0d08be1232f0d18b32811885dfc96e974d372
           <article class="shadow rounded flex md:grid md:grid-cols-8 lg:mr-6">
             <img
               class="object-cover h-full w-full col-span-3 rounded-l hidden md:block"
@@ -232,14 +228,8 @@
               <p class="text-light-grey pb-4 pt-2">
                 <%= items[item].description%></p>
               <footer class="flex justify-between items-center">
-<<<<<<< HEAD
-                <p class="cost text-xl text-ash">$3.25</p>
-                <button
-                  onclick="openModal()"
-=======
                 <p class="cost text-xl text-ash">$<%= (items[item].price / 100)%></p>
                 <button onclick="openModal()"
->>>>>>> 74d0d08be1232f0d18b32811885dfc96e974d372
                   class="border-coffee-brown border-2 rounded text-coffee-brown py-1 px-2 font-body font-bold hover:bg-coffee-brown hover:text-white"
                 >
                   <span class="text-xl leading-tight font-thin">+</span> Order
@@ -311,7 +301,7 @@
             </div>
           </article>
           </div>
-          
+
           <button
             class="bg-ash w-full text-white font-bold font-body p-3 rounded-b"
           >
@@ -319,7 +309,7 @@
           </button>
         </div>
         </div>
-       
+
 
       </div>
     </section>
