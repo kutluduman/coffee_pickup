@@ -7,9 +7,12 @@ module.exports = {
       display: ["Playfair\\ Display"],
       body: ["Nunito"],
     },
-   
 
     extend: {
+      maxHeight: {
+        "menu-card": "180",
+      },
+
       height: {
         "sm-feature": "13.75rem",
         "md-feature": "27.25rem",
