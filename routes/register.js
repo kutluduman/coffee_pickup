@@ -46,9 +46,8 @@ module.exports = (db) => {
         //User already present
         res
           .status(403)
-          .send(
-            "Sorry, the user is already registered! Use different email or phone"
-          );
+          let templateVars = {errMessage: "Sorry, the user is already registered! Use different email or phone"};
+          res.render("errors_msg", templateVars);
       } else {
         const text =
           "INSERT INTO users (name, email, password, phone, is_admin) VALUES($1, $2, $3, $4, $5) RETURNING *";
@@ -67,7 +66,10 @@ module.exports = (db) => {
               req.session.name = dbRes.rows[0].id;
               res.redirect("/menu");
             } else {
-              res.status(500).send("Sorry, registration failed! Try it again.");
+              res.
+              status(500)
+              let templateVars = {errMessage: "Sorry, registration failed! Try it again."};
+              res.render("errors_msg", templateVars);
             }
           })
           .catch((err) => {
