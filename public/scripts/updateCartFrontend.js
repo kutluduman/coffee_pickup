@@ -1,4 +1,3 @@
-
 const createCartItem = (cartItem) => {
   const cartTemplate = `
 	<article class="cart-item flex flex-wrap justify-between px-4 py-4 border-b border-t">
@@ -36,3 +35,8 @@ const updateCartView = () => {
 
   console.log(htmlCart);
 };
+
+const addToCardUI =()=>{
+ let rawCart = new FormData(document.getElementById('menu-item-customizer'));
+ console.log(rawCart.get('size'));
+}

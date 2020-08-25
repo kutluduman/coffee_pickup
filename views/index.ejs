@@ -86,7 +86,7 @@
           </p>
         </header>
 
-        <form class="block">
+        <form name="myForm"  class="block" id="menu-item-customizer">
           <div id="options-container">
             <p class="py-4 px-2">Choose Size</p>
             <label
@@ -99,13 +99,13 @@
               class="flex justify-between items-center bg-white p-3 border border-t"
             >
               <div class="bg-white w-full">Medium</div>
-              <input type="radio" name="size" value="small" />
+              <input type="radio" name="size" value="medium" />
             </label>
             <label
               class="flex justify-between items-center bg-white p-3 border border-t"
             >
               <div class="bg-white w-full">Large</div>
-              <input type="radio" name="size" value="small" />
+              <input type="radio" name="size" value="large" />
             </label>
   
           </div>
@@ -135,7 +135,7 @@
           </div>
 
           <button
-            type="submit"
+            type="button"
             class="w-full text-center p-4 bg-coffee-brown rounded-b font-semibold text-white"
           >
             Add to Order

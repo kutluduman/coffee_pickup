@@ -7,7 +7,7 @@ const item = {
   },
 };
 
-const addToCart = (item) => {
+const addToCartBackend = (item) => {
   const cartString = localStorage.getItem("cart");
   const cart = JSON.parse(cartString);
   console.log(cart);
