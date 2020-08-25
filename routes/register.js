@@ -69,7 +69,7 @@ module.exports = (db) => {
               //console.log("Return object from insert query", dbRes.rows[0].id);
               //set cookie
               req.session.name = dbRes.rows[0].id;
-              res.redirect("/menu");
+              res.redirect("/home");
             } else {
               res.
               status(500)
