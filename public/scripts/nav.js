@@ -19,8 +19,25 @@ const openModal = () => {
 
   modalBackground.classList.toggle("opacity-100");
   modal.classList.toggle("opacity-100");
- 
- 
+
+  body.classList.toggle("overflow-y-hidden");
+};
+
+const clearForm = () => {
+  const sizes = document.getElementsByName("size");
+  Array.from(sizes).forEach((btn) => {
+    btn.checked = false;
+  });
+
+  document.getElementById("item-qty").value = 0;
+};
+
+const closeModal = () => {
+  modalBackground.classList.toggle("opacity-100");
+  modal.classList.toggle("opacity-100");
+  setTimeout(() => {
+    modalBackground.classList.toggle("hidden");
+  }, 150);
   body.classList.toggle("overflow-y-hidden");
 };
 

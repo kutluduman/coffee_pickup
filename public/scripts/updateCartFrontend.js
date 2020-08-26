@@ -1,4 +1,6 @@
 const createCartItem = (cartItem) => {
+
+  //escap inputs to prevent sql injection
   const cartTemplate = `
 	<article class="cart-item flex flex-wrap justify-between px-4 py-4 border-b border-t">
 		<div class="flex items-center flex-wrap">
@@ -11,9 +13,15 @@ const createCartItem = (cartItem) => {
 		<p class="text-gray-700 mr-2">${
       cartItem.price * cartItem.qty
     }</p><img class="" src="/images/icons/close-circle.svg"></div>
-		<ul class="selected-options block list-disc w-48 ml-10">
-			<li class="text-light-grey text-sm">${cartItem.options.size}</li>
-		</ul>
+
+    ${
+      cartItem.options.size
+        ? `	<ul class="selected-options block list-disc w-48 ml-10">
+    <li class="text-light-grey text-sm">${cartItem.options.size}</li>
+  </ul>`
+        : ``
+    }
+	
   </article>
   `;
 
@@ -28,15 +36,43 @@ const updateCartView = () => {
   });
 
   const checkoutUI = document.getElementById("cart-items-container");
-
+  checkoutUI.innerHTML = "";
   htmlCart.forEach((element) => {
     checkoutUI.insertAdjacentHTML("beforeend", element);
   });
 
-  console.log(htmlCart);
 };
 
-const addToCardUI =()=>{
- let rawCart = new FormData(document.getElementById('menu-item-customizer'));
- console.log(rawCart.get('size'));
-}
+const addToCardUI = () => {
+  const cartItemOptions = document.getElementById("menu-item-customizer");
+  let rawCart = new FormData(cartItemOptions); // vanilla js version of getting form data
+
+  if (rawCart.get("item-qty") < 1) {
+    return false;
+    //show error message
+  } else if (
+    cartItemOptions.getAttribute("category") === "Coffee" &&
+    !rawCart.get("size")
+  ) {
+    //show error message
+    return false;
+  } else {
+    //creates the order item for local storage 
+    const item = {
+      item_name: cartItemOptions.getAttribute("item_name"),
+      qty: rawCart.get("item-qty"),
+      price: parseFloat(
+        (cartItemOptions.getAttribute("price") * rawCart.get("item-qty")) / 100
+      ).toFixed(2),
+      category: cartItemOptions.getAttribute("category"),
+      options: {
+        size: rawCart.get("size"),
+      },
+    };
+
+    addToCartBackend(item);
+    updateCartView();
+    clearForm();
+    closeModal();
+  }
+};
