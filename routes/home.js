@@ -59,7 +59,8 @@ module.exports = (db) => {
     }
 
   })
-});
+  })
+
 
 
   router.get("/", (req, res) => {
@@ -91,12 +92,12 @@ module.exports = (db) => {
     console.log("body [0]", mycart[0])
     // console.log("type of", typeof req.body.cart[0].qty)
     // console.log("quantity", JSON.parse(req.body.cart[0].qty))
-    for (let item in mycart) {
-      console.log("Loop", mycart[item])
-      itemName.push(mycart[item].item_name)
+    for (let i=0; i < mycart.length; i++) {
+      console.log("Loop", mycart[i])
+      itemName.push(mycart[i].item_name)
     }
 
-    console.log("iteme name", itemName);
+    console.log("item name", itemName);
     //Question for mentor:
     //1)how to send more then one value to array values
     //2)how link option side
@@ -106,9 +107,9 @@ module.exports = (db) => {
         FROM menu_items
         WHERE name = $1;`;
     const values1 = [name];
-    return db.query(text1, values1).then((result) => {
-      console.log("Result from query find item_id by item name", result.rows[0].id);
-      itemId.push(result.rows[0].id)
+      return db.query(text1, values1).then((result) => {
+        console.log("Result from query find item_id by item name", result.rows[0].id);
+        itemId.push(result.rows[0].id)
       // if (result.rows[0] !== undefined) {
 
       //   // if (result.rows[0].email === email || result.rows[0].phone === phone) {
@@ -117,7 +118,8 @@ module.exports = (db) => {
       // } else {
       //   return false;
       // }
-    });
+      });
+    }
 
 
     const text =
@@ -153,31 +155,5 @@ module.exports = (db) => {
   })
 
 
-
-  //expected = [{}, {}, {}]
-  //what we are getting is  = {'{},{},{}': ''}
-
-
-  //define object cart base on the application local storage
-  // const cart = {
-  //   menu_item_id: user,
-  //   quantity: {
-  //     text: req.body.text
-  //   },
-  //   created_at: Date.now()
-  // };
-
-  // Saves a tweet to `db`
-  //by query
-
-  // //when doc ready
-  // $(document).ready(function() {
-  //   $("#order_pickup").clic('keyup', (function() {
-  //     alert("The order inserted");
-  //   }))
-  // });
-
   return router;
 };
-
-
