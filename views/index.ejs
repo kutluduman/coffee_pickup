@@ -203,7 +203,7 @@
         </div>
 
         <!-------Checkout Cart-------->
-        <div id="checkout-mobile-background" class="col-span-4 grid-cols-4 ">
+        <div id="checkout-mobile-background" class="col-span-4 grid-cols-4 min-h-shopping-cart ">
           <div
           class="rounded shadow opacity-0 lg:opacity-100 hidden lg:block"
           id="checkout-cart"
@@ -225,43 +225,8 @@
             </p>
           </div>
 
-          <div id="cart-items-container">
-            <article
-            class="cart-item flex flex-wrap justify-between px-4 py-4 border-b border-t"
-          >
-            <div class="flex items-center flex-wrap">
-              <p class="item-qty font-body text-coffee-brown mr-2 inline-block">
-                1
-              </p>
-              <p class="font-body text-ash text-xl inline-block">
-                Lighthouse Americano
-              </p>
-            </div>
-            <div class="flex items-center">
-              <p class="text-gray-700 mr-2">$3.25</p>
-              <img class="" src="/images/icons/close-circle.svg" />
-            </div>
-
-            <ul class="selected-options block list-disc w-48 ml-10">
-              <li class="text-light-grey text-sm">Medium</li>
-            </ul>
-          </article>
-          <article
-            class="cart-item flex justify-between px-4 py-4 border-b border-t"
-          >
-            <div class="flex items-center">
-              <p class="item-qty font-body text-coffee-brown mr-2 inline-block">
-                1
-              </p>
-              <p class="font-body text-ash text-xl inline-block">
-                Lighthouse Americano
-              </p>
-            </div>
-            <div class="flex items-center">
-              <p class="text-gray-700 mr-2">$3.25</p>
-              <img class="" src="/images/icons/close-circle.svg" />
-            </div>
-          </article>
+          <div id="cart-items-container" class="min-h-shopping-cart max-h-shopping-cart overflow-y-scroll">
+           
           </div>
 
           <button

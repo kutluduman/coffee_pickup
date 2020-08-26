@@ -11,6 +11,10 @@ module.exports = {
     extend: {
       maxHeight: {
         "menu-card": "180",
+        "shopping-cart": "18rem",
+      },
+      minHeight: {
+        "shopping-cart": "18rem",
       },
 
       height: {
