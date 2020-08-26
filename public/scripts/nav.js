@@ -41,7 +41,7 @@ const closeModal = () => {
   body.classList.toggle("overflow-y-hidden");
 };
 
-modal.onclick = function (e) {
+modal.onclick = function(e) {
   if (e.target.id === "close-modal") {
     modalBackground.classList.toggle("opacity-100");
     modal.classList.toggle("opacity-100");
