@@ -181,10 +181,8 @@
               class="object-cover h-full w-full col-span-3 rounded-l hidden md:block"
               src=<%= items[item].picture_url%>
             />
-
             <div class="p-4 col-span-5">
               <header>
-
                 <p class="text-xl font-body font-bold"><%=items[item].name%></p>
               </header>
               <p class="text-light-grey pb-4 pt-2">
@@ -196,7 +194,6 @@
                 >
                   <span class="text-xl leading-tight font-thin">+</span> Order
                 </button>
-
               </footer>
             </div>
           </article>
@@ -214,6 +211,7 @@
               Your Selection
             </p>
           </header>
+          <form id="upload_cart" action="/home" method="POST">
           <div
             class="bg-coffee-brown flex justify-center items-center p-2"
             id="estimated-order-time-banner"
@@ -266,9 +264,11 @@
 
           <button
             class="bg-ash w-full text-white font-bold font-body p-3 rounded-b"
+            id="order_pickup"
           >
             Order Pickup
           </button>
+        </form>
         </div>
         </div>
 
