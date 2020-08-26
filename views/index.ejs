@@ -6,6 +6,8 @@
 
     <link rel="stylesheet" href="/styles/normalize.css" type="text/css" />
     <link rel="stylesheet" href="/styles/output.css" type="text/css" />
+      <!-- External JS -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <title>Register</title>
   </head>
   <body class="bg-ash">
@@ -257,6 +259,7 @@
               Your Selection
             </p>
           </header>
+          <form id="upload_cart" action="/home" method="POST">
           <div
             class="bg-coffee-brown flex justify-center items-center p-2"
             id="estimated-order-time-banner"
@@ -309,9 +312,11 @@
 
           <button
             class="bg-ash w-full text-white font-bold font-body p-3 rounded-b"
+            id="order_pickup"
           >
             Order Pickup
           </button>
+        </form>
         </div>
         </div>
 

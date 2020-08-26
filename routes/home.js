@@ -8,6 +8,7 @@
 const express = require('express');
 const router  = express.Router();
 
+
 // a middleware function with no mount path. This code is executed for every request to the router
 router.use(function (req, res, next) {
   console.log('Time:', Date.now())
@@ -38,7 +39,7 @@ module.exports = (db) => {
 
 
   router.get("/", (req,res) => {
- 
+
 
     items().then ((items) =>    {
 
@@ -81,6 +82,9 @@ module.exports = (db) => {
 
   router.post("/", (req, res) => {
     console.log("body", req.body)
+    console.log('---------------------------------')
+    console.log("body", JSON.parse(req.body.cart))
+
     const text =
           "INSERT INTO order_items (menu_item_id, quantity, price, size_id) VALUES($1, $2, $3, $4) RETURNING *";
         const values = [ 1, req.body.quantity, req.body.price, 2
@@ -114,5 +118,31 @@ module.exports = (db) => {
   })
 
 
+
+  //expected = [{}, {}, {}]
+  //what we are getting is  = {'{},{},{}': ''}
+
+
+  //define object cart base on the application local storage
+  // const cart = {
+  //   menu_item_id: user,
+  //   quantity: {
+  //     text: req.body.text
+  //   },
+  //   created_at: Date.now()
+  // };
+
+  // Saves a tweet to `db`
+  //by query
+
+  // //when doc ready
+  // $(document).ready(function() {
+  //   $("#order_pickup").clic('keyup', (function() {
+  //     alert("The order inserted");
+  //   }))
+  // });
+
   return router;
 };
+
+
