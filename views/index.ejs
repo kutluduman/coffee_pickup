@@ -6,60 +6,13 @@
 
     <link rel="stylesheet" href="/styles/normalize.css" type="text/css" />
     <link rel="stylesheet" href="/styles/output.css" type="text/css" />
-    <title>Register</title>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Home</title>
   </head>
   <body class="bg-ash">
-    <!--Navbar-->
-    <nav
-      class="px-4 py-2 md:px-6 md:py-4 w-full flex items-center justify-between fixed"
-    >
-      <img src="/images/lhc-logo.svg" />
-      <div class="flex">
-        <a
-        onclick="triggerCart()" 
-        class="mx-3 lg:hidden"
-          ><img src="/images/icons/shopping-cart.svg"
-        /></a>
-        <div onclick="triggerMenu()" class="mx-3 lg:hidden">
-          <img src="/images/icons/menu.svg" />
-        </div>
 
-        <a href="/menu" class="text-white mx-3 hidden lg:block">Menu</a>
-        <a class="text-white mx-3 hidden lg:block">Contact Us</a>
-        <div class="h-px-6 w-px bg-coffee-brown mx-3 hidden lg:block"></div>
-        <a href="/login" class="text-white mx-3 hidden lg:block">Login</a>
-        <a href="/register" class="text-white mx-3 hidden lg:block">Sign Up</a>
-      </div>
-    </nav>
-
-    <!--Mobile Menu-->
-
-    <div
-      class="fixed h-screen bg-ash right-0 flex flex-col items-end justify-center z-10 transition-all w-0 duration-300 ease-in-out"
-      id="mobile-menu"
-    >
-      <img
-        onclick="triggerMenu()"
-        class="absolute top-0 left-0 p-6 transition-all duration-300"
-        src="/images/icons/back-arrow.svg"
-      />
-      <a
-        class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300"
-        >Menu</a
-      >
-      <a
-        class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300"
-        >Contact Us</a
-      >
-      <a
-        class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300"
-        >Login</a
-      >
-      <a
-        class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300"
-        >Register</a
-      >
-    </div>
+    <%- include('partials/nav') %>
 
     <!--MOdal starts here-->
 
@@ -107,9 +60,9 @@
               <div class="bg-white w-full">Large</div>
               <input type="radio" name="size" value="large" />
             </label>
-  
+
           </div>
-          
+
           <div class="flex py-3 flex-wrap justify-center items-center">
             <button
               type="button"
@@ -188,6 +141,7 @@
 
     <!-- Feature Items-->
     <section
+    id = "feature_items"
       class="bg-feature-img bg-cover h-sm-feature grid grid-cols-4 gap-x-4 md:grid-cols-8 md:h-md-feature lg:h-lg-feature lg:grid-cols-12"
     >
       <div
@@ -212,7 +166,7 @@
 
     <!--Menu Page-->
 
-    <section class="bg-white">
+    <section id="menu" class="bg-white">
       <div
         class="wrapper px-4 grid grid-cols-4 gap-x-4 py-6 md:grid-cols-8 lg:col-start-1 lg:grid-cols-12"
       >
@@ -237,7 +191,7 @@
                 <%= items[item].description%></p>
               <footer class="flex justify-between items-center">
                 <p class="cost text-xl text-ash">$<%= (items[item].price / 100)%></p>
-                <button  onclick="openModal()" 
+                <button  onclick="openModal()"
                   class="border-coffee-brown border-2 rounded text-coffee-brown py-1 px-2 font-body font-bold hover:bg-coffee-brown hover:text-white"
                 >
                   <span class="text-xl leading-tight font-thin">+</span> Order
@@ -309,7 +263,7 @@
             </div>
           </article>
           </div>
-          
+
           <button
             class="bg-ash w-full text-white font-bold font-body p-3 rounded-b"
           >
@@ -317,10 +271,106 @@
           </button>
         </div>
         </div>
-       
+
 
       </div>
     </section>
+
+
+    <!-------Contact Us-------->
+
+    <section
+    id = "contact"
+    class="grid grid-cols-4 gap-x-4 grid-rows-none mx-4 md:grid-cols-8 lg:grid-cols-12 xl:max-w-screen-xl xl:mx-auto h-screen  pt-10"
+  >
+    <div
+    class="col-span-6 self-center hidden lg:block">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2887.1917448259037!2d-79.40439288379676!3d43.64417886103086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b34de2de61291%3A0xe8fa22738afe6e7b!2s662%20King%20St%20W%2C%20Toronto%2C%20ON!5e0!3m2!1sen!2sca!4v1598420664126!5m2!1sen!2sca" width="700" height="1200" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+    </div>
+
+    <form
+      method="POST"
+      action="#"
+      class="col-span-4 grid grid-cols-4 gap-x-4 md:col-start-2 md:col-span-6 md:p-10 lg:col-start-7 lg:col-span-6 self-center xl:col-start-8 xl:col-span-5"
+    >
+      <h1
+        class="text-white text-6xl font-display font-bold h-auto block col-span-4"
+      >
+       Contact Us
+      </h1>
+
+      <br>
+      <br>
+
+      <div class="mb-4 col-start-1 col-span-2">
+        <label class="block text-white text-sm mb-2" for="name">
+          Full Name
+        </label>
+        <input
+          class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
+          id="name"
+          name="name"
+          type="text"
+        />
+      </div>
+      <div class="mb-4 col-start-3 col-span-2">
+        <label class="block text-white text-sm mb-2" for="email">
+          Email
+        </label>
+        <input
+          class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
+          id="email"
+          name="email"
+          type="email"
+        />
+      </div>
+
+      <div class="flex flex-wrap -mx-3 mb-6">
+        <div class="w-full px-3">
+            <br>
+          <label class="block tracking-wide text-gray-400 text-sm font-bold mb-2" for="grid-password">
+            Message
+          </label>
+          <br>
+          <textarea class="bg-ash rounded border border-gray-400 text-gray-400 focus:outline-none h-32 focus:border-indigo-500 text-base px-4 py-2 mb-4 resize-none" placeholder="Message"></textarea>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="bg-coffee-brown col-span-4 py-3 rounded text-white mt-10"
+      >
+        Send Email
+      </button>
+
+      <br>
+      <h1 class="text-gray-300 text-4xl font-display font-bold h-auto block col-span-4">A:</h1>
+      <h3 class="text-gray-400 text-sm font-display font-bold h-auto block col-span-4">662 King St W Toronto, ON M5V 1M7</h3>
+      <br>
+      <h1 class="text-gray-300 text-4xl font-display font-bold h-auto block col-span-4">H:</h1>
+      <h3 class="text-gray-400 text-sm font-display font-bold h-auto block col-span-4">Mon-Fri:</h3>
+      <h3 class="text-gray-400 text-sm font-display font-bold h-auto block col-span-4">12:00am - 2:00pm</h3>
+      <br>
+      <h3 class="text-gray-400 text-sm font-display font-bold h-auto block col-span-4">Weekends:</h3>
+      <h3 class="text-gray-400 text-sm font-display font-bold h-auto block col-span-4">12:00am - 4:00pm</h3>
+
+    </form>
+  </section>
+  menu_nav
+  <script>
+   $("#contact_us").click(function() {
+    $([document.documentElement, document.body]).animate({
+        scrollTop: $("#contact").offset().top
+    }, 1500);
+});
+
+$("#menu_nav").click(function() {
+    $([document.documentElement, document.body]).animate({
+        scrollTop: $("#feature_items").offset().top
+    }, 1500);
+});
+
+  </script>
 
     <script src="/scripts/nav.js"></script>
     <script src="/scripts/cache-cart.js"></script>
