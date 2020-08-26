@@ -21,7 +21,7 @@ module.exports = (db) => {
   // runs a query checking for those values if they exist in users table
   const items = () => {
     const text = `
-      SELECT name, price, picture_url, description
+      SELECT name, price, picture_url, description, category
       FROM menu_items
       `;
     //const values = [email, phone];
@@ -75,19 +75,54 @@ module.exports = (db) => {
       });
   });
 
-  let fromcart = [{"item_name":"Lighthouse Americano","qty":2,"price":3,"options":{"size":"medium"}},
-                  {"item_name":"Lighthouse Americano","qty":2,"price":3,"options":{"size":"medium"}},
-                  {"item_name":"Lighthouse Americano","qty":2,"price":3,"options":{"size":"medium"}},
-                  {"item_name":"Lighthouse Americano","qty":2,"price":3,"options":{"size":"medium"}}]
+  let fromcartExample = [{item_name:"Lighthouse Americano",qty:2,price:3.55, category: '', options:{ size:"medium"}},
+                        {item_name:"Lighthouse Americano",qty:2,price:3.55, category: '', options:{ size:"medium"}}]
 
   router.post("/", (req, res) => {
-    console.log("body", req.body)
     console.log('---------------------------------')
     console.log("body", JSON.parse(req.body.cart))
+    const mycart = JSON.parse(req.body.cart)
+    console.log("MyCart", mycart )
+    //try to combine all info in an object
+    let item = [{}]
+    let itemName = [];
+    let itemId = [];
+    // console.log("body index 0", JSON.parse(req.body.cart[0]))
+    console.log("body [0]", mycart[0])
+    // console.log("type of", typeof req.body.cart[0].qty)
+    // console.log("quantity", JSON.parse(req.body.cart[0].qty))
+    for (let item in mycart) {
+      console.log("Loop", mycart[item])
+      itemName.push(mycart[item].item_name)
+    }
+
+    console.log("iteme name", itemName);
+    //Question for mentor:
+    //1)how to send more then one value to array values
+    //2)how link option side
+    for (let name of itemName) {
+    const text1 = `
+        SELECT id
+        FROM menu_items
+        WHERE name = $1;`;
+    const values1 = [name];
+    return db.query(text1, values1).then((result) => {
+      console.log("Result from query find item_id by item name", result.rows[0].id);
+      itemId.push(result.rows[0].id)
+      // if (result.rows[0] !== undefined) {
+
+      //   // if (result.rows[0].email === email || result.rows[0].phone === phone) {
+      //   //   return result.rows[0];
+      //   }
+      // } else {
+      //   return false;
+      // }
+    });
+
 
     const text =
           "INSERT INTO order_items (menu_item_id, quantity, price, size_id) VALUES($1, $2, $3, $4) RETURNING *";
-        const values = [ 1, req.body.quantity, req.body.price, 2
+        const values = [ 1, parseInt(mycart[0].qty), parseInt(mycart[0].price * 100), 2
           // req.body.quantity,
           // req.body.email,
           // req.body.password,
