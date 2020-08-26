@@ -79,10 +79,11 @@ module.exports = (db) => {
                   {"item_name":"Lighthouse Americano","qty":2,"price":3,"options":{"size":"medium"}}]
 
   router.post("/", (req, res) => {
+    console.log("body", req.body)
     const text =
           "INSERT INTO order_items (menu_item_id, quantity, price, size_id) VALUES($1, $2, $3, $4) RETURNING *";
-        const values = [ 1, 2, 3, 2
-          // req.body.name,
+        const values = [ 1, req.body.quantity, req.body.price, 2
+          // req.body.quantity,
           // req.body.email,
           // req.body.password,
           // req.body.phone,

@@ -225,10 +225,8 @@
               class="object-cover h-full w-full col-span-3 rounded-l hidden md:block"
               src=<%= items[item].picture_url%>
             />
-
             <div class="p-4 col-span-5">
               <header>
-
                 <p class="text-xl font-body font-bold"><%=items[item].name%></p>
               </header>
               <p class="text-light-grey pb-4 pt-2">
@@ -240,7 +238,6 @@
                 >
                   <span class="text-xl leading-tight font-thin">+</span> Order
                 </button>
-
               </footer>
             </div>
           </article>
@@ -282,28 +279,19 @@
               </p>
             </div>
             <div class="flex items-center">
-              <p
-              id="price"
-              name="price"
-              class="text-gray-700 mr-2">$3.25</p>
+              <p class="text-gray-700 mr-2">$3.25</p>
               <img class="" src="/images/icons/close-circle.svg" />
             </div>
 
             <ul class="selected-options block list-disc w-48 ml-10">
-              <li
-              id="size"
-              name="size"
-              class="text-light-grey text-sm">Medium</li>
+              <li class="text-light-grey text-sm">Medium</li>
             </ul>
           </article>
           <article
             class="cart-item flex justify-between px-4 py-4 border-b border-t"
           >
             <div class="flex items-center">
-              <p
-              id="quantity"
-              name="quantity"
-              class="item-qty font-body text-coffee-brown mr-2 inline-block">
+              <p class="item-qty font-body text-coffee-brown mr-2 inline-block">
                 1
               </p>
               <p class="font-body text-ash text-xl inline-block">
@@ -316,15 +304,12 @@
             </div>
           </article>
           </div>
-          <form action="/home" method="post">
-            <input type="submit" name="order" value="order" />
-            <button
+
+          <button
             class="bg-ash w-full text-white font-bold font-body p-3 rounded-b"
           >
             Order Pickup
           </button>
-        </form>
-
         </div>
         </div>
 
