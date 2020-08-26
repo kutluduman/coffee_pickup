@@ -86,7 +86,7 @@
           </p>
         </header>
 
-        <form class="block">
+        <form name="myForm"  class="block" id="menu-item-customizer">
           <div id="options-container">
             <p class="py-4 px-2">Choose Size</p>
             <label
@@ -99,13 +99,13 @@
               class="flex justify-between items-center bg-white p-3 border border-t"
             >
               <div class="bg-white w-full">Medium</div>
-              <input type="radio" name="size" value="small" />
+              <input type="radio" name="size" value="medium" />
             </label>
             <label
               class="flex justify-between items-center bg-white p-3 border border-t"
             >
               <div class="bg-white w-full">Large</div>
-              <input type="radio" name="size" value="small" />
+              <input type="radio" name="size" value="large" />
             </label>
 
           </div>
@@ -121,6 +121,7 @@
             <input
               onkeydown="return false"
               type="number"
+              name="item-qty"
               id="item-qty"
               class="w-12 text-center text-3xl bg-transparent text-coffee-brown font-body"
               value="0"
@@ -135,7 +136,8 @@
           </div>
 
           <button
-            type="submit"
+            type="button"
+            onclick="addToCardUI()"
             class="w-full text-center p-4 bg-coffee-brown rounded-b font-semibold text-white"
           >
             Add to Order
@@ -220,7 +222,7 @@
 
         <div class="col-span-4 pt-4 md:col-span-8" id="menu-items-container">
           <% for(let item in items) { %>
-          <article  category ="<%= items[item].category %>" class="menu-item-card shadow rounded flex md:grid md:grid-cols-8 lg:mr-6">
+          <article name="<%=items[item].name%>" price="<%= items[item].price %>" category ="<%= items[item].category %>" class="menu-item-card shadow rounded flex md:grid md:grid-cols-8 lg:mr-6">
             <img
               class="object-cover h-full w-full col-span-3 rounded-l hidden md:block"
               src=<%= items[item].picture_url%>

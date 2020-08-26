@@ -1,13 +1,13 @@
-const item = {
-  item_name: "Lighthouse Americano",
-  qty: 2,
-  price: 3.00,
-  options: {
-    size: "medium",
-  },
-};
+// const item = {
+//   item_name: "Lighthouse Americano",
+//   qty: 2,
+//   price: 3.00,
+//   options: {
+//     size: "medium",
+//   },
+// };
 
-const addToCart = (item) => {
+const addToCartBackend = (item) => {
   const cartString = localStorage.getItem("cart");
   const cart = JSON.parse(cartString);
   console.log(cart);
