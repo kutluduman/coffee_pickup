@@ -136,8 +136,8 @@ module.exports = (db) => {
       });
   });
 
-  let fromcartExample = [{ item_name: "Lighthouse Americano", qty: 2, price: 3.55, category: '', options: { size: "medium" } },
-  { item_name: "Lighthouse Americano", qty: 2, price: 3.55, category: '', options: { size: "medium" } }]
+  // let fromcartExample = [{ item_name: "Lighthouse Americano", qty: 2, price: 3.55, category: '', options: { size: "medium" } },
+  // { item_name: "Lighthouse Americano", qty: 2, price: 3.55, category: '', options: { size: "medium" } }]
 
   router.post("/", (req, res) => {
     // console.log('---------------------------------')
@@ -190,8 +190,6 @@ module.exports = (db) => {
       //  console.log("Value2", values2)
       db.query(text2, [values2]).then((result2) => {
         // console.log("Result from query find coffe_size_id by size name", result2.rows); //result.rows[0]
-        //itemId.push(result.rows[0].id)
-
 
         //make calculation of price
         for (let i = 0; i < mycart.length; i++) {
@@ -199,17 +197,10 @@ module.exports = (db) => {
           //   break
           // }
           let tempPrice = 0;
-          // console.log("FOR i: ", i)
           //give same id like in the cart
-          // console.log("mycart[i].id", mycart[i].id)
           myCheckoutObject.id = mycart[i].id
           //give same quantity like the cart
-          // console.log("mycart[i].qty", mycart[i].qty)
           myCheckoutObject.qty = parseInt(mycart[i].qty)
-          //console.log(" myCheckout[i].qty", myCheckoutObject.qty)
-
-
-
 
           //check name to calculate price
           //result.row = [ anonymous { id: 1, name: 'Americano', price: 176 }, anonymous { id: 2, name: 'Cappuccino', price: 355 }, anonymous { id: 3, name: 'Espresso', price: 288 } ]
@@ -226,15 +217,11 @@ module.exports = (db) => {
             }
           }
 
-          //myCheckoutObject.name = mycart[i].item_name
-
-          //   console.log("parse single price", parseInt(result.rows[i].price))
-          // //console.log(parseInt(result.rows[i].price))
           myCheckoutObject.price = Math.trunc(tempPrice * parseInt(mycart[i].qty))
 
           //by default the size is small
           myCheckoutObject.item_size_id = 1;
-          // console.log("mycart[i].options.size", mycart[i].options.size)
+
           if (mycart[i].options.size === 'medium') {
             myCheckoutObject.price = Math.trunc(myCheckoutObject.price * 1.30)
             myCheckoutObject.item_size_id = 2;
@@ -243,35 +230,35 @@ module.exports = (db) => {
             myCheckoutObject.price = Math.trunc(myCheckoutObject.price * 1.60)
             myCheckoutObject.item_size_id = 3;
           }
-          // //myCheckoutObject.price = Math.trunc(result.rows[i].price * result2.rows[i].price_modifier) * myCheckoutObject.qty
+          // myCheckoutObject.price = Math.trunc(result.rows[i].price * result2.rows[i].price_modifier) * myCheckoutObject.qty
           // myCheckoutObject.price = Math.round(myCheckoutObject.price) / 100;
           myCheckoutArray.push(myCheckoutObject)
           myCheckoutObject = {}
 
         }
 
-        //console.log("This is myCheckout object: ", myCheckoutObject);
         console.log("This is myCheckout array: ", myCheckoutArray);
 
-        //add order to orders table
-        //pending point:
-
-        //2) get current time now converted in format right for table :
-        //3) get the user_id that made the order to pass as value at the below query
         //user_id = req.session.name
         console.log('----------------------------------------------------------------------')
         console.log("req.session.name", req.session.name)
         console.log('----------------------------------------------------------------------')
 
+        //if user not log in exit the function
+        if (req.session.name === undefined) {
+          console.log("User is not login. I exit the function")
+          return
+        }
+
+        //add order to orders table
         const text3 =
           "INSERT INTO orders (user_id, in_progress, time_ordered,pickup_ready) VALUES($1, $2, NOW()::timestamp, $3) RETURNING *";
         const values3 = [parseInt(req.session.name), true, false];
         console.log("query insert order")
         db.query(text3, values3).then((dbRes) => {
-          //console.log("dbRes", dbRes)
+
 
           let order_id = dbRes.rows[0].id
-          //console.log("order_id dbRes[0].id", order_id)
           //add to order_items by FOR loop (advice by mentor)
           console.log(`length ${myCheckoutArray.length}`)
           for (let i = 0; i < myCheckoutArray.length; i++) {
@@ -301,10 +288,10 @@ module.exports = (db) => {
 
           //query to get user email by cookie
           const text5 = `
-        SELECT users.phone, users.email
-        FROM users
-        WHERE users.id = $1
-	      `;
+            SELECT users.phone, users.email
+            FROM users
+            WHERE users.id = $1
+	          `;
           db.query(text5, [req.session.name]).then((result) => {
             const user = result.rows[0]
 
@@ -322,23 +309,18 @@ module.exports = (db) => {
                   })
                     .then(message => console.log(message.sid));
                   res(order);
+
                 }
-              })
 
-
+            })
 
           })
-        })
 
+        })
 
       })
 
-
-
-
-
     })
-
 
   });
 
