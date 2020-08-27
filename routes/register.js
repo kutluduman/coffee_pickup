@@ -16,7 +16,7 @@ const client = require("twilio")(
 
 // A middleware function with no mount path. This code is executed for every request to the router
 router.use(function (req, res, next) {
-  console.log("Time:", Date.now());
+  //console.log("Time:", Date.now());
   next();
 });
 
@@ -81,7 +81,7 @@ module.exports = (db) => {
             }
           })
           .catch((err) => {
-            console.log("Something Broke !", err);
+            //console.log("Something Broke !", err);
           });
       }
     });

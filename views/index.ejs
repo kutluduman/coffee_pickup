@@ -92,7 +92,7 @@
         before to remove excess ...
       </p>
 
-      <button class="bg-coffee-brown col-span-4 py-3 rounded text-white mt-2">
+      <button id="order_btn" class="bg-coffee-brown col-span-4 py-3 rounded text-white mt-2">
         Order Pickup
       </button>
     </div>
@@ -183,8 +183,8 @@
 
             <div class="flex w-full justify-between p-4 items-center">
               <h3 class="font-body text-xl font-bold">Total:</h3>
-              <p class="text-2xl text-gray-700">
-                $<span id="bill-total">0.00</span>
+              <p class="text-2xl text-gray-700" id="bill-total">
+              0.00
               </p>
             </div>
 
@@ -291,6 +291,15 @@
       $([document.documentElement, document.body]).animate(
         {
           scrollTop: $("#feature_items").offset().top,
+        },
+        1500
+      );
+    });
+
+    $("#order_btn").click(function () {
+      $([document.documentElement, document.body]).animate(
+        {
+          scrollTop: $("#menu").offset().top,
         },
         1500
       );

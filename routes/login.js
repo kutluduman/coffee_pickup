@@ -17,6 +17,7 @@ router.use(function (req, res, next) {
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
+
     res.render("login");
   });
 
@@ -35,11 +36,16 @@ module.exports = (db) => {
 
   router.post("/", (req, res) => {
     const email = req.body.email;
+
+    console.log('this should be a email: ', req.session);
+    emailExist(email).then(user => console.log(user))
     return emailExist(email)
       .then((user) => {
+
         if (user) {
           if (req.body.password === user.password) {
             req.session.email = user.email;
+            req.session.name = user.id;
             res.redirect("/home");
           } else {
             console.log(req.body.password, user.password);
