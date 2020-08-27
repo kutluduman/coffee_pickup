@@ -51,6 +51,7 @@ const homeRoute = require("./routes/home");
 const logoutRoute = require("./routes/logout");
 const adminRoute = require("./routes/adminDash");
 const adminUpdateRoute = require("./routes/adminUpdate");
+const successRoute = require("./routes/success");
 
 /*
  Mount all resource routes
@@ -64,6 +65,7 @@ app.use("/home",homeRoute(db));
 app.use("/logout", logoutRoute(db));
 app.use("/admin", adminRoute(db));
 app.use("/update", adminUpdateRoute(db));
+app.use("/success", successRoute(db));
 
 
 // Note: mount other resources here, using the same pattern above
