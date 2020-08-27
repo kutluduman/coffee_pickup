@@ -1,26 +1,27 @@
 const createCartItem = (cartItem) => {
-
   //escap inputs to prevent sql injection
   const cartTemplate = `
 	<article class="cart-item flex flex-wrap justify-between px-4 py-4 border-b border-t ">
 		<div class="flex items-center flex-wrap">
 			<p class="item-qty font-body text-coffee-brown mr-2 inline-block">${
-  cartItem.qty
-}</p>
+        cartItem.qty
+      }</p>
 			<p class="font-body text-ash text-xl inline-block">${cartItem.item_name}</p>
 		</div>
 		<div class="flex items-center">
 		<p class="text-gray-700 mr-2">${
-  cartItem.price * cartItem.qty
-}</p><img cartItemId="${cartItem.id}" onclick="deleteItem(this)" id="remove-item" src="/images/icons/close-circle.svg"></div>
+      cartItem.price * cartItem.qty
+    }</p><img cartItemId="${
+    cartItem.id
+  }" onclick="deleteItem(this)" id="remove-item" src="/images/icons/close-circle.svg"></div>
 
     ${
-  cartItem.options.size
-    ? `	<ul class="selected-options block list-disc w-48 ml-10 w-full">
+      cartItem.options.size
+        ? `	<ul class="selected-options block list-disc w-48 ml-10 w-full">
     <li class="text-light-grey text-sm">${cartItem.options.size}</li>
   </ul>`
-    : ``
-}
+        : ``
+    }
 	
   </article>
   `;
@@ -28,7 +29,9 @@ const createCartItem = (cartItem) => {
   return cartTemplate;
 };
 
-
+const getCartQty = () => {
+  document.getElementById("cartQty").innerText = getCart().length;
+};
 
 const updateCartView = () => {
   const cart = getCart();
@@ -43,6 +46,17 @@ const updateCartView = () => {
     checkoutUI.insertAdjacentHTML("beforeend", element);
   });
 
+  getCartQty();
+  calculateTotal();
+};
+
+const calculateTotal = () => {
+  let total = 0;
+  const cart = getCart();
+  cart.forEach((elem) =>{
+    total += elem.price * elem.qty;
+  });
+  document.getElementById('bill-total').innerText = total;
 };
 
 const addToCardUI = () => {
@@ -62,8 +76,10 @@ const addToCardUI = () => {
     //creates the order item for local storage
 
     //Sets item id to cart array index
-    let cartItemId = JSON.parse(localStorage.getItem('cart')) ? JSON.parse(localStorage.getItem('cart')).length : 0;
-    
+    let cartItemId = JSON.parse(localStorage.getItem("cart"))
+      ? JSON.parse(localStorage.getItem("cart")).length
+      : 0;
+
     const item = {
       id: cartItemId,
       item_name: cartItemOptions.getAttribute("item_name"),
