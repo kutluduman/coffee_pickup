@@ -364,9 +364,9 @@ module.exports = (db) => {
 
     })
 
+    res.redirect('/success');
+
   });
-
-
 
 
   return router;
