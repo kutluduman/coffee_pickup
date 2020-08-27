@@ -7,6 +7,8 @@
 
 const express = require('express');
 const router = express.Router();
+//require twilio credentials
+const client = require('twilio')(`${process.env.TWILIO_ACCOUNT_SID}`, `${process.env.TWILIO_AUTH_TOKEN}`);
 
 
 
@@ -30,10 +32,12 @@ module.exports = (db) => {
       FROM orders
       JOIN users ON (orders.user_id = users.id)
       JOIN order_items ON (order_items.order_id = orders.id)
-      WHERE orders.in_progress = FALSE AND orders.pickup_ready = FALSE AND users.email = $1
-      GROUP BY orders.id;`;
-    const values = [email];
+      WHERE orders.in_progress = TRUE AND orders.pickup_ready = FALSE AND users.email = $1
+      GROUP BY orders.id
+      ORDER BY orders.id DESC;;`;
+    const values = [`${email}`];
     return db.query(text, values).then((result) => {
+      console.log("function order in progress: result", result)
       if (result.rows[0] !== undefined) {
         console.log("Result from query orderInProgress", result.rows[0]);
         //if (result.rows[0].email === email || result.rows[0].phone === phone) {
@@ -113,7 +117,7 @@ module.exports = (db) => {
         console.log('return from user function', items)
         for (let item in items) {
           console.log(items[item])
-        } 
+        }
 
         console.log('HERE IS THE SESSION ID', req.session.name)
         db.query('SELECT id, name FROM users WHERE id = $1', [req.session.name])
@@ -124,7 +128,7 @@ module.exports = (db) => {
         })
 
 
-    
+
       }
 
     })
@@ -280,6 +284,15 @@ module.exports = (db) => {
             })
           }
 
+          //query to get user phone to send SMS
+          const text6 = `
+              SELECT users.phone
+              FROM users
+              WHERE users.id = $1
+              `;
+              db.query(text6, [req.session.name]).then((result6) => {
+              const user_phone = result6.rows[0].phone
+
           totPrepTime()
             .then((totalPrepTime) => {
               if (totalPrepTime) {
@@ -289,45 +302,49 @@ module.exports = (db) => {
                 client.messages.create({
                   body: sms,
                   from: process.env.TWILIO_PHONE,
-                  to: process.env.PHONE
+                  to: process.env.PHONE  //user_phone
                 })
-                  .then(message => console.log(message.sid));
+                .then(message => console.log("SMS to client", message.sid));
               }
             })
+            .then (() => {
 
-          //query to get user email by cookie
-          const text5 = `
-            SELECT users.phone, users.email
-            FROM users
-            WHERE users.id = $1
-	          `;
-          db.query(text5, [req.session.name]).then((result) => {
-            const user = result.rows[0]
+              //query to get user email by cookie
+              const text5 = `
+              SELECT users.phone, users.email
+              FROM users
+              WHERE users.id = $1
+              `;
+              db.query(text5, [req.session.name]).then((result) => {
+              const user = result.rows[0]
 
-            orderInProgress(user.email)
+              orderInProgress(user.email)
               .then((order) => {
-                if (order) {
-                  console.log("Orders:", order)
+              if (order) {
+                console.log("Orders:", order)
 
-                  //sms notification to the owner
-                  let sms = `New order recived. Order_id: ${order.order_id}, user_id: ${order.user_id} `
-                  client.messages.create({
-                    body: sms,
-                    from: process.env.TWILIO_PHONE,
-                    to: process.env.PHONE
-                  })
-                    .then(message => console.log(message.sid));
-                  res(order);
+                //sms notification to the owner
+                let sms1 = `New order recived. Order_id: ${order.order_id}, user_id: ${order.user_id} `
+                client.messages.create({
+                  body: sms1,
+                  from: process.env.TWILIO_PHONE,
+                  to: process.env.PHONE
+                })
+                .then(message => console.log("SMS to owner", message.sid));
 
-                }
+                //res(order);
+
+              }
+              })
+               })
 
             })
-
-          })
-
+          })  //added
         })
 
+
       })
+
 
     })
 
