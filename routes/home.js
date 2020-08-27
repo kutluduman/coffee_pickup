@@ -113,9 +113,18 @@ module.exports = (db) => {
         console.log('return from user function', items)
         for (let item in items) {
           console.log(items[item])
-        }
-        let templateVars = { items: items };
-        res.render('index', templateVars);
+        } 
+
+        console.log('HERE IS THE SESSION ID', req.session.name)
+        db.query('SELECT id, name FROM users WHERE id = $1', [req.session.name])
+        .then(user =>{
+          console.log('WE found this', user)
+          let templateVars = { items: items, user: user.rows[0]  };//////////////////users[req.session.user_id] //////////////////////////////////////////render user here
+          res.render('index', templateVars);
+        })
+
+
+    
       }
 
     })
