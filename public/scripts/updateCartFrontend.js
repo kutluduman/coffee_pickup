@@ -50,13 +50,26 @@ const updateCartView = () => {
   calculateTotal();
 };
 
+
+const addMinutes =( minutes)=> {
+  return new Date().getTime() + minutes*60000;
+}
+
 const calculateTotal = () => {
   let total = 0;
+  let pickupTime = 0;
   const cart = getCart();
   cart.forEach((elem) =>{
     total += elem.price * elem.qty;
+    pickupTime += elem.prep_time;
   });
   document.getElementById('bill-total').innerText =  (total / 100).toLocaleString("en-US", {style:"currency", currency:"USD"});
+
+  // if(pickupTime < 1){
+  //   pickupTime = 'TBD';
+  // }
+  // document.getElementById('estimated-pickup-time').innerText = addMinutes(pickupTime);
+  
 };
 
 const addToCardUI = () => {
@@ -84,6 +97,7 @@ const addToCardUI = () => {
       id: cartItemId,
       item_name: cartItemOptions.getAttribute("item_name"),
       qty: rawCart.get("item-qty"),
+      prep_time: cartItemOptions.getAttribute("prep_time") * rawCart.get("item-qty"),
       price: 
         cartItemOptions.getAttribute("price") ,
    

@@ -1,4 +1,4 @@
 
 ////Code to checkout goes here
 
-//console.log(getCart());
+console.log(getCart());
