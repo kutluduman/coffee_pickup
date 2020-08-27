@@ -11,7 +11,6 @@
     <title>Home</title>
   </head>
   <body class="bg-ash">
-
     <%- include('partials/nav') %>
 
     <!--MOdal starts here-->
@@ -39,7 +38,7 @@
           </p>
         </header>
 
-        <form name="myForm"  class="block" id="menu-item-customizer">
+        <form name="myForm" class="block" id="menu-item-customizer">
           <div id="options-container">
             <p class="py-4 px-2">Choose Size</p>
             <label
@@ -60,7 +59,6 @@
               <div class="bg-white w-full">Large</div>
               <input type="radio" name="size" value="large" />
             </label>
-
           </div>
 
           <div class="flex py-3 flex-wrap justify-center items-center">
@@ -141,7 +139,7 @@
 
     <!-- Feature Items-->
     <section
-    id = "feature_items"
+      id="feature_items"
       class="bg-feature-img bg-cover h-sm-feature grid grid-cols-4 gap-x-4 md:grid-cols-8 md:h-md-feature lg:h-lg-feature lg:grid-cols-12"
     >
       <div
@@ -170,27 +168,38 @@
       <div
         class="wrapper px-4 grid grid-cols-4 gap-x-4 py-6 md:grid-cols-8 lg:col-start-1 lg:grid-cols-12"
       >
-        <div class="col-span-4 lg:col-span-12 mb-6 ">
-          <h2 class="font-display text-ash text-3xl font-bold md:text-5xl">Our Menu</h2>
+        <div class="col-span-4 lg:col-span-12 mb-6">
+          <h2 class="font-display text-ash text-3xl font-bold md:text-5xl">
+            Our Menu
+          </h2>
         </div>
 
         <div class="col-span-4 md:col-span-8" id="menu-items-container">
-
           <% for(let item in items) { %>
-          <article name="<%=items[item].name%>" price="<%= items[item].price %>" category="<%= items[item].category %>" class="menu-item-card shadow-md rounded mb-6 flex md:grid md:grid-cols-8 lg:mr-6">
+          <article
+            name="<%=items[item].name%>"
+            price="<%= items[item].price %>"
+            category="<%= items[item].category %>"
+            class="menu-item-card shadow-md rounded mb-6 flex md:grid md:grid-cols-8 lg:mr-6"
+          >
             <img
               class="object-cover h-full w-full col-span-3 rounded-l hidden md:block"
-              src=<%= items[item].picture_url%>
-            />
+              src="<%= items[item].picture_url %>"/>
+        
             <div class="p-4 col-span-5 w-full">
               <header>
                 <p class="text-xl font-body font-bold"><%=items[item].name%></p>
               </header>
-              <p class="text-light-grey pb-4 pt-2"> <%= items[item].description%></p> 
-                
+              <p class="text-light-grey pb-4 pt-2">
+                <%= items[item].description%>
+              </p>
+
               <footer class="flex justify-between w-full items-center">
-                <p class="cost text-xl text-ash">$<%= (items[item].price / 100)%></p>
-                <button  onclick="openModal()"
+                <p class="cost text-xl text-ash">
+                  $<%= (items[item].price / 100)%>
+                </p>
+                <button
+                  onclick="openModal()"
                   class="border-coffee-brown border-2 rounded text-coffee-brown py-1 px-2 font-body font-bold hover:bg-coffee-brown hover:text-white"
                 >
                   <span class="text-xl leading-tight font-thin">+</span> Order
@@ -199,160 +208,277 @@
             </div>
           </article>
           <% } %>
-
         </div>
 
         <!-------Checkout Cart-------->
-        <div id="checkout-mobile-background" class="hidden grid-cols-4 col-span-4 sm:col-start-1 md:col-start-2 md:col-span-6 lg:block lg:col-span-4 min-h-shopping-cart   " >
-          <div
-          class="rounded shadow opacity-0 lg:opacity-100 hidden lg:block col-span-4"
-          id="checkout-cart"
+        <div
+          id="checkout-mobile-background"
+          class="hidden grid-cols-4 col-span-4 sm:col-start-1 md:col-start-2 md:col-span-6 lg:block lg:col-span-4 min-h-shopping-cart"
         >
-          <header class="p-4">
-            <p class="font-display font-bold text-2xl text-center">
-              Your Selection
-            </p>
-          </header>
-          <form id="upload_cart" action="/home" method="POST">
           <div
-            class="bg-coffee-brown flex justify-center items-center p-2"
-            id="estimated-order-time-banner"
+            class="rounded shadow opacity-0 lg:opacity-100 hidden lg:block col-span-4"
+            id="checkout-cart"
           >
-            <img class="mr-2" src="/images/icons/clock.svg" />
-            <p class="text-white font-body">
-              Estimated Pickup Time:
-              <span id="estimated-pickup-time font-bold">2:30pm</span>
-            </p>
-          </div>
+            <header class="p-4">
+              <p class="font-display font-bold text-2xl text-center">
+                Your Selection
+              </p>
+            </header>
+            <form id="upload_cart" action="/home" method="POST">
+              <div
+                class="bg-coffee-brown flex justify-center items-center p-2"
+                id="estimated-order-time-banner"
+              >
+                <img class="mr-2" src="/images/icons/clock.svg" />
+                <p class="text-white font-body">
+                  Estimated Pickup Time:
+                  <span id="estimated-pickup-time font-bold">2:30pm</span>
+                </p>
+              </div>
 
-          <div id="cart-items-container" class="min-h-shopping-cart max-h-shopping-cart overflow-y-auto">
-           
-          </div>
+              <div
+                id="cart-items-container"
+                class="min-h-shopping-cart max-h-shopping-cart overflow-y-auto"
+              ></div>
 
-          <div class="flex w-full justify-between p-4 items-center">
-            <h3 class="font-body text-xl font-bold">Total:</h3>
-            <p class="text-2xl text-gray-700">$<span id="bill-total">0.00</span></p>
-          </div>
+              <div class="flex w-full justify-between p-4 items-center">
+                <h3 class="font-body text-xl font-bold">Total:</h3>
+                <p class="text-2xl text-gray-700">
+                  $<span id="bill-total">0.00</span>
+                </p>
+              </div>
 
-          <button
-            class="bg-ash w-full text-white font-bold font-body p-3 rounded-b"
-            id="order_pickup"
-          >
-            Order Pickup
-          </button>
-        </form>
+              <button
+                class="bg-ash w-full text-white font-bold font-body p-3 rounded-b"
+                id="order_pickup"
+              >
+                Order Pickup
+              </button>
+            </form>
+          </div>
         </div>
-        </div>
-
-
       </div>
     </section>
-
 
     <!-------Contact Us-------->
 
     <section
-    id = "contact"
-    class="grid grid-cols-4 gap-x-4 mb-24 md:mb-12 lg:mb-0 grid-rows-none mx-4 md:grid-cols-8  lg:pb-0 lg:grid-cols-12 xl:max-w-screen-xl xl:mx-auto min-h-screen  pt-10"
-  >
-  
-  <div class="col-span-6 self-center hidden lg:flex">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2887.1917448259037!2d-79.40439288379676!3d43.64417886103086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b34de2de61291%3A0xe8fa22738afe6e7b!2s662%20King%20St%20W%2C%20Toronto%2C%20ON!5e0!3m2!1sen!2sca!4v1598420664126!5m2!1sen!2sca" width="650px" height="800px" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-  </div>
-   
-
-    <form
-      method="POST"
-      action="#"
-      class="col-span-4 grid grid-cols-4 gap-x-4 md:col-start-2 md:col-span-6  md:p-10 lg:col-start-7 lg:col-span-6 self-center xl:col-start-8 xl:col-span-5 md:mx-0 md:px-0 "
+      id="contact"
+      class="grid grid-cols-4 gap-x-4 mb-24 md:mb-12 lg:mb-0 grid-rows-none mx-4 md:grid-cols-8 lg:pb-0 lg:grid-cols-12 xl:max-w-screen-xl xl:mx-auto min-h-screen pt-10"
     >
-      <h1
-        class="text-white text-6xl font-display font-bold h-auto block col-span-4"
+      <div class="col-span-6 self-center hidden lg:flex">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2887.1917448259037!2d-79.40439288379676!3d43.64417886103086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b34de2de61291%3A0xe8fa22738afe6e7b!2s662%20King%20St%20W%2C%20Toronto%2C%20ON!5e0!3m2!1sen!2sca!4v1598420664126!5m2!1sen!2sca"
+          width="650px"
+          height="800px"
+          frameborder="0"
+          style="border: 0"
+          allowfullscreen=""
+          aria-hidden="false"
+          tabindex="0"
+        ></iframe>
+      </div>
+
+      <form
+        method="POST"
+        action="#"
+        class="col-span-4 grid grid-cols-4 gap-x-4 md:col-start-2 md:col-span-6 md:p-10 lg:col-start-7 lg:col-span-6 self-center xl:col-start-8 xl:col-span-5 md:mx-0 md:px-0"
       >
-       Contact Us
-      </h1>
+        <h1
+          class="text-white text-6xl font-display font-bold h-auto block col-span-4"
+        >
+          Contact Us
+        </h1>
 
-      <br>
-      <br>
+        <br />
+        <br />
 
-      <div class="mb-4 col-start-1 col-span-2">
-        <label class="block text-white text-sm mb-2" for="name">
-          Full Name
-        </label>
-        <input
-          class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
-          id="name"
-          name="name"
-          type="text"
-        />
-      </div>
-      <div class="mb-4 col-start-3 col-span-2">
-        <label class="block text-white text-sm mb-2" for="email">
-          Email
-        </label>
-        <input
-          class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
-          id="email"
-          name="email"
-          type="email"
-        />
-      </div>
+        <div class="mb-4 col-start-1 col-span-2">
+          <label class="block text-white text-sm mb-2" for="name">
+            Full Name
+          </label>
+          <input
+            class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
+            id="name"
+            name="name"
+            type="text"
+          />
+        </div>
+        <div class="mb-4 col-start-3 col-span-2">
+          <label class="block text-white text-sm mb-2" for="email">
+            Email
+          </label>
+          <input
+            class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
+            id="email"
+            name="email"
+            type="email"
+          />
+        </div>
 
-      <div class="flex flex-wrap -px-3 mb-6 col-span-4">
-    
-          <label class="block tracking-wide text-gray-400 text-sm font-bold mb-2" for="grid-password">
+        <div class="flex flex-wrap -px-3 mb-6 col-span-4">
+          <label
+            class="block tracking-wide text-gray-400 text-sm font-bold mb-2"
+            for="grid-password"
+          >
             Message
           </label>
-          <br>
-          <textarea class="bg-ash rounded border w-full border-gray-400 text-coffee-brown focus:outline-none h-48 focus:border-coffee-brown text-base px-4 py-2 mb-4 resize-none"  placeholder="Message"></textarea>
-      </div>
+          <br />
+          <textarea
+            class="bg-ash rounded border w-full border-gray-400 text-coffee-brown focus:outline-none h-48 focus:border-coffee-brown text-base px-4 py-2 mb-4 resize-none"
+            placeholder="Message"
+          ></textarea>
+        </div>
 
-      <button
-        type="submit"
-        class="bg-coffee-brown col-span-4 py-3 rounded text-white mt-10"
+        <button
+          type="submit"
+          class="bg-coffee-brown col-span-4 py-3 rounded text-white mt-10"
+        >
+          Send Email
+        </button>
+
+        <div class="col-span-2">
+          <h1
+            class="text-white text-4xl font-display font-bold h-auto block col-span-4"
+          >
+            A:
+          </h1>
+          <h3
+            class="text-white text-sm font-body font-bold h-auto block col-span-4"
+          >
+            662 King St W<br />Toronto, ON<br />M5V 1M7
+          </h3>
+        </div>
+
+        <div class="col-span-2">
+          <h1 class="text-white text-4xl font-display font-bold">H:</h1>
+          <h3 class="text-white text-sm font-body font-bold">Mon-Fri:</h3>
+          <h3 class="text-white text-sm font-body">12:00am - 2:00pm</h3>
+
+          <h3 class="text-white text-sm font-body font-bold mt-2">Weekends:</h3>
+          <h3 class="text-white text-sm font-body">12:00am - 4:00pm</h3>
+        </div>
+      </form>
+    </section>
+
+    <button
+      class="bg-coffee-brown w-full p-4 fixed lg:hidden bottom-0 z-30 text-white font-bold font-body rounded-t-md flex items-center justify-center"
+      onclick="showMobileCart()"
+    >
+      <span
+        class="w-8 h-8 rounded-full bg-ash bg-opacity-25 items-center justify-center flex mr-4"
+        id="cartQty"
+        >0</span
       >
-        Send Email
-      </button>
+      <span id="mobile-menu-label">View Current Order</span>
+    </button>
 
-      <div class="col-span-2">
-        <h1 class="text-white text-4xl font-display font-bold h-auto block col-span-4">A:</h1>
-        <h3 class="text-white text-sm font-body font-bold h-auto block col-span-4">662 King St W<br>Toronto, ON<br>M5V 1M7</h3>
-      </div>
-
-      <div class="col-span-2">
-        <h1 class="text-white text-4xl font-display font-bold ">H:</h1>
-        <h3 class="text-white text-sm font-body font-bold ">Mon-Fri:</h3>
-        <h3 class="text-white text-sm font-body  ">12:00am - 2:00pm</h3>
-     
-        <h3 class="text-white text-sm font-body font-bold mt-2 ">Weekends:</h3>
-        <h3 class="text-white text-sm font-body  ">12:00am - 4:00pm</h3>
-      </div>
-      
-
-    </form>
+    <section class="bg-white py-4 grid grid-cols-4 md:grid-cols-8  lg:grid-cols-12">
+      <article
+        class="menu-item-card m-1 col-span-4 md:col-span-6 md:col-start-2 lg:col-span-10 shadow-md rounded mb-6 lg:col-start-2 grid md:grid-cols-8 lg:mr-6 "
+      >
 
     
-  </section>
+        <header class="grid grid-cols-4 md:grid-cols-8 col-span-4 md:col-span-8 border-ash border-b ">
+          <div class="w-full py-2  col-span-4 md:col-span-2 bg-gray-500 md:bg-transparent self-center">
+            <p class="text-center ">#021</p>
+            <p class="text-center font-bold">Order ID</p>
+          </div>
 
-  <button class="bg-coffee-brown w-full p-4 fixed lg:hidden bottom-0 z-30 text-white font-bold font-body rounded-t-md flex items-center justify-center" onclick="showMobileCart()">
-    <span class="w-8 h-8 rounded-full bg-ash bg-opacity-25  items-center justify-center flex mr-4" id="cartQty">0</span> <span id="mobile-menu-label">View Current Order</span>
-  </button>
+          <div class="col-span-2 md:col-span-4 self-center">
+            <p class="text-center ">2:31</p>
+            <p class="text-center font-bold">Est Prep Time</p>
+          </div>
 
+          <div class="col-span-2 md:col-span-2 self-center ">
+            <p class="text-center ">John Smith</p>
+            <p class="text-center font-bold">Order Recipient</p>
+          </div>
+        </header>
 
-  <script>
-   $("#contact_us").click(function() {
-    $([document.documentElement, document.body]).animate({
-        scrollTop: $("#contact").offset().top
-    }, 1500);
-});
+        <!-- <div class="p-1 col-span-4 md:col-span-8 "> -->
 
-$("#menu_nav").click(function() {
-    $([document.documentElement, document.body]).animate({
-        scrollTop: $("#feature_items").offset().top
-    }, 1500);
-});
+          <div class="col-span-4 md:col-span-8 flex flex-wrap  " id="active-orders-container">
+            <article
+              class="cart-item flex flex-wrap justify-between px-4 py-4  w-auto"
+            >
+              <div class="flex items-center flex-wrap">
+                <p
+                  class="item-qty font-body text-coffee-brown mr-2 inline-block"
+                >
+                  1
+                </p>
+                <p class="font-body text-ash text-xl inline-block">
+                  Americano
+                </p>
+              </div>
+         
 
-  </script>
+              <ul class="selected-options block list-disc w-48 ml-10 w-full">
+                <li class="text-light-grey text-sm">large</li>
+              </ul>
+            </article>
+
+          </div>
+          
+          <footer class="grid grid-cols-4 gap-x-4 md:grid-cols-8 col-span-4 md:col-span-8 justify-around">
+          
+            <div class="grid-cols-4 gap-x-4 grid md:grid-cols-8 md:gap-x-1 col-span-4 md:col-span-8 border-t">
+              <button
+              class="justify-center text-sm text-left col-span-2 md:col-span-2 m-1 bg-red-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
+            >
+              <img
+                class="inline-block mr-1"
+                src="/images/icons/close-circle-outline.svg"
+              />
+              Cancel 
+            </button>
+            <button
+              class="justify-center text-left col-span-2 md:col-span-2 m-1 text-sm  bg-orange-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
+            >
+              <img class="inline-block mr-1" src="/images/icons/alert.svg" />
+             Delayed
+            </button>
+            <button
+              class="justify-center text-left col-span-2 md:col-span-2 m-1 text-sm  bg-blue-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
+            >
+              <img class="inline-block mr-1" src="/images/icons/archive.svg" />
+              Archive
+            </button>
+            <button
+              class="justify-center text-left col-span-2 md:col-span-2 m-1 text-sm  bg-green-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
+            >
+              <img
+                class="inline-block mr-1"
+                src="/images/icons/checkmark.svg"
+              />Ready
+            </button>
+            </div>
+           
+          </footer>
+        <!-- </div> -->
+      </article>
+    </section>
+
+    <script>
+      $("#contact_us").click(function () {
+        $([document.documentElement, document.body]).animate(
+          {
+            scrollTop: $("#contact").offset().top,
+          },
+          1500
+        );
+      });
+
+      $("#menu_nav").click(function () {
+        $([document.documentElement, document.body]).animate(
+          {
+            scrollTop: $("#feature_items").offset().top,
+          },
+          1500
+        );
+      });
+    </script>
 
     <script src="/scripts/nav.js"></script>
     <script src="/scripts/cache-cart.js"></script>
@@ -362,6 +488,5 @@ $("#menu_nav").click(function() {
     <script src="/scripts/deleteCartItem.js"></script>
     <script src="/scripts/showMobileCart.js"></script>
     <script src="/scripts/app.js"></script>
-
   </body>
 </html>
