@@ -41,6 +41,10 @@ $(document).ready(function () {
       method: "POST",
       url: "/home",
       data: { cart: cart },
-    });
+    }).then((res) => {
+      window.location.href = "/success";
+    }).catch((err) => {
+        console.log('Error in ajax post /home', err);
+    })
   });
 });

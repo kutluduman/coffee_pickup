@@ -364,6 +364,7 @@ module.exports = (db) => {
 
     })
 
+    res.redirect('/success');
 
   });
 
