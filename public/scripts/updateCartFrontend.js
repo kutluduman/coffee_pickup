@@ -52,7 +52,13 @@ const updateCartView = () => {
 
 
 const addMinutes =( minutes)=> {
-  return new Date().getTime() + minutes*60000;
+  let currentQueue = parseInt(document.getElementById('estimated-pickup-time').getAttribute('current_queue'))
+
+  let updatedTime = new Date().getTime() + ((currentQueue + minutes )* 60000);
+  return new Date(updatedTime).toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit'
+  })
 }
 
 const calculateTotal = () => {
@@ -65,11 +71,11 @@ const calculateTotal = () => {
   });
   document.getElementById('bill-total').innerText =  (total / 100).toLocaleString("en-US", {style:"currency", currency:"USD"});
 
-  // if(pickupTime < 1){
-  //   pickupTime = 'TBD';
-  // }
-  // document.getElementById('estimated-pickup-time').innerText = addMinutes(pickupTime);
-  
+  if(pickupTime < 1){
+    document.getElementById('estimated-pickup-time').innerText = 'TBD'
+  } else {
+    document.getElementById('estimated-pickup-time').innerText = addMinutes( pickupTime)
+  }
 };
 
 const addToCardUI = () => {
