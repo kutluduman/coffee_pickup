@@ -2,7 +2,7 @@
 const addToCartBackend = (item) => {
   const cartString = sessionStorage.getItem("cart");
   const cart = JSON.parse(cartString);
-  console.log(cart);
+  //console.log(cart);
   if (cart) {
     cart.push(item);
     sessionStorage.setItem("cart", JSON.stringify(cart));
@@ -36,7 +36,7 @@ $(document).ready(function () {
 
     const cart = sessionStorage.getItem("cart");
     // cart = getCart
-    console.log(cart);
+    //console.log(cart);
     $.ajax({
       method: "POST",
       url: "/home",

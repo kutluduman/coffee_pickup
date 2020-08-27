@@ -12,7 +12,7 @@ const router = express.Router();
 
 // a middleware function with no mount path. This code is executed for every request to the router
 router.use(function (req, res, next) {
-  console.log('Time:', Date.now())
+//  console.log('Time:', Date.now())
   next()
 })
 
@@ -24,7 +24,7 @@ module.exports = (db) => {
   //given the user email return the object order
   //to be use with sms confirmation for th owner
   const orderInProgress = (email) => {
-    console.log("email:", email)
+    //console.log("email:", email)
     const text = `
       SELECT orders.id as order_id, orders.user_id, orders.time_ordered
       FROM orders
@@ -35,12 +35,12 @@ module.exports = (db) => {
     const values = [email];
     return db.query(text, values).then((result) => {
       if (result.rows[0] !== undefined) {
-        console.log("Result from query orderInProgress", result.rows[0]);
+       // console.log("Result from query orderInProgress", result.rows[0]);
         //if (result.rows[0].email === email || result.rows[0].phone === phone) {
         return result.rows[0];
         //}
       } else {
-        console.log("orderInProgress returning false")
+       // console.log("orderInProgress returning false")
         return false;
 
       }
@@ -51,7 +51,7 @@ module.exports = (db) => {
   //return the sum of all order in progress of the preparation_time as object
   //to be use with sms confirmation for the user
   const totPrepTime = (email) => {
-    console.log("email:", email)
+   // console.log("email:", email)
     const text = `
     SELECT SUM(t.sub_prep_time)
     FROM (SELECT orders.id as order_id, order_items.quantity, menu_items.name, menu_items.prep_time, menu_items.prep_time * order_items.quantity as sub_prep_time
@@ -64,12 +64,12 @@ module.exports = (db) => {
     //const values = [email];
     return db.query(text).then((result) => {
       if (result.rows[0] !== undefined) {
-        console.log("Result from query totPrepTimee", result.rows[0]);
+      //  console.log("Result from query totPrepTimee", result.rows[0]);
         //if (result.rows[0].email === email || result.rows[0].phone === phone) {
         return result.rows[0];
         //}
       } else {
-        console.log("totPrepTime return FALSE")
+      //  console.log("totPrepTime return FALSE")
         return false;
 
       }
@@ -87,7 +87,7 @@ module.exports = (db) => {
     //const values = [email, phone];
     return db.query(text).then((result) => {
       if (result.rows !== undefined) {
-        console.log("Result from query items", result.rows);
+       // console.log("Result from query items", result.rows);
         if (result.rows) {
           return result.rows;
         }
@@ -110,9 +110,9 @@ module.exports = (db) => {
         let templateVars = { errMessage: "Sorry, the no items" };
         res.render("errors_msg", templateVars);
       } else {
-        console.log('return from user function', items)
+       // console.log('return from user function', items)
         for (let item in items) {
-          console.log(items[item])
+       //   console.log(items[item])
         } 
 
         console.log('HERE IS THE SESSION ID', req.session.name)
@@ -223,7 +223,7 @@ module.exports = (db) => {
           //check name to calculate price
           //result.row = [ anonymous { id: 1, name: 'Americano', price: 176 }, anonymous { id: 2, name: 'Cappuccino', price: 355 }, anonymous { id: 3, name: 'Espresso', price: 288 } ]
           for (let j = 0; j < result.rows.length; j++) {
-            console.log(" mycart[i].item_name", mycart[i].item_name)
+           // console.log(" mycart[i].item_name", mycart[i].item_name)
             //console.log(" result.rows[j].name", result.rows[i].name)
             //   console.log(" result.rows[j].price", result.rows[j].price)
             if (mycart[i].item_name === result.rows[j].name) {
@@ -260,7 +260,7 @@ module.exports = (db) => {
         }
 
         //console.log("This is myCheckout object: ", myCheckoutObject);
-        console.log("This is myCheckout array: ", myCheckoutArray);
+      //  console.log("This is myCheckout array: ", myCheckoutArray);
 
         //add order to orders table
         //pending point:
@@ -282,12 +282,12 @@ module.exports = (db) => {
           let order_id = dbRes.rows[0].id
           //console.log("order_id dbRes[0].id", order_id)
           //add to order_items by FOR loop (advice by mentor)
-          console.log(`length ${myCheckoutArray.length}`)
+        //  console.log(`length ${myCheckoutArray.length}`)
           for (let i = 0; i < myCheckoutArray.length; i++) {
             const text4 =
               "INSERT INTO order_items (order_id, menu_item_id, quantity, price, size_id) VALUES($1, $2, $3, $4, $5) RETURNING *";
             const values4 = [order_id, myCheckoutArray[i].item_id, myCheckoutArray[i].qty, myCheckoutArray[i].price, myCheckoutArray[i].item_size_id];
-            console.log("Just before query insert")
+          //  console.log("Just before query insert")
             db.query(text4, values4).then((dbRes1) => {
 
             })
@@ -296,7 +296,7 @@ module.exports = (db) => {
           totPrepTime()
             .then((totalPrepTime) => {
               if (totalPrepTime) {
-                console.log("tot prep time:", totalPrepTime)
+                //console.log("tot prep time:", totalPrepTime)
                 //sms notification to the client
                 let sms = `Your order has been recived. Expected pickup time in ${totalPrepTime.sum} minutes.`
                 client.messages.create({
@@ -320,7 +320,7 @@ module.exports = (db) => {
             orderInProgress(user.email)
               .then((order) => {
                 if (order) {
-                  console.log("Orders:", order)
+                  //console.log("Orders:", order)
 
                   //sms notification to the owner
                   let sms = `New order recived. Order_id: ${order.order_id}, user_id: ${order.user_id} `
