@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="/styles/output.css" type="text/css" />
   <!-- External JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <title>Register</title>
+  <title>Update</title>
 
 </head>
 
@@ -21,50 +21,66 @@
       <img src="/images/sign-up-img.png" />
     </div>
 
-    <form method="POST" action="/register"
+    <form method="POST" action="/update"
       class="col-span-4 grid grid-cols-4 gap-x-4 md:col-start-2 md:col-span-6 md:p-10 lg:col-start-7 lg:col-span-6 self-center xl:col-start-8 xl:col-span-5">
       <h1 class="text-white text-5xl font-display font-bold h-auto block col-span-4">
-        Sign Up
+        Add Menu Item
       </h1>
       <p class="text-white col-span-4 mb-6 block font-body font-light col-span-4">
-        Create an account to order for pickup.
+        Use this form to update the menu.
       </p>
       <div class="mb-4 col-start-1 col-span-2">
-        <label class="block text-white text-sm mb-2" for="username">
-          Name
+        <label class="block text-white text-sm mb-2" for="item_name">
+          Menu Item Name
         </label>
-        <input class="form-input text-coffee-brown focus:outline-none focus:shadow-outline" id="name" name="name"
+        <input class="form-input text-coffee-brown focus:outline-none focus:shadow-outline" id="item_name" name="item_name"
           type="text" />
       </div>
       <div class="mb-4 col-start-3 col-span-2">
-        <label class="block text-white text-sm mb-2" for="phone">
-          Phone Number
+        <label class="block text-white text-sm mb-2" for="item_price">
+          Menu Item Price
         </label>
-        <input class="form-input text-coffee-brown focus:outline-none focus:shadow-outline" id="phone" name="phone"
-          type="tel" />
+        <input class="form-input text-coffee-brown focus:outline-none focus:shadow-outline" id="item_price" name="item_price"
+          type="number" min="0" />
       </div>
-      <div class="mb-4 col-span-4">
-        <label class="block text-white text-sm mb-2" for="email">
-          Email Address
+      <div class="mb-4 col-span-2">
+        <label class="block text-white text-sm mb-2" for="item_prep_time">
+          Average Prep Time
         </label>
-        <input class="form-input text-coffee-brown focus:outline-none focus:shadow-outline" id="email" name="email"
-          type="email" />
+        <input class="form-input text-coffee-brown focus:outline-none focus:shadow-outline" id="item_prep_time" name="item_prep_time"
+          type="number" min="0" />
+      </div>
+      <div class="col-span-2">
+        <label class="block text-white text-sm mb-2" for="item_category">
+          Category
+        </label>
+        <input class="form-input text-coffee-brown focus:outline-none focus:shadow-outline" id="item_category"
+          name="item_category" type="text" />
       </div>
       <div class="col-span-4">
-        <label class="block text-white text-sm mb-2" for="password">
-          Password
+        <label class="block text-white text-sm mb-2" for="item_image_url">
+          Image URL
         </label>
-        <input class="form-input text-coffee-brown focus:outline-none focus:shadow-outline" id="password"
-          name="password" type="password" />
+        <input class="form-input text-coffee-brown focus:outline-none focus:shadow-outline" id="item_image_url"
+          name="item_image_url" type="url" />
+      </div>
+      <div class="col-span-4">
+        <label class="block text-white text-sm mb-2" for="item_description">
+          Item Description
+        </label>
+        <input class="form-input text-coffee-brown focus:outline-none focus:shadow-outline" id="item_description"
+          name="item_description" type="text" />
+      </div>
+      <div class="col-span-4">
+        <input class="mr-2 leading-tight" id="item_in_stock"
+          name="item_in_stock" type="checkbox" />
+          <span class="text-sm text-white focus:outline-none focus:shadow-outline" for="item_in_stock">
+            Item in Stock ?
+           </span>
       </div>
       <button type="submit" class="bg-coffee-brown col-span-4 py-3 rounded text-white mt-10">
-        Sign Up
+        Update Item
       </button>
-      <p class="text-white col-span-4 text-center font-light mt-6 md:mt-10 md:col-start-2 md:col-span-2">
-        Already have an account?
-      </p>
-      <a href="/login" class="text-coffee-brown col-span-4 text-center mt-1 md:col-start-2 md:col-span-2">Login Here
-      </a>
     </form>
   </section>
   <script src="/scripts/nav.js"></script>

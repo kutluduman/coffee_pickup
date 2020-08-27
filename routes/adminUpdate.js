@@ -29,5 +29,12 @@ module.exports = (db) => {
     });
   });
 
+
+  router.post("/", (req, res) => {
+    //const newItem = req.body
+    console.log("newItem: ", req.body)
+    res.render("admin_update")
+  });
+
   return router;
 };
