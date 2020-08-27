@@ -186,6 +186,7 @@
             name="<%=items[item].name%>"
             price="<%= items[item].price %>"
             category="<%= items[item].category %>"
+            prep_time="<%= items[item].prep_time%> "
             class="menu-item-card shadow-md rounded mb-6 flex md:grid md:grid-cols-8 lg:mr-6"
           >
             <img
@@ -246,7 +247,7 @@
                 <img class="mr-2" src="/images/icons/clock.svg" />
                 <p class="text-white font-body">
                   Estimated Pickup Time:
-                  <span id="estimated-pickup-time font-bold">2:30pm</span>
+                  <span id="estimated-pickup-time" class="font-bold">2:30pm</span>
                 </p>
               </div>
               <div
