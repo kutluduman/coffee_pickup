@@ -69,6 +69,7 @@ const calculateTotal = () => {
   //   pickupTime = 'TBD';
   // }
   // document.getElementById('estimated-pickup-time').innerText = addMinutes(pickupTime);
+  
 };
 
 const addToCardUI = () => {
