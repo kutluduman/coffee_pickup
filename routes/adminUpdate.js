@@ -4,10 +4,7 @@ const router = express.Router();
 module.exports = (db) => {
   const items = () => {
     const text = `
-      SELECT orders.id, users.name as name
-      FROM orders
-      JOIN users ON users.id = user_id
-      WHERE pickup_ready = true
+      SELECT * FROM menu_items
       `;
 
     return db.query(text).then((result) => {
@@ -24,7 +21,7 @@ module.exports = (db) => {
 
   router.get("/", (req, res) => {
     items().then((items) => {
-      let templateVars = { orders: items };
+      let templateVars = { menuItems: items };
       res.render("admin_update", templateVars);
     });
   });

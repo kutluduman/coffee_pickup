@@ -17,8 +17,53 @@
 
   <section
     class="grid grid-cols-4 gap-x-4 grid-rows-none mx-4 md:grid-cols-8 lg:grid-cols-12 xl:max-w-screen-xl xl:mx-auto h-screen  pt-10">
-    <div class="col-span-6 self-center hidden lg:block">
-      <img src="/images/sign-up-img.png" />
+    <div class="col-span-4 col-span-7 self-center  lg:block">
+      <table class="table-auto">
+        <thead class="border-b-2 border-white">
+          <tr class="text-coffee-brown">
+            <th class="px-4 py-2">Name</th>
+            <th class="px-4 py-2">Category</th>
+            <th class="px-4 py-2">Stock</th>
+            <th class="px-4 py-2">Price</th>
+            <th class="px-4 py-2">Desc.</th>
+            <th class="px-4 py-2">Time</th>
+            <th class="px-4 py-2">Edit</th>
+
+          </tr>
+        </thead>
+        <tbody>
+
+          <% for(let item in menuItems) { %>
+            <tr class="border-b border-coffee-brown text-white items-center">
+              <td class=" px-4 py-2"><%=menuItems[item].name%></td>
+              <td class=" px-4 py-2 text-center"><%=menuItems[item].category%></td>
+              <td class="px-4 py-2 text-center"><%=menuItems[item].in_stock%></td>
+              <td class=" px-4 py-2 text-center">$<%=menuItems[item].price / 100%></td>
+              <td class=" px-4 py-2 overflow-auto flex flex-wrap"><%=menuItems[item].description%></td>
+              <td class=" px-4 py-2 text-center"><%=menuItems[item].prep_time%></td>
+              <td class=" px-2 py-2 text-center "> 
+                <div class="flex items-end ">
+                  <form action="/edit/" class="mr-2">
+                    <button>
+                      <img  src="/images/icons/edit.svg"/> 
+
+                    </button>
+                  </form>
+                  <form  action="/edit/"  >
+                    <button  >
+                      <img src="/images/icons/trash.svg"/>
+
+                    </button>
+
+                  </form>
+                </div
+              ></td>
+
+            </tr>
+            <%}%>
+
+        </tbody>
+      </table>
     </div>
 
     <form method="POST" action="/register"
