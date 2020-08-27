@@ -178,26 +178,29 @@
             Our Menu
           </h2>
         </div>
+        
 
-      <!-------Checkout Cart-------->
-      <div id="checkout-mobile-background"
-        class="hidden grid-cols-4 col-span-4 sm:col-start-1 md:col-start-2 md:col-span-6 lg:block lg:col-span-4 min-h-shopping-cart">
-        <div class="rounded shadow opacity-0 lg:opacity-100 hidden lg:block col-span-4" id="checkout-cart">
-          <header class="p-4">
-            <p class="font-display font-bold text-2xl text-center">
-              Your Selection
-            </p>
-          </header>
-          <form id="upload_cart" action="/home" method="POST">
-            <div class="bg-coffee-brown flex justify-center items-center p-2" id="estimated-order-time-banner">
-              <img class="mr-2" src="/images/icons/clock.svg" />
-              <p class="text-white font-body">
-                Estimated Pickup Time:
-                <%if(prepTimeOrdersInProgress){%>
-                  <span id="estimated-pickup-time font-bold"> in <%=prepTimeOrdersInProgress%> minutes</span>
-                <% } else{ %>
-                <span id="estimated-pickup-time font-bold">2:30pm</span>
-                <% } %>
+        <div class="col-span-4 md:col-span-8" id="menu-items-container">
+          <% for(let item in items) { %>
+
+          <article
+            name="<%=items[item].name%>"
+            price="<%= items[item].price %>"
+            category="<%= items[item].category %>"
+            prep_time="<%= items[item].prep_time%> "
+            class="menu-item-card shadow-md rounded mb-6 flex md:grid md:grid-cols-8 lg:mr-6"
+          >
+            <img
+              class="object-cover h-full w-full col-span-3 rounded-l hidden md:block"
+              src="<%= items[item].picture_url %>"
+            />
+
+            <div class="p-4 col-span-5 w-full">
+              <header>
+                <p class="text-xl font-body font-bold"><%=items[item].name%></p>
+              </header>
+              <p class="text-light-grey pb-4 pt-2">
+                <%= items[item].description%>
               </p>
 
               <footer class="flex justify-between w-full items-center">
