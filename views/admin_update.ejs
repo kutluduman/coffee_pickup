@@ -16,9 +16,8 @@
 <body class="bg-ash">
 
   <section
-    class="grid grid-cols-4 gap-x-4 grid-rows-none mx-4 md:grid-cols-8 lg:grid-cols-12 xl:max-w-screen-xl xl:mx-auto h-screen  pt-10">
-    <div class="col-span-4 col-span-7 self-center  lg:block">
-      <table class="table-auto">
+  class="grid gap-x-4 grid-rows-none  grid-cols-4  md:grid-cols-8 lg:grid-cols-12 wrapper mx-auto pt-10 h-screen">
+      <table class="self-center table-auto col-span-4 md:col-span-8 md:mx-4">
         <thead class="border-b-2 border-white">
           <tr class="text-coffee-brown">
             <th class="px-4 py-2">Name</th>
@@ -32,24 +31,25 @@
           </tr>
         </thead>
         <tbody>
-
+       
           <% for(let item in menuItems) { %>
-            <tr class="border-b border-coffee-brown text-white items-center">
-              <td class=" px-4 py-2"><%=menuItems[item].name%></td>
-              <td class=" px-4 py-2 text-center"><%=menuItems[item].category%></td>
-              <td class="px-4 py-2 text-center"><%=menuItems[item].in_stock%></td>
-              <td class=" px-4 py-2 text-center">$<%=menuItems[item].price / 100%></td>
-              <td class=" px-4 py-2 overflow-auto flex flex-wrap"><%=menuItems[item].description%></td>
-              <td class=" px-4 py-2 text-center"><%=menuItems[item].prep_time%></td>
-              <td class=" px-2 py-2 text-center "> 
+            <tr item_id=<%=menuItems.indexOf(menuItems[item])%>
+              class="border-b border-coffee-brown text-white items-center">
+              <td  class=" px-4 py-2"><%=menuItems[item].name%></td>
+              <td  class=" px-4 py-2 text-center"><%=menuItems[item].category%></td>
+              <td  class="px-4 py-2 text-center"><%=menuItems[item].in_stock%></td>
+              <td  class=" px-4 py-2 text-center">$<%=menuItems[item].price / 100%></td>
+              <td  class=" px-4 py-2 overflow-auto flex flex-wrap"><%=menuItems[item].description%></td>
+              <td  class=" px-4 py-2 text-center"><%=menuItems[item].prep_time%></td>
+              <td  class=" px-2 py-2 text-center "> 
                 <div class="flex items-end ">
-                  <form action="/edit/" class="mr-2">
-                    <button>
-                      <img  src="/images/icons/edit.svg"/> 
+                  <form  class="mr-2">
+                    <button type="button" >
+                      <img  class="pointer" id="edit"  src="/images/icons/edit.svg"/> 
 
                     </button>
                   </form>
-                  <form  action="/edit/"  >
+                  <form    >
                     <button  >
                       <img src="/images/icons/trash.svg"/>
 
@@ -66,9 +66,8 @@
       </table>
     </div>
 
-    <form method="POST" action="/update"
-      class="col-span-4 grid grid-cols-4 gap-x-4 md:col-start-2 md:col-span-6 md:p-10 lg:col-start-7 lg:col-span-6 self-center xl:col-start-8 xl:col-span-5">
-      <h1 class="text-white text-5xl font-display font-bold h-auto block col-span-4">
+    <form method="POST" action="/update" class=" self-center grid gap-x-4 grid-cols-4 table-auto col-span-4 md:col-span-6 md:col-start-2 lg:col-span-4 lg:col-start-9" id="edit-menu-form">
+      <h1 class="text-white text-5xl font-display font-bold h-auto block col-span-4" id="update-form-label">
         Add Menu Item
       </h1>
       <p class="text-white col-span-4 mb-6 block font-body font-light col-span-4">
@@ -123,12 +122,22 @@
             Item in Stock ?
            </span>
       </div>
-      <button type="submit" class="bg-coffee-brown col-span-4 py-3 rounded text-white mt-10">
-        Update Item
-      </button>
+      <div class="col-span-4 grid grid-cols-4 gap-x-4 ">
+        <button type="submit" class="col-span-2 py-3 bg-coffee-brown  rounded text-white mt-10" id="update-btn">
+          Update Item
+        </button>
+        <button type="button" onclick="clearForm()" class="col-span-2 border border-white  py-3 rounded text-white mt-10">
+          Cancel
+        </button>
+      </div>
+   
     </form>
+    
   </section>
-  <script src="/scripts/nav.js"></script>
+  <script>
+    sessionStorage.setItem('menu', '<%-JSON.stringify(menuItems)%>')
+  </script>
+  <script src="/scripts/updateEditForm.js"></script>
 </body>
 
 </html>
