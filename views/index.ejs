@@ -92,7 +92,7 @@
         before to remove excess ...
       </p>
 
-      <button class="bg-coffee-brown col-span-4 py-3 rounded text-white mt-2">
+      <button id="order_btn" class="bg-coffee-brown col-span-4 py-3 rounded text-white mt-2">
         Order Pickup
       </button>
     </div>
@@ -291,6 +291,15 @@
       $([document.documentElement, document.body]).animate(
         {
           scrollTop: $("#feature_items").offset().top,
+        },
+        1500
+      );
+    });
+
+    $("#order_btn").click(function () {
+      $([document.documentElement, document.body]).animate(
+        {
+          scrollTop: $("#menu").offset().top,
         },
         1500
       );
