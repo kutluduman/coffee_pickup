@@ -37,6 +37,8 @@ module.exports = (db) => {
     const email = req.body.email;
     return emailExist(email)
       .then((user) => {
+        console.log(user)
+
         if (user) {
           if (req.body.password === user.password) {
             req.session.email = user.email;

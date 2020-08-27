@@ -9,6 +9,6 @@ const removeFromCart = (itemToRemove) => {
   for (let i = 0; i < newCartContent.length; i++) {
     newCartContent[i].id = i;
   }
-  localStorage.setItem("cart", JSON.stringify(newCartContent));
+  sessionStorage.setItem("cart", JSON.stringify(newCartContent));
   updateCartView();
 };

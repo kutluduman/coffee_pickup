@@ -10,7 +10,7 @@ const createCartItem = (cartItem) => {
 		</div>
 		<div class="flex items-center">
 		<p class="text-gray-700 mr-2">${
-      cartItem.price * cartItem.qty
+     (cartItem.price * cartItem.qty / 100).toLocaleString("en-US", {style:"currency", currency:"USD"})
     }</p><img cartItemId="${
     cartItem.id
   }" onclick="deleteItem(this)" id="remove-item" src="/images/icons/close-circle.svg"></div>
@@ -56,7 +56,7 @@ const calculateTotal = () => {
   cart.forEach((elem) =>{
     total += elem.price * elem.qty;
   });
-  document.getElementById('bill-total').innerText = total;
+  document.getElementById('bill-total').innerText =  (total / 100).toLocaleString("en-US", {style:"currency", currency:"USD"});
 };
 
 const addToCardUI = () => {
@@ -76,17 +76,17 @@ const addToCardUI = () => {
     //creates the order item for local storage
 
     //Sets item id to cart array index
-    let cartItemId = JSON.parse(localStorage.getItem("cart"))
-      ? JSON.parse(localStorage.getItem("cart")).length
+    let cartItemId = JSON.parse(sessionStorage.getItem("cart"))
+      ? JSON.parse(sessionStorage.getItem("cart")).length
       : 0;
 
     const item = {
       id: cartItemId,
       item_name: cartItemOptions.getAttribute("item_name"),
       qty: rawCart.get("item-qty"),
-      price: parseFloat(
-        (cartItemOptions.getAttribute("price") * rawCart.get("item-qty")) / 100
-      ).toFixed(2),
+      price: 
+        cartItemOptions.getAttribute("price") ,
+   
       category: cartItemOptions.getAttribute("category"),
       options: {
         size: rawCart.get("size"),

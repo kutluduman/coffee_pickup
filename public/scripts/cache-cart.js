@@ -1,18 +1,18 @@
 
 const addToCartBackend = (item) => {
-  const cartString = localStorage.getItem("cart");
+  const cartString = sessionStorage.getItem("cart");
   const cart = JSON.parse(cartString);
   console.log(cart);
   if (cart) {
     cart.push(item);
-    localStorage.setItem("cart", JSON.stringify(cart));
+    sessionStorage.setItem("cart", JSON.stringify(cart));
   } else {
-    localStorage.setItem("cart", JSON.stringify([item]));
+    sessionStorage.setItem("cart", JSON.stringify([item]));
   }
 };
 
 const getCart = () => {
-  const cart = localStorage.getItem("cart");
+  const cart = sessionStorage.getItem("cart");
   return JSON.parse(cart);
 };
 
@@ -34,7 +34,7 @@ $(document).ready(function () {
       },
     };
 
-    const cart = localStorage.getItem("cart");
+    const cart = sessionStorage.getItem("cart");
     // cart = getCart
     console.log(cart);
     $.ajax({
