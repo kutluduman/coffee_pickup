@@ -9,7 +9,7 @@ module.exports = (db) => {
       JOIN users ON users.id = user_id
       WHERE pickup_ready = true
       `;
-   
+
     return db.query(text).then((result) => {
       if (result.rows !== undefined) {
         console.log("Result from query items", result.rows);
@@ -22,13 +22,10 @@ module.exports = (db) => {
     });
   };
 
-
   router.get("/", (req, res) => {
     items().then((items) => {
-      
-        let templateVars = { orders: items };
-        res.render("admin_dash", templateVars);
-      
+      let templateVars = { orders: items };
+      res.render("admin_dash", templateVars);
     });
   });
 

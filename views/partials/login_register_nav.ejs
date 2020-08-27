@@ -1,51 +1,32 @@
 <!--Navbar-->
-<nav
-class="px-4 py-2 md:px-6 md:py-4 w-full flex items-center justify-between fixed"
->
-<img src="/images/lhc-logo.svg" />
-<div class="flex">
-  <a
-  onclick="triggerCart()"
-  class="mx-3 lg:hidden"
-    ><img src="/images/icons/shopping-cart.svg"
-  /></a>
-  <div onclick="triggerMenu()" class="mx-3 lg:hidden">
-    <img src="/images/icons/menu.svg" />
-  </div>
+<nav class="px-4 py-2 md:px-6 md:py-4 w-full flex items-center justify-between fixed">
+  <img src="/images/lhc-logo.svg" />
+  <div class="flex">
+    <a onclick="triggerCart()" class="mx-3 lg:hidden"><img src="/images/icons/shopping-cart.svg" /></a>
+    <div onclick="triggerMenu()" class="mx-3 lg:hidden">
+      <img src="/images/icons/menu.svg" />
+    </div>
 
-  <a href="/home" class="text-white mx-3 hidden lg:block">Home</a>
-  <div class="h-px-6 w-px bg-coffee-brown mx-3 hidden lg:block"></div>
-  <a href="/login" class="text-white mx-3 hidden lg:block">Login</a>
-  <a href="/register" class="text-white mx-3 hidden lg:block">Sign Up</a>
-</div>
+    <a href="/home" class="text-white mx-3 hidden lg:block">Home</a>
+    <div class="h-px-6 w-px bg-coffee-brown mx-3 hidden lg:block"></div>
+    <a href="/login" class="text-white mx-3 hidden lg:block">Login</a>
+    <a href="/register" class="text-white mx-3 hidden lg:block">Sign Up</a>
+  </div>
 </nav>
 
 <!--Mobile Menu-->
 
 <div
-class="fixed h-screen bg-ash right-0 flex flex-col items-end justify-center z-10 transition-all w-0 duration-300 ease-in-out"
-id="mobile-menu"
->
-<img
-  onclick="triggerMenu()"
-  class="absolute top-0 left-0 p-6 transition-all duration-300"
-  src="/images/icons/back-arrow.svg"
-/>
+  class="fixed h-screen bg-ash right-0 flex flex-col items-end justify-center z-10 transition-all w-0 duration-300 ease-in-out"
+  id="mobile-menu">
+  <img onclick="triggerMenu()" class="absolute top-0 left-0 p-6 transition-all duration-300"
+    src="/images/icons/back-arrow.svg" />
 
-<a
-  href="/Home"
-  class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300"
-  >Home</a
->
+  <a href="/Home"
+    class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300">Home</a>
 
-<a
-  href="/login"
-  class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300"
-  >Login</a
->
-<a
-  href="/register"
-  class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300"
-  >Register</a
->
+  <a href="/login"
+    class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300">Login</a>
+  <a href="/register"
+    class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300">Register</a>
 </div>
