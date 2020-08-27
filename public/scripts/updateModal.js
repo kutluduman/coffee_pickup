@@ -8,6 +8,7 @@ Array.from(menuItems).forEach((menuItem) => {
     itemCustomizer.setAttribute("category", category);
     itemCustomizer.setAttribute("price", this.getAttribute('price'));
     itemCustomizer.setAttribute("item_name", this.getAttribute('name'));
+    itemCustomizer.setAttribute("prep_time", this.getAttribute('prep_time'));
 
     if (category === "Coffee") {
       optionsContainer.classList.remove("hidden");
