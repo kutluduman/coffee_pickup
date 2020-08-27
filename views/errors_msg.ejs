@@ -1,58 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/styles/normalize.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/output.css" type="text/css" />
-          <!-- External JS -->
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <title>Error_message</title>
-  </head>
-  <body class="bg-ash">
-    <nav class=" px-4 py-2 md:px-6 md:py-4 w-full flex items-center justify-between fixed">
-      <img src="/images/lhc-logo.svg" />
-      <div class="flex">
-        <a class="mx-3 lg:hidden"
-          ><img src="/images/icons/shopping-cart.svg"
-        /></a>
-        <div onclick="triggerMenu()" class="mx-3 lg:hidden"><img src="/images/icons/menu.svg" /></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <a href="/menu" class="text-white mx-3 hidden lg:block">Menu</a>
-        <a class="text-white mx-3 hidden lg:block">Contact Us</a>
-        <div class="h-px-6 w-px bg-coffee-brown mx-3 hidden lg:block"></div>
-        <a href="/login" class="text-white mx-3 hidden lg:block">Login</a>
-        <a href="/register" class="text-white mx-3 hidden lg:block">Sign Up</a>
-      </div>
-    </nav>
+  <link rel="stylesheet" href="/styles/normalize.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/output.css" type="text/css" />
+  <!-- External JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <title>Error_message</title>
+</head>
 
-    <div
-      class="fixed h-screen bg-ash right-0 flex flex-col items-end justify-center z-10 transition-all w-0 duration-300 ease-in-out"
-      id="mobile-menu"
-    >
-      <img onclick="triggerMenu()"
-        class="absolute top-0 left-0 p-6 transition-all duration-300"
-        src="/images/icons/back-arrow.svg"
-      />
-      <a
-        class=" text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300"
-        >Menu</a
-      >
-      <a class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300">Contact Us</a>
-      <a class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300">Login</a>
-      <a class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300">Register</a>
+<body class="bg-ash">
+  <nav class=" px-4 py-2 md:px-6 md:py-4 w-full flex items-center justify-between fixed">
+    <img src="/images/lhc-logo.svg" />
+    <div class="flex">
+      <a class="mx-3 lg:hidden"><img src="/images/icons/shopping-cart.svg" /></a>
+      <div onclick="triggerMenu()" class="mx-3 lg:hidden"><img src="/images/icons/menu.svg" /></div>
+
+      <a href="/menu" class="text-white mx-3 hidden lg:block">Menu</a>
+      <a class="text-white mx-3 hidden lg:block">Contact Us</a>
+      <div class="h-px-6 w-px bg-coffee-brown mx-3 hidden lg:block"></div>
+      <a href="/login" class="text-white mx-3 hidden lg:block">Login</a>
+      <a href="/register" class="text-white mx-3 hidden lg:block">Sign Up</a>
     </div>
+  </nav>
 
-    <section
-      class="grid grid-cols-4 gap-x-4 grid-rows-none mx-4 md:grid-cols-8 lg:grid-cols-12 xl:max-w-screen-xl xl:mx-auto h-screen  pt-10"
-    >
-      <h3
-        class="text-white text-3xl font-display font-bold h-auto block col-span-12 text-center inline-block align-bottom p-12"
-      >
-        Error message: <%= errMessage %>
-      </h3>
-    </section>
-    <script src="/scripts/nav.js"></script>
-  </body>
+  <div
+    class="fixed h-screen bg-ash right-0 flex flex-col items-end justify-center z-10 transition-all w-0 duration-300 ease-in-out"
+    id="mobile-menu">
+    <img onclick="triggerMenu()" class="absolute top-0 left-0 p-6 transition-all duration-300"
+      src="/images/icons/back-arrow.svg" />
+    <a
+      class=" text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300">Menu</a>
+    <a class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300">Contact
+      Us</a>
+    <a
+      class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300">Login</a>
+    <a
+      class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300">Register</a>
+  </div>
+
+  <section
+    class="grid grid-cols-4 gap-x-4 grid-rows-none mx-4 md:grid-cols-8 lg:grid-cols-12 xl:max-w-screen-xl xl:mx-auto h-screen  pt-10">
+    <h3
+      class="text-white text-3xl font-display font-bold h-auto block col-span-12 text-center inline-block align-bottom p-12">
+      Error message: <%= errMessage %>
+    </h3>
+  </section>
+  <script src="/scripts/nav.js"></script>
+</body>
+
 </html>

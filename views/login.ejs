@@ -1,87 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/styles/normalize.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/output.css" type="text/css" />
-          <!-- External JS -->
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-          <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Login</title>
+  <link rel="stylesheet" href="/styles/normalize.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/output.css" type="text/css" />
+  <!-- External JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
-  </head>
+  <title>Login</title>
 
-  <body class="bg-ash">
+</head>
 
-    <%- include('partials/login_register_nav') %>
+<body class="bg-ash">
 
-    <section
-      class="grid grid-cols-4 gap-x-4 grid-rows-none mx-4 md:grid-cols-8 lg:grid-cols-12 xl:max-w-screen-xl xl:mx-auto h-screen  pt-10"
-    >
-      <div class="col-span-6 self-center hidden lg:block">
-        <img src="/images/coffee_cafe.jpeg" />
+  <%- include('partials/login_register_nav') %>
+
+  <section
+    class="grid grid-cols-4 gap-x-4 grid-rows-none mx-4 md:grid-cols-8 lg:grid-cols-12 xl:max-w-screen-xl xl:mx-auto h-screen  pt-10">
+    <div class="col-span-6 self-center hidden lg:block">
+      <img src="/images/coffee_cafe.jpeg" />
+    </div>
+
+    <form method="POST" action="/login"
+      class="col-span-4 grid grid-cols-4 gap-x-4 md:col-start-2 md:col-span-6 md:p-10 lg:col-start-7 lg:col-span-6 self-center xl:col-start-8 xl:col-span-5">
+      <h1 class="text-white text-5xl font-display font-bold h-auto block col-span-4">
+        Login
+      </h1>
+      <p class="text-white col-span-4 mb-6 block font-body font-light col-span-4">
+        Login to order items for pickup.
+      </p>
+
+      <div class="mb-4 col-span-4">
+        <label class="block text-white text-sm mb-2" for="email">
+          Email Address
+        </label>
+        <input class="form-input text-coffee-brown focus:outline-none focus:shadow-outline" id="email" name="email"
+          type="email" />
       </div>
+      <div class="col-span-4">
+        <label class="block text-white text-sm mb-2" for="password">
+          Password
+        </label>
+        <input class="form-input text-coffee-brown focus:outline-none focus:shadow-outline" id="password"
+          name="password" type="password" />
+      </div>
+      <button type="submit" class="bg-coffee-brown col-span-4 py-3 rounded text-white mt-10">
+        Login
+      </button>
+      <p class="text-white col-span-4 text-center font-light mt-6 md:mt-10 md:col-start-2 md:col-span-2">
+        Don't have an account?
+      </p>
+      <a href="/register" target="_blank"
+        class="text-coffee-brown col-span-4 text-center mt-1 md:col-start-2 md:col-span-2">
+        Register Here
+      </a>
+    </form>
+  </section>
+</body>
 
-      <form
-        method="POST"
-        action="/login"
-        class="col-span-4 grid grid-cols-4 gap-x-4 md:col-start-2 md:col-span-6 md:p-10 lg:col-start-7 lg:col-span-6 self-center xl:col-start-8 xl:col-span-5"
-      >
-        <h1
-          class="text-white text-5xl font-display font-bold h-auto block col-span-4"
-        >
-          Login
-        </h1>
-        <p
-          class="text-white col-span-4 mb-6 block font-body font-light col-span-4"
-        >
-          Login to order items for pickup.
-        </p>
-
-        <div class="mb-4 col-span-4">
-          <label class="block text-white text-sm mb-2" for="email">
-            Email Address
-          </label>
-          <input
-            class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
-            id="email"
-            name="email"
-            type="email"
-          />
-        </div>
-        <div class="col-span-4">
-          <label class="block text-white text-sm mb-2" for="password">
-            Password
-          </label>
-          <input
-            class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
-            id="password"
-            name="password"
-            type="password"
-          />
-        </div>
-        <button
-          type="submit"
-          class="bg-coffee-brown col-span-4 py-3 rounded text-white mt-10"
-        >
-          Login
-        </button>
-        <p
-          class="text-white col-span-4 text-center font-light mt-6 md:mt-10 md:col-start-2 md:col-span-2"
-        >
-          Don't have an account?
-        </p>
-        <a
-          href="/register"
-          target="_blank"
-          class="text-coffee-brown col-span-4 text-center mt-1 md:col-start-2 md:col-span-2"
-        >
-          Register Here
-        </a>
-      </form>
-    </section>
-  </body>
 </html>
