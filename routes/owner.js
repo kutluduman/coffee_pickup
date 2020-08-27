@@ -62,7 +62,7 @@ module.exports = (db) => {
               from: process.env.TWILIO_PHONE,
               to: process.env.PHONE
             })
-            .then(message => //console.log(message.sid));
+            .then(message => console.log(message.sid));
           }
         })
     /////////////////////////////////////////////////
@@ -113,7 +113,7 @@ module.exports = (db) => {
               from: process.env.TWILIO_PHONE,
               to: process.env.PHONE
             })
-            .then(message => //console.log(message.sid));
+            .then(message => console.log(message.sid));
           }
         })
     /////////////////////////////////////////////////
@@ -162,7 +162,7 @@ module.exports = (db) => {
           from: process.env.TWILIO_PHONE,
           to: process.env.PHONE
         })
-        .then(message => //console.log(message.sid));
+        .then(message => console.log(message.sid));
       }
     })
     /////////////////////////////////////////////////

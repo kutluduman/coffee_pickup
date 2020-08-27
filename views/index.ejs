@@ -175,7 +175,11 @@
               <img class="mr-2" src="/images/icons/clock.svg" />
               <p class="text-white font-body">
                 Estimated Pickup Time:
+                <%if(prepTimeOrdersInProgress){%>
+                  <span id="estimated-pickup-time font-bold"> in <%=prepTimeOrdersInProgress%> minutes</span>
+                <% } else{ %>
                 <span id="estimated-pickup-time font-bold">2:30pm</span>
+                <% } %>
               </p>
             </div>
 

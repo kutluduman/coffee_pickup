@@ -85,7 +85,7 @@ module.exports = (db) => {
   // runs a query checking for those values if they exist in users table
   const items = () => {
     const text = `
-      SELECT name, price, picture_url, description, category
+      SELECT name, price, picture_url, description, category, prep_time
       FROM menu_items
       `;
     //const values = [email, phone];
@@ -123,8 +123,16 @@ module.exports = (db) => {
         db.query('SELECT id, name FROM users WHERE id = $1', [req.session.name])
         .then(user =>{
           console.log('WE found this', user)
-          let templateVars = { items: items, user: user.rows[0]  };//////////////////users[req.session.user_id] //////////////////////////////////////////render user here
-          res.render('index', templateVars);
+          totPrepTime()
+          .then((totalPrepTime) => {
+            if (totalPrepTime) {
+              //console.log("Tot prep time to pass front end", totalPrepTime.sum)
+              //prepTimeOrdersInProgress = totalPrepTime.sum;
+
+              let templateVars = { items: items, user: user.rows[0], prepTimeOrdersInProgress: totalPrepTime.sum};//////////////////users[req.session.user_id] //////////////////////////////////////////render user here
+              res.render('index', templateVars);
+            }
+          })
         })
 
 
@@ -169,12 +177,6 @@ module.exports = (db) => {
     //  console.log("Loop", mycart[i])
     //  itemName.push(mycart[i].item_name)
 
-
-    //console.log("item name", itemName);
-    //Question for mentor:
-    //1)how to send more then one value to array values
-    //2)how link option side
-    // for (let name of itemName) {
 
     //query to get the price and item id by menu item name
     const text1 = `
@@ -298,6 +300,7 @@ module.exports = (db) => {
             .then((totalPrepTime) => {
               if (totalPrepTime) {
                 //console.log("tot prep time:", totalPrepTime)
+
                 //sms notification to the client
                 let sms = `Your order has been recived. Expected pickup time in ${totalPrepTime.sum} minutes.`
                 client.messages.create({
@@ -329,21 +332,21 @@ module.exports = (db) => {
                   client.messages.create({
                     body: sms,
                     from: process.env.TWILIO_PHONE,
-                    to: process.env.PHONE
+                    to: process.env.PHONE //owner phone number
                   })
                     .then(message => console.log(message.sid));
-                  res(order);
+                  //res(order);
                 }
               })
 
-                //sms notification to the owner
-                let sms1 = `New order recived. Order_id: ${order.order_id}, user_id: ${order.user_id} `
-                client.messages.create({
-                  body: sms1,
-                  from: process.env.TWILIO_PHONE,
-                  to: process.env.PHONE
-                })
-                .then(message => console.log("SMS to owner", message.sid));
+                // //sms notification to the owner
+                // let sms1 = `New order recived. Order_id: ${order.order_id}, user_id: ${order.user_id} `
+                // client.messages.create({
+                //   body: sms1,
+                //   from: process.env.TWILIO_PHONE,
+                //   to: process.env.PHONE
+                // })
+                // .then(message => console.log("SMS to owner", message.sid));
 
                 //res(order);
 
