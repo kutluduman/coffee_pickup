@@ -13,29 +13,29 @@ const client = new Client();
 
 // Loads the schema files from db/schema
 const runSchemaFiles = function() {
-  console.log(chalk.cyan(`-> Loading Schema Files ...`));
+  //console.log(chalk.cyan(`-> Loading Schema Files ...`));
   const schemaFilenames = fs.readdirSync('./db/schema');
 
   for (const fn of schemaFilenames) {
     const sql = fs.readFileSync(`./db/schema/${fn}`, 'utf8');
-    console.log(`\t-> Running ${chalk.green(fn)}`);
+    //console.log(`\t-> Running ${chalk.green(fn)}`);
     client.querySync(sql);
   }
 };
 
 const runSeedFiles = function() {
-  console.log(chalk.cyan(`-> Loading Seeds ...`));
+  //console.log(chalk.cyan(`-> Loading Seeds ...`));
   const schemaFilenames = fs.readdirSync('./db/seeds');
 
   for (const fn of schemaFilenames) {
     const sql = fs.readFileSync(`./db/seeds/${fn}`, 'utf8');
-    console.log(`\t-> Running ${chalk.green(fn)}`);
+    //console.log(`\t-> Running ${chalk.green(fn)}`);
     client.querySync(sql);
   }
 };
 
 try {
-  console.log(`-> Connecting to PG using ${connectionString} ...`);
+  //console.log(`-> Connecting to PG using ${connectionString} ...`);
   client.connectSync(connectionString);
   runSchemaFiles();
   runSeedFiles();

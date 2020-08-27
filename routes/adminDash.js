@@ -12,7 +12,7 @@ module.exports = (db) => {
 
     return db.query(text).then((result) => {
       if (result.rows !== undefined) {
-        console.log("Result from query items", result.rows);
+        //console.log("Result from query items", result.rows);
         if (result.rows) {
           return result.rows;
         }
