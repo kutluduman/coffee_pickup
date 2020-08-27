@@ -6,7 +6,8 @@
  */
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
+
 
 
 // a middleware function with no mount path. This code is executed for every request to the router
@@ -16,6 +17,65 @@ router.use(function (req, res, next) {
 })
 
 module.exports = (db) => {
+
+
+
+  //*********************************************/
+  //given the user email return the object order
+  //to be use with sms confirmation for th owner
+  const orderInProgress = (email) => {
+    console.log("email:", email)
+    const text = `
+      SELECT orders.id as order_id, orders.user_id, orders.time_ordered
+      FROM orders
+      JOIN users ON (orders.user_id = users.id)
+      JOIN order_items ON (order_items.order_id = orders.id)
+      WHERE orders.in_progress = FALSE AND orders.pickup_ready = FALSE AND users.email = $1
+      GROUP BY orders.id;`;
+    const values = [email];
+    return db.query(text, values).then((result) => {
+      if (result.rows[0] !== undefined) {
+        console.log("Result from query orderInProgress", result.rows[0]);
+        //if (result.rows[0].email === email || result.rows[0].phone === phone) {
+        return result.rows[0];
+        //}
+      } else {
+        console.log("orderInProgress returning false")
+        return false;
+
+      }
+    });
+  };
+
+  //*********************************************/
+  //return the sum of all order in progress of the preparation_time as object
+  //to be use with sms confirmation for the user
+  const totPrepTime = (email) => {
+    console.log("email:", email)
+    const text = `
+    SELECT SUM(t.sub_prep_time)
+    FROM (SELECT orders.id as order_id, order_items.quantity, menu_items.name, menu_items.prep_time, menu_items.prep_time * order_items.quantity as sub_prep_time
+          FROM orders
+          JOIN users ON (orders.user_id = users.id)
+          JOIN order_items ON (order_items.order_id = orders.id)
+          JOIN menu_items ON (menu_items.id = order_items.menu_item_id)
+          WHERE orders.in_progress = TRUE AND orders.pickup_ready = FALSE
+          GROUP BY orders.id, order_items.quantity, menu_items.name, menu_items.prep_time) as t;`;
+    //const values = [email];
+    return db.query(text).then((result) => {
+      if (result.rows[0] !== undefined) {
+        console.log("Result from query totPrepTimee", result.rows[0]);
+        //if (result.rows[0].email === email || result.rows[0].phone === phone) {
+        return result.rows[0];
+        //}
+      } else {
+        console.log("totPrepTime return FALSE")
+        return false;
+
+      }
+    });
+  };
+
 
   // Make function userExists(arg1, arg2)
   // runs a query checking for those values if they exist in users table
@@ -38,28 +98,29 @@ module.exports = (db) => {
   };
 
 
-  router.get("/", (req,res) => {
+  router.get("/", (req, res) => {
 
 
-    items().then ((items) =>    {
+    items().then((items) => {
 
-    if (!items) {
-      //User already present
-      res
-        .status(403)
-        let templateVars = {errMessage: "Sorry, the no items"};
+      if (!items) {
+        //User already present
+        res
+          .status(403)
+        let templateVars = { errMessage: "Sorry, the no items" };
         res.render("errors_msg", templateVars);
-    } else {
-      console.log('return from user function',items )
-      for(let item in items) {
-        console.log(items[item])
+      } else {
+        console.log('return from user function', items)
+        for (let item in items) {
+          console.log(items[item])
+        }
+        let templateVars = { items: items };
+        res.render('index', templateVars);
       }
-      let templateVars = {items: items};
-      res.render('index',templateVars);
-    }
 
+    })
   })
-});
+
 
 
   router.get("/", (req, res) => {
@@ -75,74 +136,214 @@ module.exports = (db) => {
       });
   });
 
-  let fromcart = [{"item_name":"Lighthouse Americano","qty":2,"price":3,"options":{"size":"medium"}},
-                  {"item_name":"Lighthouse Americano","qty":2,"price":3,"options":{"size":"medium"}},
-                  {"item_name":"Lighthouse Americano","qty":2,"price":3,"options":{"size":"medium"}},
-                  {"item_name":"Lighthouse Americano","qty":2,"price":3,"options":{"size":"medium"}}]
+  let fromcartExample = [{ item_name: "Lighthouse Americano", qty: 2, price: 3.55, category: '', options: { size: "medium" } },
+  { item_name: "Lighthouse Americano", qty: 2, price: 3.55, category: '', options: { size: "medium" } }]
 
   router.post("/", (req, res) => {
-    console.log("body", req.body)
-    console.log('---------------------------------')
-    console.log("body", JSON.parse(req.body.cart))
+    // console.log('---------------------------------')
+    // console.log("body", JSON.parse(req.body.cart))
+    const mycart = JSON.parse(req.body.cart)
+    //  console.log("MyCart", mycart)
+    //try to combine all info in an object
+    let myCheckoutArray = []
+    let myCheckoutObject = {};
+    let itemId = [];
+    // console.log("body index 0", JSON.parse(req.body.cart[0]))
+    // console.log("body [0]", mycart[0])
+    // console.log("type of", typeof req.body.cart[0].qty)
+    // console.log("quantity", JSON.parse(req.body.cart[0].qty))
+    // for (let i=0; i < mycart.length; i++) {
+    //  console.log("Loop", mycart[i])
+    //  itemName.push(mycart[i].item_name)
 
-    const text =
-          "INSERT INTO order_items (menu_item_id, quantity, price, size_id) VALUES($1, $2, $3, $4) RETURNING *";
-        const values = [ 1, req.body.quantity, req.body.price, 2
-          // req.body.quantity,
-          // req.body.email,
-          // req.body.password,
-          // req.body.phone,
-          // false,
-        ];
-        console.log("Just before query insert")
-        db.query(text, values)
-        .then((dbRes) => {
-          console.log("dbRes", dbRes)
-          res.redirect("/home");
-          if (dbRes !== undefined) {
-            //console.log("Return object from insert query", dbRes.rows[0].id);
-            //set cookie
-            //req.session.name = dbRes.rows[0].id;
-            // console.log()
 
-          } else {
-            res.
-            status(500)
-            let templateVars = {errMessage: "Sorry, registration failed! Try it again."};
-            res.render("errors_msg", templateVars);
+    //console.log("item name", itemName);
+    //Question for mentor:
+    //1)how to send more then one value to array values
+    //2)how link option side
+    // for (let name of itemName) {
+
+    //query to get the price and item id by menu item name
+    const text1 = `
+    SELECT menu_items.id, menu_items.name, menu_items.price
+    FROM menu_items
+    JOIN order_items ON (order_items.menu_item_id = menu_items.id)
+    JOIN coffe_sizes ON (coffe_sizes.id = order_items.size_id)
+    WHERE menu_items.name = ANY($1)
+	  GROUP BY menu_items.id`;
+    const values1 = mycart.map(item => item.item_name);
+    // console.log("db.query1", db.query(text1, values1).toString())
+    // console.log("Value1", values1)
+    db.query(text1, [values1]).then((result) => {
+      console.log("Result from query find item_id by item name", result.rows); //result.rows[0]
+      //itemId.push(result.rows[0].id)
+
+
+      //query to get the price modifier by size
+      const text2 = `
+          SELECT coffe_sizes.id, coffe_sizes.size, coffe_sizes.price_modifier
+          FROM coffe_sizes
+          WHERE coffe_sizes.size = ANY($1)
+	        GROUP BY coffe_sizes.id`;
+      const values2 = mycart.map(item => item.options.size);
+      //  console.log("db.query2", db.query(text2, values2).toString())
+      //  console.log("Value2", values2)
+      db.query(text2, [values2]).then((result2) => {
+        // console.log("Result from query find coffe_size_id by size name", result2.rows); //result.rows[0]
+        //itemId.push(result.rows[0].id)
+
+
+        //make calculation of price
+        for (let i = 0; i < mycart.length; i++) {
+          // if (!result.rows[i]) {
+          //   break
+          // }
+          let tempPrice = 0;
+          // console.log("FOR i: ", i)
+          //give same id like in the cart
+          // console.log("mycart[i].id", mycart[i].id)
+          myCheckoutObject.id = mycart[i].id
+          //give same quantity like the cart
+          // console.log("mycart[i].qty", mycart[i].qty)
+          myCheckoutObject.qty = parseInt(mycart[i].qty)
+          //console.log(" myCheckout[i].qty", myCheckoutObject.qty)
+
+
+
+
+          //check name to calculate price
+          //result.row = [ anonymous { id: 1, name: 'Americano', price: 176 }, anonymous { id: 2, name: 'Cappuccino', price: 355 }, anonymous { id: 3, name: 'Espresso', price: 288 } ]
+          for (let j = 0; j < result.rows.length; j++) {
+            console.log(" mycart[i].item_name", mycart[i].item_name)
+            //console.log(" result.rows[j].name", result.rows[i].name)
+            //   console.log(" result.rows[j].price", result.rows[j].price)
+            if (mycart[i].item_name === result.rows[j].name) {
+              myCheckoutObject.item_id = result.rows[j].id
+              myCheckoutObject.name = result.rows[j].name;
+              tempPrice = result.rows[j].price;
+              break
+
+            }
           }
+
+          //myCheckoutObject.name = mycart[i].item_name
+
+          //   console.log("parse single price", parseInt(result.rows[i].price))
+          // //console.log(parseInt(result.rows[i].price))
+          myCheckoutObject.price = Math.trunc(tempPrice * parseInt(mycart[i].qty))
+
+          //by default the size is small
+          myCheckoutObject.item_size_id = 1;
+          // console.log("mycart[i].options.size", mycart[i].options.size)
+          if (mycart[i].options.size === 'medium') {
+            myCheckoutObject.price = Math.trunc(myCheckoutObject.price * 1.30)
+            myCheckoutObject.item_size_id = 2;
+          }
+          if (mycart[i].options.size === 'large') {
+            myCheckoutObject.price = Math.trunc(myCheckoutObject.price * 1.60)
+            myCheckoutObject.item_size_id = 3;
+          }
+          // //myCheckoutObject.price = Math.trunc(result.rows[i].price * result2.rows[i].price_modifier) * myCheckoutObject.qty
+          // myCheckoutObject.price = Math.round(myCheckoutObject.price) / 100;
+          myCheckoutArray.push(myCheckoutObject)
+          myCheckoutObject = {}
+
+        }
+
+        //console.log("This is myCheckout object: ", myCheckoutObject);
+        console.log("This is myCheckout array: ", myCheckoutArray);
+
+        //add order to orders table
+        //pending point:
+
+        //2) get current time now converted in format right for table :
+        //3) get the user_id that made the order to pass as value at the below query
+        //user_id = req.session.name
+        console.log('----------------------------------------------------------------------')
+        console.log("req.session.name", req.session.name)
+        console.log('----------------------------------------------------------------------')
+
+        const text3 =
+          "INSERT INTO orders (user_id, in_progress, time_ordered,pickup_ready) VALUES($1, $2, NOW()::timestamp, $3) RETURNING *";
+        const values3 = [parseInt(req.session.name), true, false];
+        console.log("query insert order")
+        db.query(text3, values3).then((dbRes) => {
+          //console.log("dbRes", dbRes)
+
+          let order_id = dbRes.rows[0].id
+          //console.log("order_id dbRes[0].id", order_id)
+          //add to order_items by FOR loop (advice by mentor)
+          console.log(`length ${myCheckoutArray.length}`)
+          for (let i = 0; i < myCheckoutArray.length; i++) {
+            const text4 =
+              "INSERT INTO order_items (order_id, menu_item_id, quantity, price, size_id) VALUES($1, $2, $3, $4, $5) RETURNING *";
+            const values4 = [order_id, myCheckoutArray[i].item_id, myCheckoutArray[i].qty, myCheckoutArray[i].price, myCheckoutArray[i].item_size_id];
+            console.log("Just before query insert")
+            db.query(text4, values4).then((dbRes1) => {
+
+            })
+          }
+
+          totPrepTime()
+            .then((totalPrepTime) => {
+              if (totalPrepTime) {
+                console.log("tot prep time:", totalPrepTime)
+                //sms notification to the client
+                let sms = `Your order has been recived. Expected pickup time in ${totalPrepTime.sum} minutes.`
+                client.messages.create({
+                  body: sms,
+                  from: process.env.TWILIO_PHONE,
+                  to: process.env.PHONE
+                })
+                  .then(message => console.log(message.sid));
+              }
+            })
+
+          //query to get user email by cookie
+          const text5 = `
+        SELECT users.phone, users.email
+        FROM users
+        WHERE users.id = $1
+	      `;
+          db.query(text5, [req.session.name]).then((result) => {
+            const user = result.rows[0]
+
+            orderInProgress(user.email)
+              .then((order) => {
+                if (order) {
+                  console.log("Orders:", order)
+
+                  //sms notification to the owner
+                  let sms = `New order recived. Order_id: ${order.order_id}, user_id: ${order.user_id} `
+                  client.messages.create({
+                    body: sms,
+                    from: process.env.TWILIO_PHONE,
+                    to: process.env.PHONE
+                  })
+                    .then(message => console.log(message.sid));
+                  res(order);
+                }
+              })
+
+
+
+          })
         })
-        .catch((err) => {
-          console.log("Something Broke !", err);
-        });
-  })
+
+
+      })
 
 
 
-  //expected = [{}, {}, {}]
-  //what we are getting is  = {'{},{},{}': ''}
 
 
-  //define object cart base on the application local storage
-  // const cart = {
-  //   menu_item_id: user,
-  //   quantity: {
-  //     text: req.body.text
-  //   },
-  //   created_at: Date.now()
-  // };
+    })
 
-  // Saves a tweet to `db`
-  //by query
 
-  // //when doc ready
-  // $(document).ready(function() {
-  //   $("#order_pickup").clic('keyup', (function() {
-  //     alert("The order inserted");
-  //   }))
-  // });
+  });
+
+
+
 
   return router;
 };
-
-
