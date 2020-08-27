@@ -9,7 +9,7 @@ module.exports = (db) => {
       JOIN users ON users.id = user_id
       WHERE orders.in_progress = TRUE AND orders.pickup_ready = FALSE
       `;
-      //WHERE pickup_ready = true
+    //WHERE pickup_ready = true
     return db.query(text).then((result) => {
       if (result.rows !== undefined) {
         //console.log("Result from query items", result.rows);
@@ -44,11 +44,15 @@ GROUP BY orders.id, order_items.id, menu_items.name , coffe_sizes.size, users.na
 ORDER BY orders.id;
     `;
     db.query(text).then((result) => {
-    const ordersInProgress = result.rows
-    console.log("reslt fom query admin", result.rows)
-     let templateVars = { orders: items, order_item: ordersInProgress };
-       res.render("admin_dash", templateVars);
-     });
+      const ordersInProgress = result.rows;
+      console.log("reslt fom query admin", result.rows);
+
+      items().then((items) => {
+        console.log(ordersInProgress)
+        let templateVars = { orders: items, orderItems: ordersInProgress };
+        res.render("admin_dash", templateVars);
+      });
+    });
   });
 
   return router;
