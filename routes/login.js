@@ -16,6 +16,7 @@ router.use(function (req, res, next) {
   next();
 });
 
+
 module.exports = (db) => {
   router.get("/", (req, res) => {
     res.render("login");
