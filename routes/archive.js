@@ -10,7 +10,7 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.post("/", (req, res) => {
-
+    let order_id = parseInt(req.body.user_id);
     //orders.id = 6 ?????
     //how get order_id from HTML?
 
@@ -18,11 +18,11 @@ module.exports = (db) => {
     UPDATE orders
     SET in_progress = FALSE,
         pickup_ready = TRUE
-    WHERE orders.id = 3
+    WHERE orders.id = $1
     RETURNING *;
       `;
-
-    db.query(text)
+      const values = [order_id];
+    db.query(text, values)
       .then(data => {
         const users = data.rows;
         //res.json({ users });
