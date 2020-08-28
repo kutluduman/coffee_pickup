@@ -47,7 +47,7 @@ const updateItem = (selectedItem) => {
 };
 
 Array.from(menuItems).forEach((menuItem) => {
-  menuItem.addEventListener("click", function (e) {
+  menuItem.addEventListener("click", function(e) {
     const itemId = this.getAttribute("item_id");
 
     console.log(e.target.tagName, this.getAttribute("item_id"));
