@@ -3,7 +3,9 @@ The Lighthouse Coffee House
 
 ##  Project Description
 
-The following steps are only for _one_ of the group members to perform. Our midterm project for the July 2020 Lighthouse Labs Midterm. It is a order for pickup website for a fictional Cafe.
+ Our midterm project for the July 2020 Lighthouse Labs Midterm. It is a order for pickup website for a fictional Cafe. Allowing users to order menu items for pickup and recieve a text message confirmation (it also texts the store owner that they have a new order).
+
+ It also provides basic admin functionality for the cafe owner to create, update, and delete menu items, as well as view currently active orders and mark them as ready for pickup or delayed which also sends a message to the customer.
 
 ## How to Setup
 1. Create the .env by using .env.example as reference: cp .env.example .env
@@ -23,11 +25,11 @@ npm i
   ```javascript
     npx tailwindcss build ./styles/styles.css -o ./public/styles/output.css
    ````
-7. Run Gulp to use process css with PostCSS and drag output.css from ./dest into ./public/styles/
+7. Run Gulp to process css with PostCSS and drag output.css from ./dest into ./public/styles/
 ```
 gulp css
 ```
-8. Add your twillio and 
+
 8. Run the server: 
 ```javacript
 npm run local
@@ -36,7 +38,25 @@ npm run local
 
 Run the server: npm run local
 Note: nodemon is used, so you should not have to restart your server
-Visit http://localhost:8080/
+Visit http://localhost:8080/.
+
+## Available Routes
+
+- localhost:8080/login
+  - allows a user to login
+- localhost:8080/register
+  - allows a user to register a account
+- localhost:8080/home 
+  - home page / menu for both admin & user
+
+### Admin Routes
+
+- localhost:8080/update
+  - allows admin to preform CRUD functions on menu items
+- localhost:8080/admin
+  - allows admin to view active orders and send relavent text messages
+
+
 
 
 
@@ -45,7 +65,7 @@ Visit http://localhost:8080/
 
 2. Use the npm run db:reset command each time there is a change to the database schema or seeds.
 
-3. If do not add classes directly to css if you need configure Taildwind do so in the tailwind.config.js file
+3. If you need to add new css classes directlyf you can either add it to the styles.css file or configure Taildwind do so in the tailwind.config.js file
 
 
 
@@ -77,6 +97,7 @@ Visit http://localhost:8080/
 - pg
 - pg-native
 - twilio
+- jquery
 
 ## Dev Dependencies
 
