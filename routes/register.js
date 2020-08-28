@@ -1,14 +1,11 @@
-/*
- * All routes for Users are defined here
- * Since this file is loaded in server.js into api/users,
- *   these routes are mounted onto /users
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
-
 const express = require("express");
 const router = express.Router();
 
-// Require twilio credentials
+/*
+Twilio credentials that are stored in the
+env and used below so that sms api connection
+is established to send messages to clients
+*/
 const client = require("twilio")(
   `${process.env.TWILIO_ACCOUNT_SID}`,
   `${process.env.TWILIO_AUTH_TOKEN}`
@@ -16,7 +13,6 @@ const client = require("twilio")(
 
 // A middleware function with no mount path. This code is executed for every request to the router
 router.use(function(req, res, next) {
-  //console.log("Time:", Date.now());
   next();
 });
 
@@ -26,8 +22,8 @@ module.exports = (db) => {
   });
 
   /*
-    Make function userExists(arg1, arg2)
-   runs a query checking for those values if they exist in users table
+    This function runs a query to check whether the
+    parameter values exist in the users table
   */
   const userExists = (email, phone) => {
     const text = `
@@ -46,10 +42,15 @@ module.exports = (db) => {
     });
   };
 
+  /*
+    This post route checks first with userExists function
+    whether the user exists in the database and then posts
+    the information from the body into the database to register
+    the user
+  */
   router.post("/", (req, res) => {
     userExists(req.body.email, req.body.phone).then((user) => {
       if (user) {
-        //User already present
         res.status(403);
         let templateVars = {
           errMessage:
@@ -69,7 +70,6 @@ module.exports = (db) => {
         db.query(text, values)
           .then((dbRes) => {
             if (dbRes.rows[0].id !== undefined) {
-              //set cookie
               req.session.name = dbRes.rows[0].id;
               res.redirect("/home");
             } else {
@@ -81,7 +81,7 @@ module.exports = (db) => {
             }
           })
           .catch((err) => {
-            //console.log("Something Broke !", err);
+            console.log(err);
           });
       }
     });
