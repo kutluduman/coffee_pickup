@@ -19,15 +19,20 @@ module.exports = (db) => {
       console.log("Id from HTML form:", req.body);
       //orders.id = 6 ?????
       //how get order_id from HTML?
+      console.log("Id from HTML form:", req.body.user_id);
+      let order_id = parseInt(req.body.user_id);
+      //orders.id = 6 ?????
+      //how get order_id from HTML?
+      //parse as int
 
       const text = `
       UPDATE orders
       SET pickup_ready = TRUE
-      WHERE orders.id = 2
+      WHERE orders.id = $1
       RETURNING *;
       `;
-
-      db.query(text)
+      const values = [order_id];
+      db.query(text, values)
         .then((data) => {
           const users = data.rows;
 
@@ -35,11 +40,11 @@ module.exports = (db) => {
           SELECT orders.id as order_id, users.phone
           FROM orders
           JOIN users ON (orders.user_id = users.id)
-          WHERE orders.id = 2
+          WHERE orders.id = $1
           GROUP BY orders.id, users.phone;`;
-
+          const values2 = [order_id];
           //  console.log("Just before query insert")
-          db.query(text2).then((data) => {
+          db.query(text2, values2).then((data) => {
             const usersPhone = data.rows[0].phone;
             console.log("user phone numbers:", usersPhone);
             let sms = `Your order is ready for pickup.`;

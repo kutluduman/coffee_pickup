@@ -64,22 +64,35 @@
             <div
               class="grid-cols-4 gap-x-4 grid md:grid-cols-8 md:gap-x-1 col-span-4 md:col-span-8 border-t"
             >
+            <form action='/ready' class="col-span-2 md:col-span-2" method="POST">
+              <input type="hidden"  name="user_id" value= <%=orders[order].id%> >
+
               <button
-                class="justify-center text-left col-span-2 md:col-span-2 m-1 text-sm bg-green-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
+                class="justify-center text-left w-full m-1 text-sm bg-green-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
               >
                 <img
                   class="inline-block mr-1"
                   src="/images/icons/checkmark.svg"
                 />Ready
               </button>
+            </form>
+
+
+            <form method="POST" class="col-span-2 md:col-span-2" action="/delay">
+              <input type="hidden"  name="user_id" value= <%=orders[order].id%> >
               <button
-                class="justify-center text-left col-span-2 md:col-span-2 m-1 text-sm bg-orange-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
-              >
-                <img class="inline-block mr-1" src="/images/icons/alert.svg" />
-                Delayed
-              </button>
+              class="justify-center text-left w-full m-1 text-sm bg-orange-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
+            >
+              <img class="inline-block mr-1" src="/images/icons/alert.svg" />
+              Delayed
+            </button>
+            </form>
+
+
+              <form method="POST" class="col-span-2 md:col-span-2" action="/cancel">
+                <input type="hidden"  name="user_id" value= <%=orders[order].id%> >
               <button
-                class="justify-center text-sm text-left col-span-2 md:col-span-2 m-1 bg-red-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
+                class="justify-center text-sm text-left w-full m-1 bg-red-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
               >
                 <img
                   class="inline-block mr-1"
@@ -87,9 +100,13 @@
                 />
                 Cancel
               </button>
+            </form>
 
+
+            <form method="POST" class="col-span-2 md:col-span-2" action="/archive">
+              <input type="hidden"  name="user_id" value= <%=orders[order].id%> >
               <button
-                class="justify-center text-left col-span-2 md:col-span-2 m-1 text-sm bg-blue-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
+                class="justify-center text-left w-full m-1 text-sm bg-blue-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
               >
                 <img
                   class="inline-block mr-1"
@@ -97,6 +114,7 @@
                 />
                 Archive
               </button>
+            </form>
             </div>
           </footer>
           <!-- </div> -->

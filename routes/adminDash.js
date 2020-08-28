@@ -23,6 +23,8 @@ module.exports = (db) => {
   };
 
   router.get("/", (req, res) => {
+   // items().then((items) => {
+    //query to get user email by cookie
     const text = `
     SELECT orders.id as orders_id ,order_items.id as order_items_id, order_items.menu_item_id as menu_item_id, order_items.quantity as order_items_qty, menu_items.name, order_items.price, coffe_sizes.size, order_items.size_id, users.name as user_name
 FROM order_items
@@ -60,7 +62,7 @@ ORDER BY orders.id;
         }
       });
     });
-  });
-
+ // });
+})
   return router;
 };
