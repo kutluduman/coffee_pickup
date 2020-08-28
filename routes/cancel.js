@@ -5,32 +5,31 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const express = require('express');
-const router  = express.Router();
+const express = require("express");
+const router = express.Router();
 
 module.exports = (db) => {
   router.post("/", (req, res) => {
-
+    let order_id = parseInt(req.body.user_id);
     //orders.id = 6 ?????
     //how get order_id from HTML?
 
     const text = `
     DELETE FROM orders
-    WHERE orders.id = 22
+    WHERE orders.id = $1
     RETURNING *;
       `;
-
-    db.query(text)
-      .then(data => {
+    const values = [order_id];
+    db.query(text, values)
+      .then((data) => {
         const users = data.rows;
         //res.json({ users });
       })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
       });
-      res.redirect('/admin');
+    res.redirect("/admin");
   });
+
   return router;
 };

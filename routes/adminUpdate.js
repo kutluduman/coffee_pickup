@@ -22,32 +22,48 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     items().then((items) => {
       let templateVars = { menuItems: items };
-      res.render("admin_update", templateVars);
+
+      if (req.session.name === 1) {
+        res.render("admin_update", templateVars);
+      } else {
+        res.send("Must be admin to view this page/");
+      }
     });
   });
 
-
   router.post("/", (req, res) => {
-    let newItem = req.body;
-    //console.log("newItem: ", newItem)
+    if (req.session.name === 1) {
+      let newItem = req.body;
+      //console.log("newItem: ", newItem)
 
-    //parse checkbox status for SQL
-    let in_stock;
-    if (newItem.item_in_stock === 'on') {
-      in_stock = true;
+      //parse checkbox status for SQL
+      let in_stock;
+      if (newItem.item_in_stock === "on") {
+        in_stock = true;
+      } else {
+        in_stock = false;
+      }
+
+      const text =
+        "INSERT INTO menu_items (name, price, picture_url, prep_time, description, in_stock, category) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *";
+      const values = [
+        newItem.item_name,
+        parseInt(newItem.item_price),
+        newItem.item_image_url,
+        parseInt(newItem.item_prep_time),
+        newItem.item_description,
+        in_stock,
+        newItem.item_category,
+      ];
+      //  console.log("Just before query insert")
+      db.query(text, values).then((dbRes) => {
+        //console.log("New item inserted: ", dbRes)
+      });
+
+      res.redirect("/update");
     } else {
-      in_stock = false;
+      res.send("Must be admin");
     }
-
-    const text =
-    "INSERT INTO menu_items (name, price, picture_url, prep_time, description, in_stock, category) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *";
-    const values = [newItem.item_name, parseInt(newItem.item_price), newItem.item_image_url, parseInt(newItem.item_prep_time), newItem.item_description, in_stock, newItem.item_category];
-    //  console.log("Just before query insert")
-    db.query(text, values).then((dbRes) => {
-      //console.log("New item inserted: ", dbRes)
-    })
-
-    res.render("admin_update")
   });
 
   return router;
