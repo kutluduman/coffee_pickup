@@ -74,26 +74,34 @@
 
           <div class="grid-cols-4 gap-x-4 grid md:grid-cols-8 md:gap-x-1 col-span-4 md:col-span-8 border-t">
 
+            <form action="/ready" method="POST">
+              <input type="hidden" name="order_id" value="<%=orders[order].id%>" />
             <button
               class="justify-center text-left col-span-2 md:col-span-2 m-1 text-sm  bg-green-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center">
               <img class="inline-block mr-1" src="/images/icons/checkmark.svg" />Ready
             </button>
+          </form>
+          <form action="/delay" method="POST">
             <button
               class="justify-center text-left col-span-2 md:col-span-2 m-1 text-sm  bg-orange-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center">
               <img class="inline-block mr-1" src="/images/icons/alert.svg" />
               Delayed
             </button>
+          </form>
+            <form action="/cancel" method="POST">
             <button
               class="justify-center text-sm text-left col-span-2 md:col-span-2 m-1 bg-red-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center">
               <img class="inline-block mr-1" src="/images/icons/close-circle-outline.svg" />
               Cancel
             </button>
-
+          </form>
+          <form action="/archive" method="POST">
             <button
               class="justify-center text-left col-span-2 md:col-span-2 m-1 text-sm  bg-blue-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center">
               <img class="inline-block mr-1" src="/images/icons/archive.svg" />
               Archive
             </button>
+          </form>
 
           </div>
 
