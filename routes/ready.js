@@ -48,8 +48,7 @@ module.exports = (db) => {
             const usersPhone = data.rows[0].phone;
             console.log("user phone numbers:", usersPhone);
             let sms = `Your order is ready for pickup.`;
-            client.messages
-              .create({
+            client.messages.create({
                 body: sms,
                 from: process.env.TWILIO_PHONE,
                 to: process.env.PHONE, //client phone number use => usersPhone
