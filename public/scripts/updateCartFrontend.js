@@ -9,9 +9,13 @@ const createCartItem = (cartItem) => {
 			<p class="font-body text-ash text-xl inline-block">${cartItem.item_name}</p>
 		</div>
 		<div class="flex items-center">
-		<p class="text-gray-700 mr-2">${
-     (cartItem.price * cartItem.qty / 100).toLocaleString("en-US", {style:"currency", currency:"USD"})
-    }</p><img cartItemId="${
+		<p class="text-gray-700 mr-2">${(
+      (cartItem.price * cartItem.qty) /
+      100
+    ).toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    })}</p><img cartItemId="${
     cartItem.id
   }" onclick="deleteItem(this)" id="remove-item" src="/images/icons/close-circle.svg"></div>
 
@@ -22,7 +26,7 @@ const createCartItem = (cartItem) => {
   </ul>`
         : ``
     }
-	
+
   </article>
   `;
 
@@ -50,31 +54,38 @@ const updateCartView = () => {
   calculateTotal();
 };
 
+const addMinutes = (minutes) => {
+  let currentQueue = parseInt(
+    document
+      .getElementById("estimated-pickup-time")
+      .getAttribute("current_queue")
+  );
 
-const addMinutes =( minutes)=> {
-  let currentQueue = parseInt(document.getElementById('estimated-pickup-time').getAttribute('current_queue'))
-
-  let updatedTime = new Date().getTime() + ((currentQueue + minutes )* 60000);
+  let updatedTime = new Date().getTime() + (currentQueue + minutes) * 60000;
   return new Date(updatedTime).toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit'
-  })
-}
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+};
 
 const calculateTotal = () => {
   let total = 0;
   let pickupTime = 0;
   const cart = getCart();
-  cart.forEach((elem) =>{
+  cart.forEach((elem) => {
     total += elem.price * elem.qty;
     pickupTime += elem.prep_time;
   });
-  document.getElementById('bill-total').innerText =  (total / 100).toLocaleString("en-US", {style:"currency", currency:"USD"});
+  document.getElementById("bill-total").innerText = (
+    total / 100
+  ).toLocaleString("en-US", { style: "currency", currency: "USD" });
 
-  if(pickupTime < 1){
-    document.getElementById('estimated-pickup-time').innerText = 'TBD'
+  if (pickupTime < 1) {
+    document.getElementById("estimated-pickup-time").innerText = "TBD";
   } else {
-    document.getElementById('estimated-pickup-time').innerText = addMinutes( pickupTime)
+    document.getElementById("estimated-pickup-time").innerText = addMinutes(
+      pickupTime
+    );
   }
 };
 
@@ -103,10 +114,10 @@ const addToCardUI = () => {
       id: cartItemId,
       item_name: cartItemOptions.getAttribute("item_name"),
       qty: rawCart.get("item-qty"),
-      prep_time: cartItemOptions.getAttribute("prep_time") * rawCart.get("item-qty"),
-      price: 
-        cartItemOptions.getAttribute("price") ,
-   
+      prep_time:
+        cartItemOptions.getAttribute("prep_time") * rawCart.get("item-qty"),
+      price: cartItemOptions.getAttribute("price"),
+
       category: cartItemOptions.getAttribute("category"),
       options: {
         size: rawCart.get("size"),

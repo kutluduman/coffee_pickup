@@ -9,7 +9,6 @@ module.exports = (db) => {
 
     return db.query(text).then((result) => {
       if (result.rows !== undefined) {
-        //console.log("Result from query items", result.rows);
         if (result.rows) {
           return result.rows;
         }
@@ -34,9 +33,6 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     if (req.session.name === 1) {
       let newItem = req.body;
-      //console.log("newItem: ", newItem)
-
-      //parse checkbox status for SQL
       let in_stock;
       if (newItem.item_in_stock === "on") {
         in_stock = true;
@@ -55,16 +51,11 @@ module.exports = (db) => {
         in_stock,
         newItem.item_category,
       ];
-      //  console.log("Just before query insert")
-      db.query(text, values).then((dbRes) => {
-        //console.log("New item inserted: ", dbRes)
-      });
-
+      db.query(text, values).then((dbRes) => {});
       res.redirect("/update");
     } else {
       res.send("Must be admin");
     }
   });
-
   return router;
 };
