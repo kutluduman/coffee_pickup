@@ -8,7 +8,7 @@ const createCartItem = (cartItem) => {
       }</p>
 			<p class="font-body text-ash text-xl inline-block">${cartItem.item_name}</p>
 		</div>
-		<div class="flex items-center">
+		<div class="flex items-censter">
 		<p class="text-gray-700 mr-2">${(
       (cartItem.price * cartItem.qty) /
       100

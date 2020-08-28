@@ -100,8 +100,8 @@
 
   <script>
 
-    const orderItems = <% -JSON.stringify(orderItems) %>;
-
+    const orderItems = <%- JSON.stringify(orderItems) %>;
+    console.log(orderItems);
     const createItemInOrder = (cartItem) => {
       const itemInOrderTemplate = `
            <article class="cart-item flex flex-wrap justify-between px-4 py-4  w-auto">
