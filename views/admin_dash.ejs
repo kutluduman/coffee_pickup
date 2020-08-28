@@ -1,115 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/normalize.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/output.css" type="text/css" />
+    <!-- External JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Register</title>
+  </head>
 
-  <link rel="stylesheet" href="/styles/normalize.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/output.css" type="text/css" />
-  <!-- External JS -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <title>Register</title>
+  <body class="bg-ash">
+    <section
+      class="grid gap-x-4 grid-rows-none grid-cols-4 md:grid-cols-8 lg:grid-cols-12 wrapper mx-auto pt-10"
+    >
+      <h1
+        class="text-white text-4xl font-display font-bold text-center md:col-span-8 md:col-start-2 lg:col-span-12 text-center mb-3"
+      >
+        Current Active Orders
+      </h1>
 
-</head>
-
-<body class="bg-ash">
-
-
-
-  <section class="grid gap-x-4 grid-rows-none  grid-cols-4  md:grid-cols-8 lg:grid-cols-12 wrapper mx-auto pt-10">
-
-    <h1
-      class="text-white text-4xl font-display font-bold text-center md:col-span-8 md:col-start-2 lg:col-span-12  text-center mb-3">
-      Current Active Orders</h1>
-
-    <div
-      class="mx-4 gap-x-4 grid-rows-none grid-cols-4 md:grid-cols-8 lg:grid-cols-12 col-span-4 md:col-span-8 lg:col-span-12  ">
-
-      <% for(let order in orders) { %>
-      <article
-        class="bg-white menu-item-card m-1 col-span-4 md:col-span-8 lg:col-span-12 shadow-md rounded mb-6 lg:col-start-2 grid md:grid-cols-8 lg:mr-6 ">
-
-
-
-        <header
-          class="grid grid-cols-4 md:grid-cols-8 col-span-4 md:col-span-8 border-ash border-b bg-coffee-brown text-white p-2 rounded-t">
-          <div class="w-full py-2  col-span-4 md:col-span-2 bg-gray-500 md:bg-transparent self-center">
-            <p class="text-center "># <%=orders[order].id%></p>
-            <p class="text-center font-bold">Order ID</p>
-          </div>
-
-          <div class="col-span-2 md:col-span-4 self-center">
-            <p class="text-center ">2:31</p>
-            <p class="text-center font-bold">Est Prep Time</p>
-          </div>
-
-          <div class="col-span-2 md:col-span-2 self-center ">
-            <p class="text-center "> <%=orders[order].name%></p>
-            <p class="text-center font-bold">Order Recipient</p>
-          </div>
-        </header>
-
-        <!-- <div class="p-1 col-span-4 md:col-span-8 "> -->
-
-        <div class="col-span-4 md:col-span-8 lg:col-span-12 flex flex-wrap  " id="active-orders-container p-2">
-          <article class="cart-item flex flex-wrap justify-between px-4 py-4  w-auto">
-            <div class="flex items-center flex-wrap">
-              <p class="item-qty font-body text-coffee-brown mr-2 inline-block">
-                1
-              </p>
-              <p class="font-body text-ash text-xl inline-block">
-                Americano
-              </p>
+      <div
+        class="mx-4 gap-x-4 grid-rows-none grid-cols-4 md:grid-cols-8 lg:grid-cols-12 col-span-4 md:col-span-8 lg:col-span-12"
+      >
+        <% for(let order in orders) { %>
+        <article
+          class="bg-white menu-item-card m-1 col-span-4 md:col-span-8 lg:col-span-12 shadow-md rounded mb-6 lg:col-start-2 grid md:grid-cols-8 lg:mr-6"
+        >
+          <header
+            class="grid grid-cols-4 md:grid-cols-8 col-span-4 md:col-span-8 border-ash border-b bg-coffee-brown text-white p-2 rounded-t"
+          >
+            <div
+              class="w-full py-2 col-span-4 md:col-span-2 bg-gray-500 md:bg-transparent self-center"
+            >
+              <p class="text-center"># <%=orders[order].id%></p>
+              <p class="text-center font-bold">Order ID</p>
             </div>
 
+            <div class="col-span-2 md:col-span-4 self-center">
+              <p class="text-center">2:31</p>
+              <p class="text-center font-bold">Est Prep Time</p>
+            </div>
 
-            <ul class="selected-options block list-disc w-48 ml-10 w-full">
-              <li class="text-light-grey text-sm">large</li>
-            </ul>
-          </article>
+            <div class="col-span-2 md:col-span-2 self-center">
+              <p class="text-center"><%=orders[order].name%></p>
+              <p class="text-center font-bold">Order Recipient</p>
+            </div>
+          </header>
 
-        </div>
+          <!-- <div class="p-1 col-span-4 md:col-span-8 "> -->
 
-        <footer class="grid grid-cols-4 gap-x-4 md:grid-cols-8 col-span-4 md:col-span-8 justify-around m-2">
+          <div
+            class="col-span-4 md:col-span-8 lg:col-span-12 flex flex-wrap active-order"
+            id="active-orders-container p-2"
+            order-id="<%=orders[order].id%>"
+          ></div>
 
-          <div class="grid-cols-4 gap-x-4 grid md:grid-cols-8 md:gap-x-1 col-span-4 md:col-span-8 border-t">
+          <footer
+            class="grid grid-cols-4 gap-x-4 md:grid-cols-8 col-span-4 md:col-span-8 justify-around m-2"
+          >
+            <div
+              class="grid-cols-4 gap-x-4 grid md:grid-cols-8 md:gap-x-1 col-span-4 md:col-span-8 border-t"
+            >
+              <button
+                class="justify-center text-left col-span-2 md:col-span-2 m-1 text-sm bg-green-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
+              >
+                <img
+                  class="inline-block mr-1"
+                  src="/images/icons/checkmark.svg"
+                />Ready
+              </button>
+              <button
+                class="justify-center text-left col-span-2 md:col-span-2 m-1 text-sm bg-orange-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
+              >
+                <img class="inline-block mr-1" src="/images/icons/alert.svg" />
+                Delayed
+              </button>
+              <button
+                class="justify-center text-sm text-left col-span-2 md:col-span-2 m-1 bg-red-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
+              >
+                <img
+                  class="inline-block mr-1"
+                  src="/images/icons/close-circle-outline.svg"
+                />
+                Cancel
+              </button>
 
-            <button
-              class="justify-center text-left col-span-2 md:col-span-2 m-1 text-sm  bg-green-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center">
-              <img class="inline-block mr-1" src="/images/icons/checkmark.svg" />Ready
-            </button>
-            <button
-              class="justify-center text-left col-span-2 md:col-span-2 m-1 text-sm  bg-orange-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center">
-              <img class="inline-block mr-1" src="/images/icons/alert.svg" />
-              Delayed
-            </button>
-            <button
-              class="justify-center text-sm text-left col-span-2 md:col-span-2 m-1 bg-red-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center">
-              <img class="inline-block mr-1" src="/images/icons/close-circle-outline.svg" />
-              Cancel
-            </button>
+              <button
+                class="justify-center text-left col-span-2 md:col-span-2 m-1 text-sm bg-blue-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
+              >
+                <img
+                  class="inline-block mr-1"
+                  src="/images/icons/archive.svg"
+                />
+                Archive
+              </button>
+            </div>
+          </footer>
+          <!-- </div> -->
+        </article>
+        <% } %>
+      </div>
+    </section>
+    <script src="/scripts/nav.js"></script>
 
-            <button
-              class="justify-center text-left col-span-2 md:col-span-2 m-1 text-sm  bg-blue-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center">
-              <img class="inline-block mr-1" src="/images/icons/archive.svg" />
-              Archive
-            </button>
+    <script>
 
-          </div>
+         const orderItems = <%-JSON.stringify(orderItems)%>
 
-        </footer>
-        <!-- </div> -->
-      </article>
-      <% } %>
+         const createItemInOrder = (cartItem) => {
+           const itemInOrderTemplate= `
+           <article class="cart-item flex flex-wrap justify-between px-4 py-4  w-auto">
+                 <div class="flex items-center flex-wrap">
+                   <p class="item-qty font-body text-coffee-brown mr-2 inline-block">
+                     ${cartItem.order_items_qty}
+                   </p>
+                   <p class="font-body text-ash text-xl inline-block">
+                    ${cartItem.name}
+
+                   </p>
+                 </div>
 
 
+                 <ul class="selected-options block list-disc w-48 ml-10 w-full">
 
-    </div>
+                   <li class="text-light-grey text-sm">large</li>
+                 </ul>
+               </article>
+      `
+      return itemInOrderTemplate;
+         }
+
+         const activeOrders = document.getElementsByClassName('active-order');
+
+         const checkoutUI = document.getElementById("cart-items-container");
 
 
-  </section>
-  <script src="/scripts/nav.js"></script>
-</body>
+         Array.from(activeOrders).forEach((order) => {
+            const orderToItemToCreate = order.getAttribute('order-id');
+            for(let i = 0; i < orderItems.length; i++ ){
+              console.log(orderToItemToCreate )
+              if(orderItems[i].orders_id == orderToItemToCreate){
+                console.log( createItemInOrder(orderItems[i]))
+                order.insertAdjacentHTML("beforeend", createItemInOrder(orderItems[i]));
+              }
 
+            }
+            });
+
+         console.log(activeOrders)
+    </script>
+  </body>
 </html>

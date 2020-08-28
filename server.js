@@ -52,6 +52,10 @@ const logoutRoute = require("./routes/logout");
 const adminRoute = require("./routes/adminDash");
 const adminUpdateRoute = require("./routes/adminUpdate");
 const successRoute = require("./routes/success");
+const readyRoute = require("./routes/ready");
+const delayRoute = require("./routes/delay");
+const cancelRoute = require("./routes/cancel");
+const archiveRoute = require("./routes/archive");
 
 /*
  Mount all resource routes
@@ -66,6 +70,11 @@ app.use("/logout", logoutRoute(db));
 app.use("/admin", adminRoute(db));
 app.use("/update", adminUpdateRoute(db));
 app.use("/success", successRoute(db));
+app.use("/ready", readyRoute(db));
+app.use("/delay", delayRoute(db));
+app.use("/cancel", cancelRoute(db));
+app.use("/archive", archiveRoute(db));
+
 
 
 
