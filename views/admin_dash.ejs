@@ -26,8 +26,7 @@
       >
         <% for(let order in orders) { %>
         <article
-       
-          class="bg-white menu-item-card m-1 col-span-4 md:col-span-8 lg:col-span-12 shadow-md rounded mb-6 lg:col-start-2 grid md:grid-cols-8 lg:mr-6 "
+          class="bg-white menu-item-card m-1 col-span-4 md:col-span-8 lg:col-span-12 shadow-md rounded mb-6 lg:col-start-2 grid md:grid-cols-8 lg:mr-6"
         >
           <header
             class="grid grid-cols-4 md:grid-cols-8 col-span-4 md:col-span-8 border-ash border-b bg-coffee-brown text-white p-2 rounded-t"
@@ -54,10 +53,9 @@
 
           <div
             class="col-span-4 md:col-span-8 lg:col-span-12 flex flex-wrap active-order"
-            id="active-orders-container p-2"    order-id="<%=orders[order].id%>"
-          >
-          
-          </div>
+            id="active-orders-container p-2"
+            order-id="<%=orders[order].id%>"
+          ></div>
 
           <footer
             class="grid grid-cols-4 gap-x-4 md:grid-cols-8 col-span-4 md:col-span-8 justify-around m-2"
@@ -109,49 +107,49 @@
 
     <script>
 
-                 const orderItems = <%-JSON.stringify(orderItems)%>
+         const orderItems = <%-JSON.stringify(orderItems)%>
 
-                 const createItemInOrder = (cartItem) => {
-                   const itemInOrderTemplate= `
-                   <article class="cart-item flex flex-wrap justify-between px-4 py-4  w-auto">
-                         <div class="flex items-center flex-wrap">
-                           <p class="item-qty font-body text-coffee-brown mr-2 inline-block">
-                             ${cartItem.order_items_qty}
-                           </p>
-                           <p class="font-body text-ash text-xl inline-block">
-                            ${cartItem.name}
+         const createItemInOrder = (cartItem) => {
+           const itemInOrderTemplate= `
+           <article class="cart-item flex flex-wrap justify-between px-4 py-4  w-auto">
+                 <div class="flex items-center flex-wrap">
+                   <p class="item-qty font-body text-coffee-brown mr-2 inline-block">
+                     ${cartItem.order_items_qty}
+                   </p>
+                   <p class="font-body text-ash text-xl inline-block">
+                    ${cartItem.name}
 
-                           </p>
-                         </div>
+                   </p>
+                 </div>
 
 
-                         <ul class="selected-options block list-disc w-48 ml-10 w-full">
+                 <ul class="selected-options block list-disc w-48 ml-10 w-full">
 
-                           <li class="text-light-grey text-sm">large</li>
-                         </ul>
-                       </article>
-              `
-              return itemInOrderTemplate;
-                 }
+                   <li class="text-light-grey text-sm">large</li>
+                 </ul>
+               </article>
+      `
+      return itemInOrderTemplate;
+         }
 
-                 const activeOrders = document.getElementsByClassName('active-order');
+         const activeOrders = document.getElementsByClassName('active-order');
 
-                 const checkoutUI = document.getElementById("cart-items-container");
+         const checkoutUI = document.getElementById("cart-items-container");
 
-                  
-                 Array.from(activeOrders).forEach((order) => {
-                    const orderToItemToCreate = order.getAttribute('order-id');
-                    for(let i = 0; i < orderItems.length; i++ ){
-                      console.log(orderToItemToCreate )
-                      if(orderItems[i].orders_id == orderToItemToCreate){
-                        console.log( createItemInOrder(orderItems[i]))
-                        order.insertAdjacentHTML("beforeend", createItemInOrder(orderItems[i]));
-                      }
 
-                    }
-                    });
+         Array.from(activeOrders).forEach((order) => {
+            const orderToItemToCreate = order.getAttribute('order-id');
+            for(let i = 0; i < orderItems.length; i++ ){
+              console.log(orderToItemToCreate )
+              if(orderItems[i].orders_id == orderToItemToCreate){
+                console.log( createItemInOrder(orderItems[i]))
+                order.insertAdjacentHTML("beforeend", createItemInOrder(orderItems[i]));
+              }
 
-                 console.log(activeOrders)
+            }
+            });
+
+         console.log(activeOrders)
     </script>
   </body>
 </html>
