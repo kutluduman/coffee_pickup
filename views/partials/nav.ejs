@@ -1,5 +1,5 @@
-
 <!--Navbar-->
+
 <nav class="px-4 py-2 md:px-6 md:py-4 w-full flex items-center justify-between fixed bg-ash">
   <img src="/images/lhc-logo.svg" />
   <div class="flex">
@@ -14,18 +14,18 @@
     <div class="h-px-6 w-px bg-coffee-brown mx-3 hidden lg:block"></div>
 
     <%if(user){%>
-      <img src="/images/icons/person.svg"/>
-      <p class="class=text-white mx-3 hidden lg:block text-white"> <%=user.name%></p>
-      <form method="POST" action="/logout" class="form-inline">
-        <button class="text-white mx-3 hidden lg:block" type="submit" class="btn btn-outline-light"><span
-            class="glyphicon glyphicon-user"></span> Logout</button></li>
-      </form>
-      <% } else{ %>
+    <img src="/images/icons/person.svg" />
+    <p class="class=text-white mx-3 hidden lg:block text-white"> <%=user.name%></p>
+    <form method="POST" action="/logout" class="form-inline">
+      <button class="text-white mx-3 hidden lg:block" type="submit" class="btn btn-outline-light"><span
+          class="glyphicon glyphicon-user"></span> Logout</button></li>
+    </form>
+    <% } else{ %>
 
-        <a href="/login" class="text-white mx-3 hidden lg:block">Login</a>
-        <a href="/register" class="text-white mx-3 hidden lg:block">Sign Up</a>
-        <% } %>
-    <!-- <i class="text-white mx-3 hidden lg:block fas fa-user"></i> -->
+    <a href="/login" class="text-white mx-3 hidden lg:block">Login</a>
+    <a href="/register" class="text-white mx-3 hidden lg:block">Sign Up</a>
+    <% } %>
+
 
   </div>
 </nav>
@@ -37,7 +37,8 @@
   id="mobile-menu">
   <img onclick="triggerMenu()" class="absolute top-0 left-0 p-6 transition-all duration-300"
     src="/images/icons/back-arrow.svg" />
-  <a href="/home#menu" class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300">Menu</a>
+  <a href="/home#menu"
+    class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300">Menu</a>
   <a href="/home#contact"
     class="text-5xl md:text-6xl mobile-menu-item hover:text-coffee-brown hidden transition-all duration-300">Contact
     Us</a>

@@ -1,135 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/styles/normalize.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/output.css" type="text/css" />
-    <!-- External JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <title>Register</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <body class="bg-ash">
+  <link rel="stylesheet" href="/styles/normalize.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/output.css" type="text/css" />
 
-    <%- include('partials/nav') %>
+  <!-- External JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <title>Register</title>
+</head>
+
+<body class="bg-ash">
+
+  <%- include('partials/nav') %>
 
 
-    <section
-      class="grid gap-x-4 grid-rows-none grid-cols-4 md:grid-cols-8 lg:grid-cols-12 wrapper mx-auto pt-10"
-    >
-      <h1
-        class="text-white text-4xl font-display font-bold text-center md:col-span-8 md:col-start-2 lg:col-span-12 text-center mb-3"
-      >
-        Current Active Orders
-      </h1>
+  <section class="grid gap-x-4 grid-rows-none grid-cols-4 md:grid-cols-8 lg:grid-cols-12 wrapper mx-auto pt-10">
+    <h1
+      class="text-white text-4xl font-display font-bold text-center md:col-span-8 md:col-start-2 lg:col-span-12 text-center mb-3">
+      Current Active Orders
+    </h1>
 
-      <div
-        class="mx-4 gap-x-4 grid-rows-none grid-cols-4 md:grid-cols-8 lg:grid-cols-12 col-span-4 md:col-span-8 lg:col-span-12"
-      >
-        <% for(let order in orders) { %>
-        <article
-          class="bg-white menu-item-card m-1 col-span-4 md:col-span-8 lg:col-span-12 shadow-md rounded mb-6 lg:col-start-2 grid md:grid-cols-8 lg:mr-6"
-        >
-          <header
-            class="grid grid-cols-4 md:grid-cols-8 col-span-4 md:col-span-8 border-ash border-b bg-coffee-brown text-white p-2 rounded-t"
-          >
-            <div
-              class="w-full py-2 col-span-4 md:col-span-2 bg-gray-500 md:bg-transparent self-center"
-            >
-              <p class="text-center"># <%=orders[order].id%></p>
-              <p class="text-center font-bold">Order ID</p>
-            </div>
+    <div
+      class="mx-4 gap-x-4 grid-rows-none grid-cols-4 md:grid-cols-8 lg:grid-cols-12 col-span-4 md:col-span-8 lg:col-span-12">
+      <% for(let order in orders) { %>
+      <article
+        class="bg-white menu-item-card m-1 col-span-4 md:col-span-8 lg:col-span-12 shadow-md rounded mb-6 lg:col-start-2 grid md:grid-cols-8 lg:mr-6">
+        <header
+          class="grid grid-cols-4 md:grid-cols-8 col-span-4 md:col-span-8 border-ash border-b bg-coffee-brown text-white p-2 rounded-t">
+          <div class="w-full py-2 col-span-4 md:col-span-2 bg-gray-500 md:bg-transparent self-center">
+            <p class="text-center"># <%=orders[order].id%></p>
+            <p class="text-center font-bold">Order ID</p>
+          </div>
 
-      
 
-            <div class="col-span-2 md:col-span-2 self-center">
-              <p class="text-center"><%=orders[order].name%></p>
-              <p class="text-center font-bold">Order Recipient</p>
-            </div>
-          </header>
 
-          <!-- <div class="p-1 col-span-4 md:col-span-8 "> -->
+          <div class="col-span-2 md:col-span-2 self-center">
+            <p class="text-center"><%=orders[order].name%></p>
+            <p class="text-center font-bold">Order Recipient</p>
+          </div>
+        </header>
 
-          <div
-            class="col-span-4 md:col-span-8 lg:col-span-12 flex flex-wrap active-order"
-            id="active-orders-container p-2"
-            order-id="<%=orders[order].id%>"
-          ></div>
 
-          <footer
-            class="grid grid-cols-4 gap-x-4 md:grid-cols-8 col-span-4 md:col-span-8 justify-around m-2"
-          >
-            <div
-              class="grid-cols-4 gap-x-4 grid md:grid-cols-8 md:gap-x-1 col-span-4 md:col-span-8 border-t"
-            >
+
+        <div class="col-span-4 md:col-span-8 lg:col-span-12 flex flex-wrap active-order"
+          id="active-orders-container p-2" order-id="<%=orders[order].id%>"></div>
+
+        <footer class="grid grid-cols-4 gap-x-4 md:grid-cols-8 col-span-4 md:col-span-8 justify-around m-2">
+          <div class="grid-cols-4 gap-x-4 grid md:grid-cols-8 md:gap-x-1 col-span-4 md:col-span-8 border-t">
             <form action='/ready' class="col-span-2 md:col-span-2" method="POST">
-              <input type="hidden"  name="user_id" value= <%=orders[order].id%> >
+              <input type="hidden" name="user_id" value=<%=orders[order].id%>>
 
               <button
-                class="justify-center text-left w-full m-1 text-sm bg-green-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
-              >
-                <img
-                  class="inline-block mr-1"
-                  src="/images/icons/checkmark.svg"
-                />Ready
+                class="justify-center text-left w-full m-1 text-sm bg-green-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center">
+                <img class="inline-block mr-1" src="/images/icons/checkmark.svg" />Ready
               </button>
             </form>
 
 
             <form method="POST" class="col-span-2 md:col-span-2" action="/delay">
-              <input type="hidden"  name="user_id" value= <%=orders[order].id%> >
+              <input type="hidden" name="user_id" value=<%=orders[order].id%>>
               <button
-              class="justify-center text-left w-full m-1 text-sm bg-orange-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
-            >
-              <img class="inline-block mr-1" src="/images/icons/alert.svg" />
-              Delayed
-            </button>
+                class="justify-center text-left w-full m-1 text-sm bg-orange-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center">
+                <img class="inline-block mr-1" src="/images/icons/alert.svg" />
+                Delayed
+              </button>
             </form>
 
 
-              <form method="POST" class="col-span-2 md:col-span-2" action="/cancel">
-                <input type="hidden"  name="user_id" value= <%=orders[order].id%> >
+            <form method="POST" class="col-span-2 md:col-span-2" action="/cancel">
+              <input type="hidden" name="user_id" value=<%=orders[order].id%>>
               <button
-                class="justify-center text-sm text-left w-full m-1 bg-red-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
-              >
-                <img
-                  class="inline-block mr-1"
-                  src="/images/icons/close-circle-outline.svg"
-                />
+                class="justify-center text-sm text-left w-full m-1 bg-red-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center">
+                <img class="inline-block mr-1" src="/images/icons/close-circle-outline.svg" />
                 Cancel
               </button>
             </form>
 
 
             <form method="POST" class="col-span-2 md:col-span-2" action="/archive">
-              <input type="hidden"  name="user_id" value= <%=orders[order].id%> >
+              <input type="hidden" name="user_id" value=<%=orders[order].id%>>
               <button
-                class="justify-center text-left w-full m-1 text-sm bg-blue-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
-              >
-                <img
-                  class="inline-block mr-1"
-                  src="/images/icons/archive.svg"
-                />
+                class="justify-center text-left w-full m-1 text-sm bg-blue-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center">
+                <img class="inline-block mr-1" src="/images/icons/archive.svg" />
                 Archive
               </button>
             </form>
-            </div>
-          </footer>
-          <!-- </div> -->
-        </article>
-        <% } %>
-      </div>
-    </section>
-    <script src="/scripts/nav.js"></script>
+          </div>
+        </footer>
 
-    <script>
+      </article>
+      <% } %>
+    </div>
+  </section>
+  <script src="/scripts/nav.js"></script>
 
-         const orderItems = <%-JSON.stringify(orderItems)%>;
+  <script>
 
-         const createItemInOrder = (cartItem) => {
-           const itemInOrderTemplate= `
+    const orderItems = <% -JSON.stringify(orderItems) %>;
+
+    const createItemInOrder = (cartItem) => {
+      const itemInOrderTemplate = `
            <article class="cart-item flex flex-wrap justify-between px-4 py-4  w-auto">
                  <div class="flex items-center flex-wrap">
                    <p class="item-qty font-body text-coffee-brown mr-2 inline-block">
@@ -149,26 +123,27 @@
                </article>
       `
       return itemInOrderTemplate;
-         }
+    }
 
-         const activeOrders = document.getElementsByClassName('active-order');
+    const activeOrders = document.getElementsByClassName('active-order');
 
-         const checkoutUI = document.getElementById("cart-items-container");
+    const checkoutUI = document.getElementById("cart-items-container");
 
 
-         Array.from(activeOrders).forEach((order) => {
-            const orderToItemToCreate = order.getAttribute('order-id');
-            for(let i = 0; i < orderItems.length; i++ ){
-              console.log(orderToItemToCreate )
-              if(orderItems[i].orders_id == orderToItemToCreate){
-                console.log( createItemInOrder(orderItems[i]))
-                order.insertAdjacentHTML("beforeend", createItemInOrder(orderItems[i]));
-              }
+    Array.from(activeOrders).forEach((order) => {
+      const orderToItemToCreate = order.getAttribute('order-id');
+      for (let i = 0; i < orderItems.length; i++) {
+        console.log(orderToItemToCreate)
+        if (orderItems[i].orders_id == orderToItemToCreate) {
+          console.log(createItemInOrder(orderItems[i]))
+          order.insertAdjacentHTML("beforeend", createItemInOrder(orderItems[i]));
+        }
 
-            }
-            });
+      }
+    });
 
-         console.log(activeOrders)
-    </script>
-  </body>
+    console.log(activeOrders)
+  </script>
+</body>
+
 </html>

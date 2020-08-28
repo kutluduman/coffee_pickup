@@ -1,4 +1,3 @@
-
-////Code to checkout goes here
+//Code to checkout goes here
 
 console.log(getCart());

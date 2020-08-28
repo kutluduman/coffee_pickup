@@ -16,51 +16,51 @@
 <body class="bg-ash">
 
   <section
-  class="grid gap-x-4 grid-rows-none  grid-cols-4  md:grid-cols-8 lg:grid-cols-12 wrapper mx-auto pt-10 h-screen">
-      <table class="self-center table-auto col-span-4 md:col-span-8 md:mx-4">
-        <thead class="border-b-2 border-white">
-          <tr class="text-coffee-brown">
-            <th class="px-4 py-2">Name</th>
-            <th class="px-4 py-2">Category</th>
-            <th class="px-4 py-2">Stock</th>
-            <th class="px-4 py-2">Price</th>
-            <th class="px-4 py-2">Desc.</th>
-            <th class="px-4 py-2">Time</th>
-            <th class="px-4 py-2">Edit</th>
+    class="grid gap-x-4 grid-rows-none  grid-cols-4  md:grid-cols-8 lg:grid-cols-12 wrapper mx-auto pt-10 h-screen">
+    <table class="self-center table-auto col-span-4 md:col-span-8 md:mx-4">
+      <thead class="border-b-2 border-white">
+        <tr class="text-coffee-brown">
+          <th class="px-4 py-2">Name</th>
+          <th class="px-4 py-2">Category</th>
+          <th class="px-4 py-2">Stock</th>
+          <th class="px-4 py-2">Price</th>
+          <th class="px-4 py-2">Desc.</th>
+          <th class="px-4 py-2">Time</th>
+          <th class="px-4 py-2">Edit</th>
 
-          </tr>
-        </thead>
-        <tbody>
-       
-          <% for(let item in menuItems) { %>
-            <tr item_id=<%=menuItems.indexOf(menuItems[item])%>
-              class="border-b border-coffee-brown text-white items-center">
-              <td  class=" px-4 py-2"><%=menuItems[item].name%></td>
-              <td  class=" px-4 py-2 text-center"><%=menuItems[item].category%></td>
-              <td  class="px-4 py-2 text-center"><%=menuItems[item].in_stock%></td>
-              <td  class=" px-4 py-2 text-center">$<%=menuItems[item].price / 100%></td>
-              <td  class=" px-4 py-2 overflow-auto flex flex-wrap"><%=menuItems[item].description%></td>
-              <td  class=" px-4 py-2 text-center"><%=menuItems[item].prep_time%></td>
-              <td  class=" px-2 py-2 text-center "> 
-                <div class="flex items-end ">
-                  <form  class="mr-2">
-                    <button type="button" >
-                      <img  class="pointer" id="edit"  src="/images/icons/edit.svg"/> 
+        </tr>
+      </thead>
+      <tbody>
 
-                    </button>
-                  </form>
-                  <form    >
-                    <button  >
-                      <img src="/images/icons/trash.svg"/>
+        <% for(let item in menuItems) { %>
+        <tr item_id=<%=menuItems.indexOf(menuItems[item])%>
+          class="border-b border-coffee-brown text-white items-center">
+          <td class=" px-4 py-2"><%=menuItems[item].name%></td>
+          <td class=" px-4 py-2 text-center"><%=menuItems[item].category%></td>
+          <td class="px-4 py-2 text-center"><%=menuItems[item].in_stock%></td>
+          <td class=" px-4 py-2 text-center">$<%=menuItems[item].price / 100%></td>
+          <td class=" px-4 py-2 overflow-auto flex flex-wrap"><%=menuItems[item].description%></td>
+          <td class=" px-4 py-2 text-center"><%=menuItems[item].prep_time%></td>
+          <td class=" px-2 py-2 text-center ">
+            <div class="flex items-end ">
+              <form class="mr-2">
+                <button type="button">
+                  <img class="pointer" id="edit" src="/images/icons/edit.svg" />
 
-                    </button>
+                </button>
+              </form>
+              <form>
+                <button>
+                  <img src="/images/icons/trash.svg" />
 
-                  </form>
-                </div
-              ></td>
+                </button>
 
-            </tr>
-            <%}%>
+              </form>
+            </div>
+          </td>
+
+        </tr>
+        <%}%>
 
         </tbody>
       </table>
@@ -130,14 +130,14 @@
           Cancel
         </button>
       </div>
-   
+
     </form>
-    
+
   </section>
   <script>
     sessionStorage.setItem('menu', '<%-JSON.stringify(menuItems)%>')
   </script>
-  <script src="/scripts/updateEditForm.js"></script>
+        <script src="/scripts/updateEditForm.js"></script>
 </body>
 
 </html>

@@ -8,7 +8,10 @@
 const express = require("express");
 const router = express.Router();
 //require twilio credentials
-const client = require('twilio')(`${process.env.TWILIO_ACCOUNT_SID}`, `${process.env.TWILIO_AUTH_TOKEN}`);
+const client = require("twilio")(
+  `${process.env.TWILIO_ACCOUNT_SID}`,
+  `${process.env.TWILIO_AUTH_TOKEN}`
+);
 
 // a middleware function with no mount path. This code is executed for every request to the router
 router.use(function (req, res, next) {
@@ -17,8 +20,6 @@ router.use(function (req, res, next) {
 });
 
 module.exports = (db) => {
-
-
   //*********************************************/
   //given the user email return the object order
   //to be use with sms confirmation for th owner
@@ -36,12 +37,11 @@ module.exports = (db) => {
       if (result.rows[0] !== undefined) {
         //console.log("Result from query orderInProgress", result.rows[0]);
         //if (result.rows[0].email === email || result.rows[0].phone === phone) {
-          return result.rows[0];
-       //}
+        return result.rows[0];
+        //}
       } else {
         //console.log("orderInProgress returning false")
         return false;
-
       }
     });
   };
@@ -50,24 +50,23 @@ module.exports = (db) => {
     /////////////////////////////////////////////////
     //to be copied after checkout  complete sucessfully
     //to be use with order in progress function
-    orderInProgress(req.body.email)
-        .then((order) => {
-          if (order) {
-            //console.log("Orders:", order)
+    orderInProgress(req.body.email).then((order) => {
+      if (order) {
+        //console.log("Orders:", order)
 
-            //sms notification to the owner
-            let sms = `New order recived. Order_id: ${order.order_id}, user_id: ${order.user_id} `
-            client.messages.create({
-              body: sms,
-              from: process.env.TWILIO_PHONE,
-              to: process.env.PHONE
-            })
-            .then(message => console.log(message.sid));
-          }
-        })
+        //sms notification to the owner
+        let sms = `New order recived. Order_id: ${order.order_id}, user_id: ${order.user_id} `;
+        client.messages
+          .create({
+            body: sms,
+            from: process.env.TWILIO_PHONE,
+            to: process.env.PHONE,
+          })
+          .then((message) => console.log(message.sid));
+      }
+    });
     /////////////////////////////////////////////////
-  })
-
+  });
 
   //*********************************************/
   //return the sum of all order in progress of the preparation_time as object
@@ -88,12 +87,11 @@ module.exports = (db) => {
       if (result.rows[0] !== undefined) {
         //console.log("Result from query totPrepTimee", result.rows[0]);
         //if (result.rows[0].email === email || result.rows[0].phone === phone) {
-          return result.rows[0];
-       //}
+        return result.rows[0];
+        //}
       } else {
         //console.log("totPrepTime return FALSE")
         return false;
-
       }
     });
   };
@@ -102,24 +100,24 @@ module.exports = (db) => {
     /////////////////////////////////////////////////
     //to be copied after checkout  complete sucessfully and after message notification to the owner
     //to be use with totPrepTime function
-    totPrepTime()
-        .then((totalPrepTime) => {
-          if (totalPrepTime) {
-            //console.log("tot prep time:", totalPrepTime)
-            //sms notification to the client
-            let sms = `Your order has been recived. Expected pickup time in ${totalPrepTime.sum} minutes.`
-            client.messages.create({
-              body: sms,
-              from: process.env.TWILIO_PHONE,
-              to: process.env.PHONE
-            })
-            .then(message => console.log(message.sid));
-          }
-        })
+    totPrepTime().then((totalPrepTime) => {
+      if (totalPrepTime) {
+        //console.log("tot prep time:", totalPrepTime)
+        //sms notification to the client
+        let sms = `Your order has been recived. Expected pickup time in ${totalPrepTime.sum} minutes.`;
+        client.messages
+          .create({
+            body: sms,
+            from: process.env.TWILIO_PHONE,
+            to: process.env.PHONE,
+          })
+          .then((message) => console.log(message.sid));
+      }
+    });
     /////////////////////////////////////////////////
-  })
+  });
 
-    //*********************************************/
+  //*********************************************/
   //return the phone number of the order id passed in as input
   //to be use with sms for the client order ready for pickup
   const readyForPickup = (orders_id) => {
@@ -135,12 +133,11 @@ module.exports = (db) => {
       if (result.rows[0] !== undefined) {
         //console.log("Result from query readyForPickup", result.rows[0]);
         //if (result.rows[0].email === email || result.rows[0].phone === phone) {
-          return result.rows[0];
-       //}
+        return result.rows[0];
+        //}
       } else {
         //console.log("readyForPickup return FALSE")
         return false;
-
       }
     });
   };
@@ -151,64 +148,60 @@ module.exports = (db) => {
     //to be use with totPrepTime function
     //ATTENTION the argument here is hardcoded at 8 as order_id
     //when we implement need to be changed
-    readyForPickup(8)
-    .then((ready) => {
+    readyForPickup(8).then((ready) => {
       if (ready) {
         //console.log("ready:", ready)
         //sms notification to the client
-        let sms = `Your order is ready for pickup.`
-        client.messages.create({
-          body: sms,
-          from: process.env.TWILIO_PHONE,
-          to: process.env.PHONE
-        })
-        .then(message => console.log(message.sid));
+        let sms = `Your order is ready for pickup.`;
+        client.messages
+          .create({
+            body: sms,
+            from: process.env.TWILIO_PHONE,
+            to: process.env.PHONE,
+          })
+          .then((message) => console.log(message.sid));
       }
-    })
+    });
     /////////////////////////////////////////////////
-  })
+  });
 
-
-
-
-
-    return router;
-  }
+  return router;
+};
 
 //working one for send SMS to onwer
-  //  let sms = 'New order recived. User email' + req.body.email
-  //  client.messages.create({
-  //    body: sms,
-  //    from: process.env.TWILIO_PHONE,
-  //    to: process.env.PHONE
-  //  })
-  //  .then(message => //console.log(message.sid));
+//  let sms = 'New order recived. User email' + req.body.email
+//  client.messages.create({
+//    body: sms,
+//    from: process.env.TWILIO_PHONE,
+//    to: process.env.PHONE
+//  })
+//  .then(message => //console.log(message.sid));
 
 ///////////////////////////////
 
-  //sms notification to the owner
-  // client.messages
-  // .create({
-  //    body: 'New order recived. Order id ....',
-  //    from: process.env.TWILIO_PHONE,
-  //    to: process.env.PHONE
-  //  })
-  // .then(message => //console.log(message.sid));
+//sms notification to the owner
+// client.messages
+// .create({
+//    body: 'New order recived. Order id ....',
+//    from: process.env.TWILIO_PHONE,
+//    to: process.env.PHONE
+//  })
+// .then(message => //console.log(message.sid));
 
-  //  //sms notification to the client for order received
-  //  client.messages
-  //  .create({
-  //    body: 'Your order has been recived. It will be ready in....',
-  //    from: process.env.TWILIO_PHONE,
-  //    to: process.env.PHONE
-  //   })
-  //  .then(message => //console.log(message.sid));
+//  //sms notification to the client for order received
+//  client.messages
+//  .create({
+//    body: 'Your order has been recived. It will be ready in....',
+//    from: process.env.TWILIO_PHONE,
+//    to: process.env.PHONE
+//   })
+//  .then(message => //console.log(message.sid));
 
-  //  //sms notification to the client for order ready for pick up
-  //  client.messages
-  //  .create({
-  //    body: 'Your order has been recived. It will be ready in....',
-  //      from: process.env.TWILIO_PHONE,
-  //      to: process.env.PHONE
-  //   })
-  //  .then(message => //console.log(message.sid));
+//  //sms notification to the client for order ready for pick up
+//  client.messages
+//  .create({
+//    body: 'Your order has been recived. It will be ready in....',
+//      from: process.env.TWILIO_PHONE,
+//      to: process.env.PHONE
+//   })
+//  .then(message => //console.log(message.sid));

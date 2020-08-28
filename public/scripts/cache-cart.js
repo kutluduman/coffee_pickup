@@ -1,7 +1,7 @@
 const addToCartBackend = (item) => {
   const cartString = sessionStorage.getItem("cart");
   const cart = JSON.parse(cartString);
-  //console.log(cart);
+
   if (cart) {
     cart.push(item);
     sessionStorage.setItem("cart", JSON.stringify(cart));
@@ -17,7 +17,6 @@ const getCart = () => {
 
 $(document).ready(function () {
   $("#upload_cart").submit(function (event) {
-    //stop preventDefault at the beginning always
     event.preventDefault();
 
     ///Dummy Data
@@ -34,8 +33,7 @@ $(document).ready(function () {
     };
 
     const cart = sessionStorage.getItem("cart");
-    // cart = getCart
-    //console.log(cart);
+
     $.ajax({
       method: "POST",
       url: "/home",

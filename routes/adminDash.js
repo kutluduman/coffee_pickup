@@ -23,7 +23,7 @@ module.exports = (db) => {
   };
 
   router.get("/", (req, res) => {
-   // items().then((items) => {
+    // items().then((items) => {
     //query to get user email by cookie
     const text = `
     SELECT orders.id as orders_id ,order_items.id as order_items_id, order_items.menu_item_id as menu_item_id, order_items.quantity as order_items_qty, menu_items.name, order_items.price, coffe_sizes.size, order_items.size_id, users.name as user_name
@@ -53,7 +53,11 @@ ORDER BY orders.id;
           db.query("SELECT id, name FROM users WHERE id = $1", [
             req.session.name,
           ]).then((user) => {
-            let templateVars = { orders: items, orderItems: ordersInProgress, "user": user.rows[0] };
+            let templateVars = {
+              orders: items,
+              orderItems: ordersInProgress,
+              user: user.rows[0],
+            };
 
             res.render("admin_dash", templateVars);
           });
@@ -62,7 +66,7 @@ ORDER BY orders.id;
         }
       });
     });
- // });
-})
+    // });
+  });
   return router;
 };

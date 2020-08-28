@@ -1,408 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/styles/normalize.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/output.css" type="text/css" />
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <title>Home</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <body class="bg-ash">
-    <%- include('partials/nav') %>
+  <link rel="stylesheet" href="/styles/normalize.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/output.css" type="text/css" />
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- Fonts -->
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <title>Home</title>
+</head>
 
-    <!--MOdal starts here-->
+<body class="bg-ash">
+  <%- include('partials/nav') %>
 
+  <!--MOdal starts here-->
+
+  <div
+    class="bg-gray-900 hidden bg-opacity-75 w-full h-screen fixed z-20 grid grid-cols-4 gap-x-4 px-4 opacity-0 transition-all duration-300 md:grid-cols-8 lg:grid-cols-12"
+    id="modal-background">
     <div
-      class="bg-gray-900 hidden bg-opacity-75 w-full h-screen fixed z-20 grid grid-cols-4 gap-x-4 px-4 opacity-0 transition-all duration-300 md:grid-cols-8 lg:grid-cols-12"
-      id="modal-background"
-    >
-      <div
-        class="bg-gray-100 rounded-lg col-span-4 self-center opacity-0 transition-all duration-200 md:col-start-3 md:col-span-5 lg:col-start-5 lg:col-span-4"
-        id="modal"
-      >
-        <header
-          class="bg-white rounded-t py-4 p-2 flex flex-wrap justify-between"
-        >
-          <p class="font-bold text-xl text-center">Customize Order</p>
-          <img
-            class="w-8 cursor-pointer"
-            src="/images/icons/close-outline.svg"
-            id="close-modal"
-          />
+      class="bg-gray-100 rounded-lg col-span-4 self-center opacity-0 transition-all duration-200 md:col-start-3 md:col-span-5 lg:col-start-5 lg:col-span-4"
+      id="modal">
+      <header class="bg-white rounded-t py-4 p-2 flex flex-wrap justify-between">
+        <p class="font-bold text-xl text-center">Customize Order</p>
+        <img class="w-8 cursor-pointer" src="/images/icons/close-outline.svg" id="close-modal" />
 
-          <p class="text-light-grey w-full">
-            Select the options below to customize your order.
-          </p>
-        </header>
+        <p class="text-light-grey w-full">
+          Select the options below to customize your order.
+        </p>
+      </header>
 
-        <form name="myForm" class="block" id="menu-item-customizer">
-          <div id="options-container">
-            <p class="py-4 px-2">Choose Size</p>
-            <label
-              class="flex justify-between items-center bg-white p-3 border border-t"
-            >
-              <div class="bg-white w-full">Small</div>
-              <input type="radio" name="size" value="small" />
-            </label>
-            <label
-              class="flex justify-between items-center bg-white p-3 border border-t"
-            >
-              <div class="bg-white w-full">Medium</div>
-              <input type="radio" name="size" value="medium" />
-            </label>
-            <label
-              class="flex justify-between items-center bg-white p-3 border border-t"
-            >
-              <div class="bg-white w-full">Large</div>
-              <input type="radio" name="size" value="large" />
-            </label>
-          </div>
+      <form name="myForm" class="block" id="menu-item-customizer">
+        <div id="options-container">
+          <p class="py-4 px-2">Choose Size</p>
+          <label class="flex justify-between items-center bg-white p-3 border border-t">
+            <div class="bg-white w-full">Small</div>
+            <input type="radio" name="size" value="small" />
+          </label>
+          <label class="flex justify-between items-center bg-white p-3 border border-t">
+            <div class="bg-white w-full">Medium</div>
+            <input type="radio" name="size" value="medium" />
+          </label>
+          <label class="flex justify-between items-center bg-white p-3 border border-t">
+            <div class="bg-white w-full">Large</div>
+            <input type="radio" name="size" value="large" />
+          </label>
+        </div>
 
-          <div class="flex py-3 flex-wrap justify-center items-center">
-            <button
-              type="button"
-              id="remove-qty"
-              class="text-xl py-1 px-4 border border-light-grey rounded-lg text-light-grey text-lg"
-            >
-              -
-            </button>
-            <input
-              onkeydown="return false"
-              type="number"
-              name="item-qty"
-              id="item-qty"
-              class="w-12 text-center text-3xl bg-transparent text-coffee-brown font-body"
-              value="0"
-            />
-            <button
-              type="button"
-              id="add-qty"
-              class="text-xl py-1 px-4 border border-gray-700 rounded-lg text-ash text-lg"
-            >
-              +
-            </button>
-          </div>
-
-          <button
-            type="button"
-            onclick="addToCardUI()"
-            class="w-full text-center p-4 bg-coffee-brown rounded-b font-semibold text-white"
-          >
-            Add to Order
+        <div class="flex py-3 flex-wrap justify-center items-center">
+          <button type="button" id="remove-qty"
+            class="text-xl py-1 px-4 border border-light-grey rounded-lg text-light-grey text-lg">
+            -
           </button>
-        </form>
+          <input onkeydown="return false" type="number" name="item-qty" id="item-qty"
+            class="w-12 text-center text-3xl bg-transparent text-coffee-brown font-body" value="0" />
+          <button type="button" id="add-qty"
+            class="text-xl py-1 px-4 border border-gray-700 rounded-lg text-ash text-lg">
+            +
+          </button>
+        </div>
+
+        <button type="button" onclick="addToCardUI()"
+          class="w-full text-center p-4 bg-coffee-brown rounded-b font-semibold text-white">
+          Add to Order
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!--MOdal ends here-->
+
+  <!--Landing Page-->
+  <section
+    class="grid grid-cols-4 gap-x-4 grid-rows-none mx-4 md:grid-cols-8 md:col-start-2 md:col-span-6 lg:grid-cols-12 xl:max-w-screen-xl xl:mx-auto h-screen pt-10">
+    <div
+      class="col-span-4 grid grid-cols-4 gap-x-4 md:col-start-2 md:col-span-6 lg:col-start-1 lg:col-span-6 self-center xl:col-start-1 xl:col-span-5">
+      <div class="flex col-span-4 mb-6">
+        <img class="h-full w-24 md:w-50 lg:w-full" src="/images/lhc-logo.svg" />
+        <h1 class="ml-4 text-white text-5xl font-display font-bold h-auto block col-span-4 self-end md:text-6xl">
+          The <br />
+          Lighthouse
+        </h1>
       </div>
+
+      <p class="text-white col-span-4 mb-6 block font-body font-light col-span-4 md:text-lg">
+        I thought this salad was exceptionally delicious and healthy. I
+        recommend pressing the entire tofu block for at least 20 minutes
+        before to remove excess ...
+      </p>
+
+      <button id="order_btn" class="bg-coffee-brown col-span-4 py-3 rounded text-white mt-2">
+        Order Pickup
+      </button>
     </div>
 
-    <!--MOdal ends here-->
+    <div class="col-span-6 col-start-7 self-center hidden lg:block">
+      <img src="/images/landing-img.png" />
+    </div>
+  </section>
 
-    <!--Landing Page-->
-    <section
-      class="grid grid-cols-4 gap-x-4 grid-rows-none mx-4 md:grid-cols-8 md:col-start-2 md:col-span-6 lg:grid-cols-12 xl:max-w-screen-xl xl:mx-auto h-screen pt-10"
-    >
-      <div
-        class="col-span-4 grid grid-cols-4 gap-x-4 md:col-start-2 md:col-span-6 lg:col-start-1 lg:col-span-6 self-center xl:col-start-1 xl:col-span-5"
-      >
-        <div class="flex col-span-4 mb-6">
-          <img
-            class="h-full w-24 md:w-50 lg:w-full"
-            src="/images/lhc-logo.svg"
-          />
-          <h1
-            class="ml-4 text-white text-5xl font-display font-bold h-auto block col-span-4 self-end md:text-6xl"
-          >
-            The <br />
-            Lighthouse
-          </h1>
-        </div>
-
-        <p
-          class="text-white col-span-4 mb-6 block font-body font-light col-span-4 md:text-lg"
-        >
-          I thought this salad was exceptionally delicious and healthy. I
-          recommend pressing the entire tofu block for at least 20 minutes
-          before to remove excess ...
+  <!-- Feature Items-->
+  <section id="feature_items"
+    class="bg-feature-img bg-cover h-sm-feature grid grid-cols-4 gap-x-4 md:grid-cols-8 md:h-md-feature lg:h-lg-feature lg:grid-cols-12">
+    <div
+      class="bg-ash col-span-4 rounded p-4 mx-4 self-center md:col-start-2 md:col-span-6 lg:col-start-3 lg:col-span-8 xl:col-start-4 xl:col-span-6">
+      <div class="md:px-12 md:py-2 lg:py-4">
+        <p class="text-coffee-brown font-body font-bold text-xs font-bold lg:text-lg">
+          FEATURE OF THE DAY
         </p>
+        <p class="text-white text-2xl font-display font-bold lg:text-4xl">
+          Lighthouse Americano
+        </p>
+        <p class="text-white font-body mt-2 lg:text-xl">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. At
+          condimentum lectus diam ac. Senectus nec dis quis pulvinar.
+        </p>
+      </div>
+    </div>
+  </section>
 
-        <button
-          id="order_btn"
-          class="bg-coffee-brown col-span-4 py-3 rounded text-white mt-2"
-        >
-          Order Pickup
-        </button>
+  <!--Menu Page-->
+
+  <section id="menu" class="bg-white">
+    <div class="wrapper px-4 grid grid-cols-4 gap-x-4 py-6 md:grid-cols-8 lg:col-start-1 lg:grid-cols-12">
+      <div class="col-span-4 lg:col-span-12 mb-6">
+        <h2 class="font-display text-ash text-3xl font-bold md:text-5xl">
+          Our Menu
+        </h2>
       </div>
 
-      <div class="col-span-6 col-start-7 self-center hidden lg:block">
-        <img src="/images/landing-img.png" />
-      </div>
-    </section>
 
-    <!-- Feature Items-->
-    <section
-      id="feature_items"
-      class="bg-feature-img bg-cover h-sm-feature grid grid-cols-4 gap-x-4 md:grid-cols-8 md:h-md-feature lg:h-lg-feature lg:grid-cols-12"
-    >
-      <div
-        class="bg-ash col-span-4 rounded p-4 mx-4 self-center md:col-start-2 md:col-span-6 lg:col-start-3 lg:col-span-8 xl:col-start-4 xl:col-span-6"
-      >
-        <div class="md:px-12 md:py-2 lg:py-4">
-          <p
-            class="text-coffee-brown font-body font-bold text-xs font-bold lg:text-lg"
-          >
-            FEATURE OF THE DAY
-          </p>
-          <p class="text-white text-2xl font-display font-bold lg:text-4xl">
-            Lighthouse Americano
-          </p>
-          <p class="text-white font-body mt-2 lg:text-xl">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. At
-            condimentum lectus diam ac. Senectus nec dis quis pulvinar.
-          </p>
-        </div>
-      </div>
-    </section>
+      <div class="col-span-4 md:col-span-8" id="menu-items-container">
+        <% for(let item in items) { %>
 
-    <!--Menu Page-->
+        <article name="<%=items[item].name%>" price="<%= items[item].price %>" category="<%= items[item].category %>"
+          prep_time="<%= items[item].prep_time%> "
+          class="menu-item-card shadow-md rounded mb-6 flex md:grid md:grid-cols-8 lg:mr-6">
+          <img class="object-cover h-full w-full col-span-3 rounded-l hidden md:block"
+            src="<%= items[item].picture_url %>" />
 
-    <section id="menu" class="bg-white">
-      <div
-        class="wrapper px-4 grid grid-cols-4 gap-x-4 py-6 md:grid-cols-8 lg:col-start-1 lg:grid-cols-12"
-      >
-        <div class="col-span-4 lg:col-span-12 mb-6">
-          <h2 class="font-display text-ash text-3xl font-bold md:text-5xl">
-            Our Menu
-          </h2>
-        </div>
-
-
-        <div class="col-span-4 md:col-span-8" id="menu-items-container">
-          <% for(let item in items) { %>
-
-          <article
-            name="<%=items[item].name%>"
-            price="<%= items[item].price %>"
-            category="<%= items[item].category %>"
-            prep_time="<%= items[item].prep_time%> "
-            class="menu-item-card shadow-md rounded mb-6 flex md:grid md:grid-cols-8 lg:mr-6"
-          >
-            <img
-              class="object-cover h-full w-full col-span-3 rounded-l hidden md:block"
-              src="<%= items[item].picture_url %>"
-            />
-
-            <div class="p-4 col-span-5 w-full">
-              <header>
-                <p class="text-xl font-body font-bold"><%=items[item].name%></p>
-              </header>
-              <p class="text-light-grey pb-4 pt-2">
-                <%= items[item].description%>
-              </p>
-
-              <footer class="flex justify-between w-full items-center">
-                <p class="cost text-xl text-ash">
-                  $<%= (items[item].price / 100)%>
-                </p>
-
-                <% if(user) { %>
-                <button
-                  onclick="openModal()"
-                  class="border-coffee-brown border-2 rounded text-coffee-brown py-1 px-2 font-body font-bold hover:bg-coffee-brown hover:text-white"
-                >
-                  <span class="text-xl leading-tight font-thin">+</span> Order
-                </button>
-                <% } %>
-              </footer>
-            </div>
-          </article>
-          <% } %>
-        </div>
-
-        <!-------Checkout Cart-------->
-
-        <div
-          id="checkout-mobile-background"
-          class="hidden grid-cols-4 col-span-4 sm:col-start-1 md:col-start-2 md:col-span-6 lg:block lg:col-span-4 min-h-shopping-cart"
-        >
-          <div
-            class="rounded shadow opacity-0 lg:opacity-100 hidden lg:block col-span-4"
-            id="checkout-cart"
-          >
-            <header class="p-4">
-              <p class="font-display font-bold text-2xl text-center">
-                Your Selection
-              </p>
+          <div class="p-4 col-span-5 w-full">
+            <header>
+              <p class="text-xl font-body font-bold"><%=items[item].name%></p>
             </header>
-            <form id="upload_cart" action="/home" method="POST">
+            <p class="text-light-grey pb-4 pt-2">
+              <%= items[item].description%>
+            </p>
 
+            <footer class="flex justify-between w-full items-center">
+              <p class="cost text-xl text-ash">
+                $<%= (items[item].price / 100)%>
+              </p>
 
               <% if(user) { %>
-                <div
-                class="bg-coffee-brown flex justify-center items-center p-2"
-                id="estimated-order-time-banner"
-              >
-                <img class="mr-2" src="/images/icons/clock.svg" />
-                <p class="text-white font-body">
-                  Estimated Pickup Time:
-                  <span id="estimated-pickup-time"  current_queue=<%=prepTimeOrdersInProgress %> class="font-bold">TBD</span>
-                </p>
-              </div>
-              <div
-                id="cart-items-container"
-                class="min-h-shopping-cart max-h-shopping-cart overflow-y-auto"
-              ></div>
-
-              <div class="flex w-full justify-between p-4 items-center">
-                <h3 class="font-body text-xl font-bold">Total:</h3>
-                <p class="text-2xl text-gray-700" id="bill-total">0.00</p>
-              </div>
-              <button
-              class="bg-ash w-full text-white font-bold font-body p-3 rounded-b"
-              id="order_pickup"
-            >
-              Order Pickup
-            </button>
-              <% } else {%>
-              <div
-                class="min-h-shopping-cart max-h-shopping-cart flex items-center border-t "
-              >
-                <h2 class="text-coffee-brown self-center mx-auto font-bold">
-                  Please Login To Order Pickup
-                </h2>
-              </div>
-              <button
-
-
-              class="bg-light-grey w-full text-white font-bold font-body p-3 rounded-b"
-            >
-              Order Pickup
-            </button>
+              <button onclick="openModal()"
+                class="border-coffee-brown border-2 rounded text-coffee-brown py-1 px-2 font-body font-bold hover:bg-coffee-brown hover:text-white">
+                <span class="text-xl leading-tight font-thin">+</span> Order
+              </button>
               <% } %>
-
-
-            </form>
+            </footer>
           </div>
+        </article>
+        <% } %>
+      </div>
+
+      <!-------Checkout Cart-------->
+
+      <div id="checkout-mobile-background"
+        class="hidden grid-cols-4 col-span-4 sm:col-start-1 md:col-start-2 md:col-span-6 lg:block lg:col-span-4 min-h-shopping-cart">
+        <div class="rounded shadow opacity-0 lg:opacity-100 hidden lg:block col-span-4" id="checkout-cart">
+          <header class="p-4">
+            <p class="font-display font-bold text-2xl text-center">
+              Your Selection
+            </p>
+          </header>
+          <form id="upload_cart" action="/home" method="POST">
+
+
+            <% if(user) { %>
+            <div class="bg-coffee-brown flex justify-center items-center p-2" id="estimated-order-time-banner">
+              <img class="mr-2" src="/images/icons/clock.svg" />
+              <p class="text-white font-body">
+                Estimated Pickup Time:
+                <span id="estimated-pickup-time" current_queue=<%=prepTimeOrdersInProgress %>
+                  class="font-bold">TBD</span>
+              </p>
+            </div>
+            <div id="cart-items-container" class="min-h-shopping-cart max-h-shopping-cart overflow-y-auto"></div>
+
+            <div class="flex w-full justify-between p-4 items-center">
+              <h3 class="font-body text-xl font-bold">Total:</h3>
+              <p class="text-2xl text-gray-700" id="bill-total">0.00</p>
+            </div>
+            <button class="bg-ash w-full text-white font-bold font-body p-3 rounded-b" id="order_pickup">
+              Order Pickup
+            </button>
+            <% } else {%>
+            <div class="min-h-shopping-cart max-h-shopping-cart flex items-center border-t ">
+              <h2 class="text-coffee-brown self-center mx-auto font-bold">
+                Please Login To Order Pickup
+              </h2>
+            </div>
+            <button class="bg-light-grey w-full text-white font-bold font-body p-3 rounded-b">
+              Order Pickup
+            </button>
+            <% } %>
+
+
+          </form>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-------Contact Us-------->
+  <!-------Contact Us-------->
 
-    <section
-      id="contact"
-      class="grid grid-cols-4 gap-x-4 mb-24 md:mb-12 lg:mb-0 grid-rows-none mx-4 md:grid-cols-8 lg:pb-0 lg:grid-cols-12 xl:max-w-screen-xl xl:mx-auto min-h-screen "
-    >
-      <div class="col-span-6 self-center hidden lg:flex">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2887.1917448259037!2d-79.40439288379676!3d43.64417886103086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b34de2de61291%3A0xe8fa22738afe6e7b!2s662%20King%20St%20W%2C%20Toronto%2C%20ON!5e0!3m2!1sen!2sca!4v1598420664126!5m2!1sen!2sca"
-          width="650px"
-          height="800px"
-          frameborder="0"
-          style="border: 0"
-          allowfullscreen=""
-          aria-hidden="false"
-          tabindex="0"
-        ></iframe>
+  <section id="contact"
+    class="grid grid-cols-4 gap-x-4 mb-24 md:mb-12 lg:mb-0 grid-rows-none mx-4 md:grid-cols-8 lg:pb-0 lg:grid-cols-12 xl:max-w-screen-xl xl:mx-auto min-h-screen ">
+    <div class="col-span-6 self-center hidden lg:flex">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2887.1917448259037!2d-79.40439288379676!3d43.64417886103086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b34de2de61291%3A0xe8fa22738afe6e7b!2s662%20King%20St%20W%2C%20Toronto%2C%20ON!5e0!3m2!1sen!2sca!4v1598420664126!5m2!1sen!2sca"
+        width="650px" height="800px" frameborder="0" style="border: 0" allowfullscreen="" aria-hidden="false"
+        tabindex="0"></iframe>
+    </div>
+
+    <form method="POST" action="#"
+      class="col-span-4 grid grid-cols-4 gap-x-4 md:col-start-2 md:col-span-6 md:p-10 lg:col-start-7 lg:col-span-6 self-center xl:col-start-8 xl:col-span-5 md:mx-0 md:px-0">
+      <h1 class="text-white text-6xl font-display font-bold h-auto block col-span-4">
+        Contact Us
+      </h1>
+
+      <br />
+      <br />
+
+      <div class="mb-4 col-start-1 col-span-2">
+        <label class="block text-white text-sm mb-2" for="name">
+          Full Name
+        </label>
+        <input class="form-input text-coffee-brown focus:outline-none focus:shadow-outline" id="name" name="name"
+          type="text" />
+      </div>
+      <div class="mb-4 col-start-3 col-span-2">
+        <label class="block text-white text-sm mb-2" for="email">
+          Email
+        </label>
+        <input class="form-input text-coffee-brown focus:outline-none focus:shadow-outline" id="email" name="email"
+          type="email" />
       </div>
 
-      <form
-        method="POST"
-        action="#"
-        class="col-span-4 grid grid-cols-4 gap-x-4 md:col-start-2 md:col-span-6 md:p-10 lg:col-start-7 lg:col-span-6 self-center xl:col-start-8 xl:col-span-5 md:mx-0 md:px-0"
-      >
-        <h1
-          class="text-white text-6xl font-display font-bold h-auto block col-span-4"
-        >
-          Contact Us
+      <div class="flex flex-wrap -px-3 mb-6 col-span-4">
+        <label class="block tracking-wide text-gray-400 text-sm font-bold mb-2" for="grid-password">
+          Message
+        </label>
+        <br />
+        <textarea
+          class="bg-ash rounded border w-full border-gray-400 text-coffee-brown focus:outline-none h-48 focus:border-coffee-brown text-base px-4 py-2 mb-4 resize-none"
+          placeholder="Message"></textarea>
+      </div>
+
+      <button type="submit" class="bg-coffee-brown col-span-4 py-3 rounded text-white mt-10">
+        Send Email
+      </button>
+
+      <div class="col-span-2">
+        <h1 class="text-white text-4xl font-display font-bold h-auto block col-span-4">
+          A:
         </h1>
+        <h3 class="text-white text-sm font-body font-bold h-auto block col-span-4">
+          662 King St W<br />Toronto, ON<br />M5V 1M7
+        </h3>
+      </div>
 
-        <br />
-        <br />
+      <div class="col-span-2">
+        <h1 class="text-white text-4xl font-display font-bold">H:</h1>
+        <h3 class="text-white text-sm font-body font-bold">Mon-Fri:</h3>
+        <h3 class="text-white text-sm font-body">12:00am - 2:00pm</h3>
 
-        <div class="mb-4 col-start-1 col-span-2">
-          <label class="block text-white text-sm mb-2" for="name">
-            Full Name
-          </label>
-          <input
-            class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
-            id="name"
-            name="name"
-            type="text"
-          />
-        </div>
-        <div class="mb-4 col-start-3 col-span-2">
-          <label class="block text-white text-sm mb-2" for="email">
-            Email
-          </label>
-          <input
-            class="form-input text-coffee-brown focus:outline-none focus:shadow-outline"
-            id="email"
-            name="email"
-            type="email"
-          />
-        </div>
+        <h3 class="text-white text-sm font-body font-bold mt-2">Weekends:</h3>
+        <h3 class="text-white text-sm font-body">12:00am - 4:00pm</h3>
+      </div>
+    </form>
+  </section>
 
-        <div class="flex flex-wrap -px-3 mb-6 col-span-4">
-          <label
-            class="block tracking-wide text-gray-400 text-sm font-bold mb-2"
-            for="grid-password"
-          >
-            Message
-          </label>
-          <br />
-          <textarea
-            class="bg-ash rounded border w-full border-gray-400 text-coffee-brown focus:outline-none h-48 focus:border-coffee-brown text-base px-4 py-2 mb-4 resize-none"
-            placeholder="Message"
-          ></textarea>
-        </div>
-
-        <button
-          type="submit"
-          class="bg-coffee-brown col-span-4 py-3 rounded text-white mt-10"
-        >
-          Send Email
-        </button>
-
-        <div class="col-span-2">
-          <h1
-            class="text-white text-4xl font-display font-bold h-auto block col-span-4"
-          >
-            A:
-          </h1>
-          <h3
-            class="text-white text-sm font-body font-bold h-auto block col-span-4"
-          >
-            662 King St W<br />Toronto, ON<br />M5V 1M7
-          </h3>
-        </div>
-
-        <div class="col-span-2">
-          <h1 class="text-white text-4xl font-display font-bold">H:</h1>
-          <h3 class="text-white text-sm font-body font-bold">Mon-Fri:</h3>
-          <h3 class="text-white text-sm font-body">12:00am - 2:00pm</h3>
-
-          <h3 class="text-white text-sm font-body font-bold mt-2">Weekends:</h3>
-          <h3 class="text-white text-sm font-body">12:00am - 4:00pm</h3>
-        </div>
-      </form>
-    </section>
-
-    <%if(user){ %>
-    <button
-      class="bg-coffee-brown w-full p-4 fixed lg:hidden bottom-0 z-30 text-white font-bold font-body rounded-t-md flex items-center justify-center"
-      onclick="showMobileCart()"
-    >
-      <span
-        class="w-8 h-8 rounded-full bg-ash bg-opacity-25 items-center justify-center flex mr-4"
-        id="cartQty"
-        >0</span
-      >
-      <span id="mobile-menu-label">View Current Order</span>
-    </button>
+  <%if(user){ %>
+  <button
+    class="bg-coffee-brown w-full p-4 fixed lg:hidden bottom-0 z-30 text-white font-bold font-body rounded-t-md flex items-center justify-center"
+    onclick="showMobileCart()">
+    <span class="w-8 h-8 rounded-full bg-ash bg-opacity-25 items-center justify-center flex mr-4" id="cartQty">0</span>
+    <span id="mobile-menu-label">View Current Order</span>
+  </button>
   <%}%>
 
 
