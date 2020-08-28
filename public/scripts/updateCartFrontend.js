@@ -4,28 +4,28 @@ const createCartItem = (cartItem) => {
 	<article class="cart-item flex flex-wrap justify-between px-4 py-4 border-b border-t ">
 		<div class="flex items-center flex-wrap">
 			<p class="item-qty font-body text-coffee-brown mr-2 inline-block">${
-  cartItem.qty
-}</p>
+        cartItem.qty
+      }</p>
 			<p class="font-body text-ash text-xl inline-block">${cartItem.item_name}</p>
 		</div>
 		<div class="flex items-center">
 		<p class="text-gray-700 mr-2">${(
-    (cartItem.price * cartItem.qty) /
+      (cartItem.price * cartItem.qty) /
       100
-  ).toLocaleString("en-US", {
-    style: "currency",
-    currency: "USD",
-  })}</p><img cartItemId="${
-  cartItem.id
-}" onclick="deleteItem(this)" id="remove-item" src="/images/icons/close-circle.svg"></div>
+    ).toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    })}</p><img cartItemId="${
+    cartItem.id
+  }" onclick="deleteItem(this)" id="remove-item" src="/images/icons/close-circle.svg"></div>
 
     ${
-  cartItem.options.size
-    ? `	<ul class="selected-options block list-disc w-48 ml-10 w-full">
+      cartItem.options.size
+        ? `	<ul class="selected-options block list-disc w-48 ml-10 w-full">
     <li class="text-light-grey text-sm">${cartItem.options.size}</li>
   </ul>`
-    : ``
-}
+        : ``
+    }
 
   </article>
   `;

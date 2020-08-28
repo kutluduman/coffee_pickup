@@ -12,7 +12,7 @@ const client = require("twilio")(
 );
 
 // A middleware function with no mount path. This code is executed for every request to the router
-router.use(function(req, res, next) {
+router.use(function (req, res, next) {
   next();
 });
 
@@ -91,12 +91,9 @@ module.exports = (db) => {
       } else {
         for (let item in items) {
         }
-
-        console.log("HERE IS THE SESSION ID", req.session.name);
         db.query("SELECT id, name FROM users WHERE id = $1", [
           req.session.name,
         ]).then((user) => {
-          console.log("WE found this", user);
           totPrepTime().then((totalPrepTime) => {
             if (totalPrepTime) {
               let templateVars = {
@@ -139,8 +136,6 @@ module.exports = (db) => {
 	  GROUP BY menu_items.id`;
     const values1 = mycart.map((item) => item.item_name);
     db.query(text1, [values1]).then((result) => {
-      console.log("Result from query find item_id by item name", result.rows); //result.rows[0]
-
       //query to get the price modifier by size
       const text2 = `
           SELECT coffe_sizes.id, coffe_sizes.size, coffe_sizes.price_modifier
@@ -183,7 +178,6 @@ module.exports = (db) => {
         }
 
         if (req.session.name === undefined) {
-          console.log("User is not login. I exit the function");
           return;
         }
 
@@ -191,7 +185,6 @@ module.exports = (db) => {
         const text3 =
           "INSERT INTO orders (user_id, in_progress, time_ordered,pickup_ready) VALUES($1, $2, NOW()::timestamp, $3) RETURNING *";
         const values3 = [parseInt(req.session.name), true, false];
-        console.log("query insert order");
         db.query(text3, values3).then((dbRes) => {
           let order_id = dbRes.rows[0].id;
 

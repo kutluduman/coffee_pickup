@@ -3,7 +3,7 @@ const router = express.Router();
 //const bcrypt = require('bcrypt');
 
 // A middleware function with no mount path. This code is executed for every request to the router
-router.use(function(req, res, next) {
+router.use(function (req, res, next) {
   next();
 });
 
@@ -16,7 +16,7 @@ module.exports = (db) => {
     This function checks whether the email
     exists in the database
   */
-  const emailExist = function(email) {
+  const emailExist = function (email) {
     return db
       .query(
         `
@@ -45,7 +45,6 @@ module.exports = (db) => {
             req.session.name = user.id;
             res.redirect("/home");
           } else {
-            console.log(req.body.password, user.password);
             let templateVars = { errMessage: "Incorrect Password!" };
             res.render("errors_msg", templateVars);
           }

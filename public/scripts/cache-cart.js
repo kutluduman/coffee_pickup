@@ -15,8 +15,8 @@ const getCart = () => {
   return JSON.parse(cart);
 };
 
-$(document).ready(function() {
-  $("#upload_cart").submit(function(event) {
+$(document).ready(function () {
+  $("#upload_cart").submit(function (event) {
     event.preventDefault();
 
     ///Dummy Data

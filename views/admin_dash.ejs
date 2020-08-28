@@ -133,9 +133,7 @@
     Array.from(activeOrders).forEach((order) => {
       const orderToItemToCreate = order.getAttribute('order-id');
       for (let i = 0; i < orderItems.length; i++) {
-        console.log(orderToItemToCreate)
         if (orderItems[i].orders_id == orderToItemToCreate) {
-          console.log(createItemInOrder(orderItems[i]))
           order.insertAdjacentHTML("beforeend", createItemInOrder(orderItems[i]));
         }
 

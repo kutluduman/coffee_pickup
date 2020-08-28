@@ -28,8 +28,6 @@ const updateItem = (selectedItem) => {
   document.getElementById("update-btn").innerText = "Update Item";
   document.getElementById("update-form-label").innerText = "Update Menu Item";
 
-  console.log(menu[selectedItem]);
-
   name.value = menu[selectedItem].name;
   price.value = menu[selectedItem].price;
   prepTime.value = menu[selectedItem].prep_time;
@@ -42,15 +40,12 @@ const updateItem = (selectedItem) => {
   } else {
     inStock.checked = false;
   }
-
-  console.log(menuEditor.children);
 };
 
 Array.from(menuItems).forEach((menuItem) => {
-  menuItem.addEventListener("click", function(e) {
+  menuItem.addEventListener("click", function (e) {
     const itemId = this.getAttribute("item_id");
 
-    console.log(e.target.tagName, this.getAttribute("item_id"));
     if (e.target.id === "edit") {
       updateItem(itemId);
     }
