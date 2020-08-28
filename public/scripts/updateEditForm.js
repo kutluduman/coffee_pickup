@@ -10,11 +10,8 @@ const imgUrl = document.getElementsByName("item_image_url")[0];
 const desc = document.getElementsByName("item_description")[0];
 const inStock = document.getElementsByName("item_in_stock")[0];
 
-
-
-
-const clearForm = ()=>{
-  document.getElementById('edit-menu-form').action = "/addRoute";
+const clearForm = () => {
+  document.getElementById("edit-menu-form").action = "/addRoute";
   name.value = null;
   price.value = null;
   prepTime.value = null;
@@ -34,7 +31,7 @@ const updateItem = (selectedItem) => {
   document.getElementById('update-form-label').innerText = "Update Menu Item";
   document.getElementById('item_id').value =  menu[selectedItem].id;
 
-  console.log(menu[selectedItem]);
+
 
   name.value = menu[selectedItem].name;
   price.value = menu[selectedItem].price;
@@ -48,15 +45,12 @@ const updateItem = (selectedItem) => {
   } else {
     inStock.checked = false;
   }
-
-  console.log(menuEditor.children);
 };
 
 Array.from(menuItems).forEach((menuItem) => {
   menuItem.addEventListener("click", function (e) {
     const itemId = this.getAttribute("item_id");
 
-    console.log(e.target.tagName, this.getAttribute("item_id"));
     if (e.target.id === "edit") {
       updateItem(itemId);
     }

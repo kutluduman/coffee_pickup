@@ -1,26 +1,21 @@
-/*
- * All routes for Users are defined here
- * Since this file is loaded in server.js into api/users,
- *   these routes are mounted onto /users
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
-
 const express = require("express");
 const router = express.Router();
 //const bcrypt = require('bcrypt');
 
 // A middleware function with no mount path. This code is executed for every request to the router
 router.use(function (req, res, next) {
-  console.log("Time:", Date.now());
   next();
 });
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-
     res.render("login");
   });
 
+  /*
+    This function checks whether the email
+    exists in the database
+  */
   const emailExist = function (email) {
     return db
       .query(
@@ -34,21 +29,22 @@ module.exports = (db) => {
       .then((res) => res.rows[0]);
   };
 
+  /*
+    If the user is not logged in, this post
+    route helps user to login with valid
+    credentials (email,password)
+  */
   router.post("/", (req, res) => {
     const email = req.body.email;
-
-    console.log('this should be a email: ', req.session);
-    emailExist(email).then(user => console.log(user))
+    emailExist(email).then((user) => console.log(user));
     return emailExist(email)
       .then((user) => {
-
         if (user) {
           if (req.body.password === user.password) {
             req.session.email = user.email;
             req.session.name = user.id;
             res.redirect("/home");
           } else {
-            console.log(req.body.password, user.password);
             let templateVars = { errMessage: "Incorrect Password!" };
             res.render("errors_msg", templateVars);
           }

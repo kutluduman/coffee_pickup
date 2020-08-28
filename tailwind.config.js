@@ -3,7 +3,7 @@
 module.exports = {
   purge: {
     enabled: true,
-    content: ['./views/**.ejs', './public/scripts/**.js'],
+    content: ["./views/**.ejs", "./public/scripts/**.js"],
   },
   theme: {
     fontFamily: {

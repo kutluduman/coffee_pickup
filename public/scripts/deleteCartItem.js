@@ -1,5 +1,4 @@
 const deleteItem = (item) => {
-  console.log(item);
   removeFromCart(item.getAttribute("cartItemId"));
 };
 

@@ -1,13 +1,25 @@
 const express = require("express");
 const router = express.Router();
-//require twilio credentials
+
+/*
+Twilio credentials that are stored in the
+env and used below so that sms api connection
+is established to send messages to clients
+*/
 const client = require("twilio")(
   `${process.env.TWILIO_ACCOUNT_SID}`,
   `${process.env.TWILIO_AUTH_TOKEN}`
 );
-//orders.id = 6 ?????
-//how get order_id from HTML?
+
 module.exports = (db) => {
+  /*
+    This post route helps the owner delay the
+    order if it needs to be delayed. Also, if order
+    is delayed, then owner sends message to the client
+    that the order is delayed.
+    usersPhone should be used to send message to the
+    clients from the database
+  */
   router.post("/", (req, res) => {
     let order_id = parseInt(req.body.user_id);
     const text = `
@@ -20,13 +32,12 @@ module.exports = (db) => {
     db.query(text, values)
       .then((data) => {
         const usersPhone = data.rows[0].phone;
-        console.log("user phone numbers:", usersPhone);
         let sms = `Your order has been delayed.`;
         client.messages
           .create({
             body: sms,
             from: process.env.TWILIO_PHONE,
-            to: process.env.PHONE, //client phone number use => usersPhone
+            to: process.env.PHONE,
           })
           .then((message) => console.log(message.sid));
       })
