@@ -1,7 +1,10 @@
 // This is the config file for tailwindcss https://tailwindcss.com/docs/configuration
 
 module.exports = {
-  purge: [],
+  purge: {
+    enabled: true,
+    content: ['./views/**.ejs', './public/scripts/**.js'],
+  },
   theme: {
     fontFamily: {
       display: ["Playfair\\ Display"],

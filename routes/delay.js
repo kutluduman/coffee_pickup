@@ -15,14 +15,15 @@ const client = require('twilio')(`${process.env.TWILIO_ACCOUNT_SID}`, `${process
 
 module.exports = (db) => {
   router.post("/", (req, res) => {
+    let order_id = parseInt(req.body.user_id);
     const text = `
     SELECT orders.id as order_id, users.phone
     FROM orders
     JOIN users ON (orders.user_id = users.id)
-    WHERE orders.id = 5
+    WHERE orders.id = $1
     GROUP BY orders.id, users.phone;`;
-
-    db.query(text)
+    const values = [order_id];
+    db.query(text, values)
       .then(data => {
         const usersPhone = data.rows[0].phone;
         console.log("user phone numbers:",  usersPhone)

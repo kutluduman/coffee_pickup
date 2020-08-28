@@ -10,6 +10,7 @@ npx tailwindcss build ./styles/styles.css -o ./public/styles/output.css
 
 @tailwind components;
 
+
 .form-input {
   @apply border-b text-coffee-brown bg-transparent py-1 px-1 text-white leading-tight w-full;
 }
@@ -43,5 +44,6 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
 
 @tailwind utilities;

@@ -26,8 +26,7 @@
       >
         <% for(let order in orders) { %>
         <article
-
-          class="bg-white menu-item-card m-1 col-span-4 md:col-span-8 lg:col-span-12 shadow-md rounded mb-6 lg:col-start-2 grid md:grid-cols-8 lg:mr-6 "
+          class="bg-white menu-item-card m-1 col-span-4 md:col-span-8 lg:col-span-12 shadow-md rounded mb-6 lg:col-start-2 grid md:grid-cols-8 lg:mr-6"
         >
           <header
             class="grid grid-cols-4 md:grid-cols-8 col-span-4 md:col-span-8 border-ash border-b bg-coffee-brown text-white p-2 rounded-t"
@@ -44,45 +43,6 @@
               <p class="text-center font-bold">Est Prep Time</p>
             </div>
 
-            <ul class="selected-options block list-disc w-48 ml-10 w-full">
-              <li class="text-light-grey text-sm">large</li>
-            </ul>
-          </article>
-
-        </div>
-
-        <footer class="grid grid-cols-4 gap-x-4 md:grid-cols-8 col-span-4 md:col-span-8 justify-around m-2">
-
-          <div class="grid-cols-4 gap-x-4 grid md:grid-cols-8 md:gap-x-1 col-span-4 md:col-span-8 border-t">
-
-            <form action="/ready" method="POST">
-              <input type="hidden" name="order_id" value="<%=orders[order].id%>" />
-            <button
-              class="justify-center text-left col-span-2 md:col-span-2 m-1 text-sm  bg-green-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center">
-              <img class="inline-block mr-1" src="/images/icons/checkmark.svg" />Ready
-            </button>
-          </form>
-          <form action="/delay" method="POST">
-            <button
-              class="justify-center text-left col-span-2 md:col-span-2 m-1 text-sm  bg-orange-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center">
-              <img class="inline-block mr-1" src="/images/icons/alert.svg" />
-              Delayed
-            </button>
-          </form>
-            <form action="/cancel" method="POST">
-            <button
-              class="justify-center text-sm text-left col-span-2 md:col-span-2 m-1 bg-red-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center">
-              <img class="inline-block mr-1" src="/images/icons/close-circle-outline.svg" />
-              Cancel
-            </button>
-          </form>
-          <form action="/archive" method="POST">
-            <button
-              class="justify-center text-left col-span-2 md:col-span-2 m-1 text-sm  bg-blue-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center">
-              <img class="inline-block mr-1" src="/images/icons/archive.svg" />
-              Archive
-            </button>
-          </form>
             <div class="col-span-2 md:col-span-2 self-center">
               <p class="text-center"><%=orders[order].name%></p>
               <p class="text-center font-bold">Order Recipient</p>
@@ -93,10 +53,9 @@
 
           <div
             class="col-span-4 md:col-span-8 lg:col-span-12 flex flex-wrap active-order"
-            id="active-orders-container p-2"    order-id="<%=orders[order].id%>"
-          >
-
-          </div>
+            id="active-orders-container p-2"
+            order-id="<%=orders[order].id%>"
+          ></div>
 
           <footer
             class="grid grid-cols-4 gap-x-4 md:grid-cols-8 col-span-4 md:col-span-8 justify-around m-2"
@@ -104,22 +63,35 @@
             <div
               class="grid-cols-4 gap-x-4 grid md:grid-cols-8 md:gap-x-1 col-span-4 md:col-span-8 border-t"
             >
+            <form action='/ready' class="col-span-2 md:col-span-2" method="POST">
+              <input type="hidden"  name="user_id" value= <%=orders[order].id%> >
+
               <button
-                class="justify-center text-left col-span-2 md:col-span-2 m-1 text-sm bg-green-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
+                class="justify-center text-left w-full m-1 text-sm bg-green-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
               >
                 <img
                   class="inline-block mr-1"
                   src="/images/icons/checkmark.svg"
                 />Ready
               </button>
+            </form>
+
+
+            <form method="POST" class="col-span-2 md:col-span-2" action="/delay">
+              <input type="hidden"  name="user_id" value= <%=orders[order].id%> >
               <button
-                class="justify-center text-left col-span-2 md:col-span-2 m-1 text-sm bg-orange-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
-              >
-                <img class="inline-block mr-1" src="/images/icons/alert.svg" />
-                Delayed
-              </button>
+              class="justify-center text-left w-full m-1 text-sm bg-orange-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
+            >
+              <img class="inline-block mr-1" src="/images/icons/alert.svg" />
+              Delayed
+            </button>
+            </form>
+
+
+              <form method="POST" class="col-span-2 md:col-span-2" action="/cancel">
+                <input type="hidden"  name="user_id" value= <%=orders[order].id%> >
               <button
-                class="justify-center text-sm text-left col-span-2 md:col-span-2 m-1 bg-red-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
+                class="justify-center text-sm text-left w-full m-1 bg-red-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
               >
                 <img
                   class="inline-block mr-1"
@@ -127,9 +99,13 @@
                 />
                 Cancel
               </button>
+            </form>
 
+
+            <form method="POST" class="col-span-2 md:col-span-2" action="/archive">
+              <input type="hidden"  name="user_id" value= <%=orders[order].id%> >
               <button
-                class="justify-center text-left col-span-2 md:col-span-2 m-1 text-sm bg-blue-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
+                class="justify-center text-left w-full m-1 text-sm bg-blue-500 px-2 md:mr-1 rounded text-white font-semibold py-3 flex items-center"
               >
                 <img
                   class="inline-block mr-1"
@@ -137,6 +113,7 @@
                 />
                 Archive
               </button>
+            </form>
             </div>
           </footer>
           <!-- </div> -->
@@ -148,49 +125,49 @@
 
     <script>
 
-                 const orderItems = <%-JSON.stringify(orderItems)%>
+         const orderItems = <%-JSON.stringify(orderItems)%>
 
-                 const createItemInOrder = (cartItem) => {
-                   const itemInOrderTemplate= `
-                   <article class="cart-item flex flex-wrap justify-between px-4 py-4  w-auto">
-                         <div class="flex items-center flex-wrap">
-                           <p class="item-qty font-body text-coffee-brown mr-2 inline-block">
-                             ${cartItem.order_items_qty}
-                           </p>
-                           <p class="font-body text-ash text-xl inline-block">
-                            ${cartItem.name}
+         const createItemInOrder = (cartItem) => {
+           const itemInOrderTemplate= `
+           <article class="cart-item flex flex-wrap justify-between px-4 py-4  w-auto">
+                 <div class="flex items-center flex-wrap">
+                   <p class="item-qty font-body text-coffee-brown mr-2 inline-block">
+                     ${cartItem.order_items_qty}
+                   </p>
+                   <p class="font-body text-ash text-xl inline-block">
+                    ${cartItem.name}
 
-                           </p>
-                         </div>
-
-
-                         <ul class="selected-options block list-disc w-48 ml-10 w-full">
-
-                           <li class="text-light-grey text-sm">large</li>
-                         </ul>
-                       </article>
-              `
-              return itemInOrderTemplate;
-                 }
-
-                 const activeOrders = document.getElementsByClassName('active-order');
-
-                 const checkoutUI = document.getElementById("cart-items-container");
+                   </p>
+                 </div>
 
 
-                 Array.from(activeOrders).forEach((order) => {
-                    const orderToItemToCreate = order.getAttribute('order-id');
-                    for(let i = 0; i < orderItems.length; i++ ){
-                      console.log(orderToItemToCreate )
-                      if(orderItems[i].orders_id == orderToItemToCreate){
-                        console.log( createItemInOrder(orderItems[i]))
-                        order.insertAdjacentHTML("beforeend", createItemInOrder(orderItems[i]));
-                      }
+                 <ul class="selected-options block list-disc w-48 ml-10 w-full">
 
-                    }
-                    });
+                   <li class="text-light-grey text-sm">large</li>
+                 </ul>
+               </article>
+      `
+      return itemInOrderTemplate;
+         }
 
-                 console.log(activeOrders)
+         const activeOrders = document.getElementsByClassName('active-order');
+
+         const checkoutUI = document.getElementById("cart-items-container");
+
+
+         Array.from(activeOrders).forEach((order) => {
+            const orderToItemToCreate = order.getAttribute('order-id');
+            for(let i = 0; i < orderItems.length; i++ ){
+              console.log(orderToItemToCreate )
+              if(orderItems[i].orders_id == orderToItemToCreate){
+                console.log( createItemInOrder(orderItems[i]))
+                order.insertAdjacentHTML("beforeend", createItemInOrder(orderItems[i]));
+              }
+
+            }
+            });
+
+         console.log(activeOrders)
     </script>
   </body>
 </html>
