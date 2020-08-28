@@ -31,7 +31,7 @@
           </tr>
         </thead>
         <tbody>
-       
+
           <% for(let item in menuItems) { %>
             <tr item_id=<%=menuItems.indexOf(menuItems[item])%>
               class="border-b border-coffee-brown text-white items-center">
@@ -41,16 +41,17 @@
               <td  class=" px-4 py-2 text-center">$<%=menuItems[item].price / 100%></td>
               <td  class=" px-4 py-2 overflow-auto flex flex-wrap"><%=menuItems[item].description%></td>
               <td  class=" px-4 py-2 text-center"><%=menuItems[item].prep_time%></td>
-              <td  class=" px-2 py-2 text-center "> 
+              <td  class=" px-2 py-2 text-center ">
                 <div class="flex items-end ">
                   <form  class="mr-2">
                     <button type="button" >
-                      <img  class="pointer" id="edit"  src="/images/icons/edit.svg"/> 
+                      <img  class="pointer" id="edit"  src="/images/icons/edit.svg"/>
 
                     </button>
                   </form>
-                  <form    >
+                  <form method="POST" action="/deleteItem">
                     <button  >
+                      <input type="hidden" name="itemId" value=<%=menuItems[item].id%> />
                       <img src="/images/icons/trash.svg"/>
 
                     </button>
@@ -67,7 +68,9 @@
     </div>
 
     <form method="POST" action="/update" class=" self-center grid gap-x-4 grid-cols-4 table-auto col-span-4 md:col-span-6 md:col-start-2 lg:col-span-4 lg:col-start-9" id="edit-menu-form">
+      <input type="hidden"  name="item_id" id="item_id"  >
       <h1 class="text-white text-5xl font-display font-bold h-auto block col-span-4" id="update-form-label">
+
         Add Menu Item
       </h1>
       <p class="text-white col-span-4 mb-6 block font-body font-light col-span-4">
@@ -130,9 +133,9 @@
           Cancel
         </button>
       </div>
-   
+
     </form>
-    
+
   </section>
   <script>
     sessionStorage.setItem('menu', '<%-JSON.stringify(menuItems)%>')

@@ -56,6 +56,8 @@ const readyRoute = require("./routes/ready");
 const delayRoute = require("./routes/delay");
 const cancelRoute = require("./routes/cancel");
 const archiveRoute = require("./routes/archive");
+const editRoute = require("./routes/editRoute");
+const deleteItem = require("./routes/deleteItem");
 
 /*
  Mount all resource routes
@@ -74,6 +76,8 @@ app.use("/ready", readyRoute(db));
 app.use("/delay", delayRoute(db));
 app.use("/cancel", cancelRoute(db));
 app.use("/archive", archiveRoute(db));
+app.use("/editRoute", editRoute(db));
+app.use("/deleteItem", deleteItem(db));
 
 
 

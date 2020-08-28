@@ -24,7 +24,7 @@ const clearForm = ()=>{
   inStock.checked = false;
   document.getElementById('update-btn').innerText = "Add Item";
   document.getElementById('update-form-label').innerText = "Add Menu Item";
-
+  document.getElementById('item_id').value = null;
 }
 
 const updateItem = (selectedItem) => {
@@ -32,6 +32,7 @@ const updateItem = (selectedItem) => {
   document.getElementById('edit-menu-form').action = "/editRoute";
   document.getElementById('update-btn').innerText = "Update Item";
   document.getElementById('update-form-label').innerText = "Update Menu Item";
+  document.getElementById('item_id').value =  menu[selectedItem].id;
 
   console.log(menu[selectedItem]);
 
