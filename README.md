@@ -14,18 +14,14 @@ The following steps are only for _one_ of the group members to perform.
 
 ## Screenshots
 
-1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
-2. Update the .env file with your correct local information 
-  - username: `labber` 
-  - password: `labber` 
-  - database: `midterm`
-3. Install dependencies: `npm i`
-4. Fix to binaries for sass: `npm rebuild node-sass`
-5. Reset database: `npm run db:reset`
-  - Check the db folder to see what gets created and seeded in the SDB
-7. Run the server: `npm run local`
-  - Note: nodemon is used, so you should not have to restart your server
-8. Visit `http://localhost:8080/`
+!["Main page"](https://github.com/kutluduman/midterm_coffee_pickup/blob/master/public/images/screenshots/screenshot1.png?raw=true)
+!["Sign Up"](https://github.com/kutluduman/midterm_coffee_pickup/blob/master/public/images/screenshots/screenshot2.png?raw=true)
+!["Log in"](https://github.com/kutluduman/midterm_coffee_pickup/blob/master/public/images/screenshots/screenshot3.png?raw=true)
+!["Menu"](https://github.com/kutluduman/midterm_coffee_pickup/blob/master/public/images/screenshots/screenshot5.png?raw=true)
+!["Options menu"](https://github.com/kutluduman/midterm_coffee_pickup/blob/master/public/images/screenshots/screenshot6.png?raw=true)
+!["Order purchase"](https://github.com/kutluduman/midterm_coffee_pickup/blob/master/public/images/screenshots/screenshot7.png?raw=true)
+!["Contact"](https://github.com/kutluduman/midterm_coffee_pickup/blob/master/public/images/screenshots/screenshot8.png?raw=true)
+
 
 
 ## Dependencies
