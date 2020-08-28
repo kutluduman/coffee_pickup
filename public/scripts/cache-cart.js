@@ -1,4 +1,3 @@
-
 const addToCartBackend = (item) => {
   const cartString = sessionStorage.getItem("cart");
   const cart = JSON.parse(cartString);
@@ -41,10 +40,13 @@ $(document).ready(function () {
       method: "POST",
       url: "/home",
       data: { cart: cart },
-    }).then((res) => {
-      window.location.href = "/success";
-    }).catch((err) => {
-        console.log('Error in ajax post /home', err);
     })
+      .then((res) => {
+        window.location.href = "/success";
+        sessionStorage.clear();
+      })
+      .catch((err) => {
+        console.log("Error in ajax post /home", err);
+      });
   });
 });

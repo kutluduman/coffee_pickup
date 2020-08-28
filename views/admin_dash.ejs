@@ -12,6 +12,10 @@
   </head>
 
   <body class="bg-ash">
+
+    <%- include('partials/nav') %>
+
+
     <section
       class="grid gap-x-4 grid-rows-none grid-cols-4 md:grid-cols-8 lg:grid-cols-12 wrapper mx-auto pt-10"
     >
@@ -38,10 +42,7 @@
               <p class="text-center font-bold">Order ID</p>
             </div>
 
-            <div class="col-span-2 md:col-span-4 self-center">
-              <p class="text-center">2:31</p>
-              <p class="text-center font-bold">Est Prep Time</p>
-            </div>
+      
 
             <div class="col-span-2 md:col-span-2 self-center">
               <p class="text-center"><%=orders[order].name%></p>
@@ -107,7 +108,7 @@
 
     <script>
 
-         const orderItems = <%-JSON.stringify(orderItems)%>
+         const orderItems = <%-JSON.stringify(orderItems)%>;
 
          const createItemInOrder = (cartItem) => {
            const itemInOrderTemplate= `

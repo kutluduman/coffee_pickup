@@ -5,16 +5,16 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const express = require('express');
-const router  = express.Router();
+const express = require("express");
+const router = express.Router();
 
 module.exports = (db) => {
   router.post("/", (req, res) => {
+    if (req.session.name === 1) {
+      //orders.id = 6 ?????
+      //how get order_id from HTML?
 
-    //orders.id = 6 ?????
-    //how get order_id from HTML?
-
-    const text = `
+      const text = `
     UPDATE orders
     SET in_progress = FALSE,
         pickup_ready = TRUE
@@ -22,18 +22,19 @@ module.exports = (db) => {
     RETURNING *;
       `;
 
-    db.query(text)
-      .then(data => {
-        const users = data.rows;
-        //res.json({ users });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-      res.redirect('/admin');
+      db.query(text)
+        .then((data) => {
+          const users = data.rows;
+          //res.json({ users });
+        })
+        .catch((err) => {
+          res.status(500).json({ error: err.message });
+        });
+      res.redirect("/admin");
+    } else {
+      res.send("Must be admin");
+    }
   });
+
   return router;
 };
-
