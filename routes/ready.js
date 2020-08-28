@@ -47,7 +47,8 @@ module.exports = (db) => {
           db.query(text2, values2).then((data) => {
             const usersPhone = data.rows[0].phone;
             console.log("user phone numbers:", usersPhone);
-            let sms = `Your order is ready for pickup.`;
+           let sms = `Your order is ready for pickup.`;
+
             client.messages
               .create({
                 body: sms,
