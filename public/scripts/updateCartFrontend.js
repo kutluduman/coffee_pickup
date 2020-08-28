@@ -34,8 +34,8 @@ const createCartItem = (cartItem) => {
 };
 
 const getCartQty = () => {
-  document.getElementById("cartQty").innerText = getCart().length;
-};
+    document.getElementById("cartQty").innerText = getCart().length;
+}
 
 const updateCartView = () => {
   const cart = getCart();
@@ -61,6 +61,10 @@ const addMinutes = (minutes) => {
       .getAttribute("current_queue")
   );
 
+  if (isNaN(currentQueue)) {
+    currentQueue = 0;
+  }
+
   let updatedTime = new Date().getTime() + (currentQueue + minutes) * 60000;
   return new Date(updatedTime).toLocaleTimeString([], {
     hour: "2-digit",
@@ -71,7 +75,9 @@ const addMinutes = (minutes) => {
 const calculateTotal = () => {
   let total = 0;
   let pickupTime = 0;
+
   const cart = getCart();
+
   cart.forEach((elem) => {
     total += elem.price * elem.qty;
     pickupTime += elem.prep_time;

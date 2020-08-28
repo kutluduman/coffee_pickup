@@ -13,13 +13,14 @@
 
 </head>
 
-<body class="bg-ash">
+<body class="bg-ash ">
+  <%- include('partials/nav') %>
 
   <section
-  class="grid gap-x-4 grid-rows-none  grid-cols-4  md:grid-cols-8 lg:grid-cols-12 wrapper mx-auto pt-10 h-screen">
+  class="grid gap-x-4 grid-rows-none  grid-cols-4  md:grid-cols-8 lg:grid-cols-12 wrapper mx-auto h-screen  pt-10">
 
-    <table class="self-center table-auto col-span-4 md:col-span-8 md:mx-4">
-      <thead class="border-b-2 border-white">
+    <table class="self-center table-auto col-span-4 md:col-span-8 md:mx-4 pt-10 overflow-auto">
+      <thead class="border-b-2 border-white pt-10">
         <tr class="text-coffee-brown">
           <th class="px-4 py-2">Name</th>
           <th class="px-4 py-2">Category</th>
@@ -66,9 +67,8 @@
 
         </tbody>
       </table>
-    </div>
 
-    <form method="POST" action="/update" class=" self-center grid gap-x-4 grid-cols-4 table-auto col-span-4 md:col-span-6 md:col-start-2 lg:col-span-4 lg:col-start-9" id="edit-menu-form">
+    <form method="POST" action="/update" class="  self-center grid gap-x-4 grid-cols-4 table-auto col-span-4 md:col-span-6 md:col-start-2 lg:col-span-4 lg:col-start-9" id="edit-menu-form">
       <input type="hidden"  name="item_id" id="item_id"  >
       <h1 class="text-white text-5xl font-display font-bold h-auto block col-span-4" id="update-form-label">
 

@@ -12,7 +12,7 @@ module.exports = (db) => {
     const text = `
     UPDATE orders
     SET in_progress = FALSE,
-        pickup_ready = TRUE
+    pickup_ready = TRUE
     WHERE orders.id = $1
     RETURNING *;
       `;

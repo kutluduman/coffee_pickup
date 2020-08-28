@@ -20,10 +20,16 @@ module.exports = (db) => {
 
   router.get("/", (req, res) => {
     items().then((items) => {
-      let templateVars = { menuItems: items };
 
       if (req.session.name === 1) {
-        res.render("admin_update", templateVars);
+        db.query("SELECT id, name FROM users WHERE id = $1", [
+          req.session.name,
+        ]).then((user) => {
+          let templateVars = { menuItems: items, user: user.rows[0] };
+
+          res.render("admin_update", templateVars);
+
+        });
       } else {
         res.send("Must be admin to view this page/");
       }

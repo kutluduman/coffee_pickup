@@ -3,27 +3,27 @@
 <nav class="px-4 py-2 md:px-6 md:py-4 w-full flex items-center justify-between fixed bg-ash">
   <img src="/images/lhc-logo.svg" />
   <div class="flex">
-    <a onclick="triggerCart()" class="mx-3 lg:hidden"><img src="/images/icons/shopping-cart.svg" /></a>
+   
     <div onclick="triggerMenu()" class="mx-3 lg:hidden">
       <img src="/images/icons/menu.svg" />
     </div>
 
-    <a id="menu_nav" class="text-white mx-3 hidden lg:block">Menu</a>
-    <a id="contact_us" class="text-white mx-3 hidden lg:block">Contact Us</a>
+    <a id="menu_nav" class="text-white mx-3 hidden lg:block hover:text-coffee-brown transition-all duration-200	cursor-pointer">Menu</a>
+    <a id="contact_us" class="text-white mx-3 hidden lg:block hover:text-coffee-brown transition-all duration-200	cursor-pointer">Contact Us</a>
 
     <div class="h-px-6 w-px bg-coffee-brown mx-3 hidden lg:block"></div>
 
     <%if(user){%>
     <img src="/images/icons/person.svg" />
     <p class="class=text-white mx-3 hidden lg:block text-white"> <%=user.name%></p>
-    <form method="POST" action="/logout" class="form-inline">
-      <button class="text-white mx-3 hidden lg:block" type="submit" class="btn btn-outline-light"><span
-          class="glyphicon glyphicon-user"></span> Logout</button></li>
+    <form method="POST" action="/logout" class="inline-block">
+      <button class=" text-white mx-3 hidden lg:block hover:text-coffee-brown transition-all duration-200	cursor-pointer" type="submit" ><span
+          class=""></span> Logout</button></li>
     </form>
     <% } else{ %>
 
-    <a href="/login" class="text-white mx-3 hidden lg:block">Login</a>
-    <a href="/register" class="text-white mx-3 hidden lg:block">Sign Up</a>
+    <a href="/login" class="text-white mx-3 hidden lg:block hover:text-coffee-brown">Login</a>
+    <a href="/register" class="text-white mx-3 hidden lg:block hover:text-coffee-brown">Sign Up</a>
     <% } %>
 
 
