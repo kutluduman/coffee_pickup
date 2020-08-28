@@ -25,7 +25,6 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     items().then((items) => {
     //query to get user email by cookie
-<<<<<<< HEAD
 //     const text = `
 //     SELECT orders.id as orders_id ,order_items.id as order_items_id, order_items.menu_item_id as menu_item_id, order_items.quantity as order_items_qty, menu_items.name, order_items.price, coffe_sizes.size, order_items.size_id, users.name as user_name
 //     FROM order_items
@@ -48,10 +47,9 @@ module.exports = (db) => {
    // const ordersInProgress = result.rows
    // console.log("reslt fom query admin", result.rows)
    //  let templateVars = { orders: items, order_item: ordersInProgress };
-     let templateVars = { orders: items};
+     let templateVars = { orders: items,  order_item: ordersInProgress };
        res.render("admin_dash", templateVars);
      });
-=======
     const text = `
     SELECT orders.id as orders_id ,order_items.id as order_items_id, order_items.menu_item_id as menu_item_id, order_items.quantity as order_items_qty, menu_items.name, order_items.price, coffe_sizes.size, order_items.size_id, users.name as user_name
 FROM order_items
@@ -80,7 +78,6 @@ ORDER BY orders.id;
         res.render("admin_dash", templateVars);
       });
     });
->>>>>>> 086da1d19f7435b33dd0fcfa4fcf95b8b3ab31df
   });
 
   return router;
