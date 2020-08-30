@@ -75,10 +75,12 @@ Visit http://localhost:8080/.
 !["Main page"](https://github.com/kutluduman/midterm_coffee_pickup/blob/master/public/images/screenshots/screenshot1.png?raw=true)
 !["Sign Up"](https://github.com/kutluduman/midterm_coffee_pickup/blob/master/public/images/screenshots/screenshot2.png?raw=true)
 !["Log in"](https://github.com/kutluduman/midterm_coffee_pickup/blob/master/public/images/screenshots/screenshot3.png?raw=true)
-!["Menu"](https://github.com/kutluduman/midterm_coffee_pickup/blob/master/public/images/screenshots/screenshot5.png?raw=true)
+!["Menu"](https://github.com/kutluduman/midterm_coffee_pickup/blob/master/public/images/screenshots/screenshot11.png?raw=true)
 !["Options menu"](https://github.com/kutluduman/midterm_coffee_pickup/blob/master/public/images/screenshots/screenshot6.png?raw=true)
 !["Order purchase"](https://github.com/kutluduman/midterm_coffee_pickup/blob/master/public/images/screenshots/screenshot7.png?raw=true)
 !["Contact"](https://github.com/kutluduman/midterm_coffee_pickup/blob/master/public/images/screenshots/screenshot8.png?raw=true)
+!["Admin"](https://github.com/kutluduman/midterm_coffee_pickup/blob/master/public/images/screenshots/screenshot9.png?raw=true)
+!["Admin Update"](https://github.com/kutluduman/midterm_coffee_pickup/blob/master/public/images/screenshots/screenshot10.png?raw=true)
 
 
 
